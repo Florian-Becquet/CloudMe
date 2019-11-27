@@ -22,9 +22,10 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
+                'label' => false,
                 'attr'=> [
-                    
-                    'class'=> "input--style-4"
+                    'class'=> "form-control",
+                    'placeholder' => 'Email'
                 ]
             ])
             
@@ -42,48 +43,59 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
-                ],  'label' => 'Mot de passe',
+                ],  'label' => false,
                     'attr' => [
-                        
-                        'class' => "input--style-4"
+                        'class' => "form-control",
+                        'placeholder' => 'Mot de passe'
                     ]
                 
             ])
             ->add('name', TextType::class,[
-                'label' => 'Nom',
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Nom'
                 ]
             ])
             ->add('first_name', TextType::class,[
-                'label' => 'Prénom',
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Prénom'
                 ]
             ])
             ->add('adresse', TextType::class,[
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Adresse'
                 ]
             ])
             ->add('ville', TextType::class,[
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Ville'
                 ]
             ])
             ->add('pays', TextType::class,[
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Pays'
                 ]
             ])
             ->add('codePostal', IntegerType::class,[
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Code postal'
                 ]
             ])
             ->add('formeJuridique', ChoiceType::class,[
+                'label' => false,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control"
                     
                 ],
                 'choices' => [
@@ -94,21 +106,24 @@ class RegistrationFormType extends AbstractType
             ])
                 
             ->add('societyName', TextType::class , [
-                'label' => 'Nom de la société' ,
+                'label' => false ,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Nom de la Société'
                 ]
             ])
             ->add('numero_tel',TextType::class , [
-                'label' => 'Numéro de téléphone' ,
+                'label' => false ,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Numéro de téléphone'
                 ]
             ])
             ->add('num_siret',TextType::class , [
-                'label' => 'Numéro de SIRET' ,
+                'label' => false ,
                 'attr' => [
-                    'class' => "input--style-4"
+                    'class' => "form-control",
+                    'placeholder' => 'Numéro de Siret'
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
@@ -117,7 +132,6 @@ class RegistrationFormType extends AbstractType
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
-                  
                 ],'label' => false
             ])
         ;
