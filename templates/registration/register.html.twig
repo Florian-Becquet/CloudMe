@@ -20,33 +20,37 @@
 </head>
 {% block body %}
 <body class="hold-transition register-page">
-<div class="register-box">
+<div class="register-box col-6">
   <div class="register-logo">
     <a href="{{path('app_login')}}"><b>Cloud</b>Me</a>
   </div>
 
-  <div class="card">
-    <div class="card-body register-card-body ml-4">
+  <div class="card col-12 text-center">
+    <div class="card-body register-card-body ml-4 " >
       <p class="login-box-msg">Créer un compte</p>
-
+  
       {{ form_start(registrationForm) }}
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 d-flex justify-content-around">
+        <div class="d-flex">
           {{ form_row(registrationForm.name) }}
           <div class="input-group-append">
-            <div class="input-group-text">
+            <div class="input-group-text" >
               <span class="fas fa-user"></span>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        
+             <div class="d-flex">
           {{ form_row(registrationForm.first_name) }}
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
+          </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 d-flex justify-content-around">
+        <div class="d-flex">
           {{ form_row(registrationForm.email) }}
           <div class="input-group-append">
             <div class="input-group-text">
@@ -54,7 +58,17 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="d-flex">
+          {{ form_row(registrationForm.numero_tel) }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="input-group mb-3 d-flex justify-content-around">
+        <div class="d-flex">
           {{ form_row(registrationForm.plainPassword) }}
           <div class="input-group-append">
             <div class="input-group-text">
@@ -62,7 +76,7 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="d-flex">
         <div>
           <input type="password" class="form-control" placeholder="Vérification du mot de passe" id="verifPwd">
           
@@ -73,11 +87,13 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          </div>
         </div>
         <div class="mb-2">
         <span id="messagePwd"></span>
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 d-flex justify-content-around">
+        <div class="d-flex">
           {{ form_row(registrationForm.adresse) }}
           <div class="input-group-append">
             <div class="input-group-text">
@@ -85,15 +101,17 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="d-flex">
           {{ form_row(registrationForm.pays) }}
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
+          </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 justify-content-around">
+        <div class="d-flex">
           {{ form_row(registrationForm.ville) }}
           <div class="input-group-append">
             <div class="input-group-text">
@@ -101,23 +119,17 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="d-flex">
           {{ form_row(registrationForm.codePostal) }}
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          {{ form_row(registrationForm.numero_tel) }}
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+      
+        <div class="input-group mb-3   d-flex justify-content-center">
           {{ form_row(registrationForm.formeJuridique) }}
           <div class="input-group-append">
             <div class="input-group-text">
@@ -126,26 +138,28 @@
           </div>
         </div>
         <div style="display:none;" id="infoEntreprise">
-          <div class="input-group mb-3">
+          <div class="input-group mb-3 d-flex justify-content-around" >
+          <div class="d-flex">
             {{ form_row(registrationForm.societyName) }}
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
-          </div>
-          <div class="input-group mb-3">
+            </div>
+            <div class="d-flex">
             {{ form_row(registrationForm.num_siret) }}
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary"  style="display: flex">
+        <div class="row d-flex ">
+          <div class="col-8 ">
+            <div class="icheck-primary d-flex ml-5"  >
             {{ form_row(registrationForm.agreeTerms) }}
               <label for="agreeTerms">
               
@@ -155,14 +169,14 @@
           </div>
         </div>
         <!-- /.col -->
-        <div class="row mt-2 mb-2 ml-5">
+        <div class="row mt-2 mb-2  d-flex justify-content-center">
           <div class="col-6">
-            <button type="submit" id="buttonRegister" class="btn btn-primary btn-block">Valider</button>
+            <button type="submit" id="buttonRegister" class="btn btn-primary pr-3 pl-3">Valider</button>
           </div>
         </div>
       {{ form_end(registrationForm) }}
 
-      <a href="{{path('app_login')}}" class="text-center ml-5">J'ai déja un compte.</a>
+      <a href="{{path('app_login')}}" class="text-center ">J'ai déja un compte.</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

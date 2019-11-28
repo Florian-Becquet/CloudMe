@@ -35,11 +35,11 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un mot de passe',
+                        'message' => 'Please enter a password',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} characteres',
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
@@ -54,7 +54,7 @@ class RegistrationFormType extends AbstractType
             ->add('name', TextType::class,[
                 'label' => false,
                 'attr' => [
-                    'class' => "form-control",
+                    'class' => "form-control ",
                     'placeholder' => 'Nom'
                 ]
             ])
@@ -86,7 +86,7 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Pays'
                 ]
             ])
-            ->add('codePostal', IntegerType::class,[
+            ->add('codePostal', TextType::class,[
                 'label' => false,
                 'attr' => [
                     'class' => "form-control",
@@ -96,7 +96,7 @@ class RegistrationFormType extends AbstractType
             ->add('formeJuridique', ChoiceType::class,[
                 'label' => false,
                 'attr' => [
-                    'class' => "form-control"
+                    'class' => "form-control browser-default custom-select"
                     
                 ],
                 'choices' => [
@@ -134,7 +134,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => ' Vous devez accepter les conditions.',
+                        'message' => 'You should agree to our terms.',
                     ]),
                 ],'label' => false
             ])
