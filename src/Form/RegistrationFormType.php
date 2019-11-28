@@ -46,7 +46,8 @@ class RegistrationFormType extends AbstractType
                 ],  'label' => false,
                     'attr' => [
                         'class' => "form-control",
-                        'placeholder' => 'Mot de passe'
+                        'placeholder' => 'Mot de passe',
+                        
                     ]
                 
             ])
@@ -107,6 +108,7 @@ class RegistrationFormType extends AbstractType
                 
             ->add('societyName', TextType::class , [
                 'label' => false ,
+                'required' =>false,
                 'attr' => [
                     'class' => "form-control",
                     'placeholder' => 'Nom de la Société'
@@ -114,6 +116,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('numero_tel',TextType::class , [
                 'label' => false ,
+                'required' =>false,
                 'attr' => [
                     'class' => "form-control",
                     'placeholder' => 'Numéro de téléphone'
@@ -121,6 +124,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('num_siret',TextType::class , [
                 'label' => false ,
+                'required' =>false,
                 'attr' => [
                     'class' => "form-control",
                     'placeholder' => 'Numéro de Siret'

@@ -64,13 +64,18 @@
         </div>
         <div class="input-group mb-3">
         <div>
-          <input type="password" class="form-control" placeholder="Vérification du mot de passe">
+          <input type="password" class="form-control" placeholder="Vérification du mot de passe" id="verifPwd">
+          
           </div>
+          
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+        </div>
+        <div class="mb-2">
+        <span id="messagePwd"></span>
         </div>
         <div class="input-group mb-3">
           {{ form_row(registrationForm.adresse) }}
@@ -120,7 +125,7 @@
             </div>
           </div>
         </div>
-        <div style="" id="infoEntreprise">
+        <div style="display:none;" id="infoEntreprise">
           <div class="input-group mb-3">
             {{ form_row(registrationForm.societyName) }}
             <div class="input-group-append">
@@ -152,7 +157,7 @@
         <!-- /.col -->
         <div class="row mt-2 mb-2 ml-5">
           <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block">Valider</button>
+            <button type="submit" id="buttonRegister" class="btn btn-primary btn-block">Valider</button>
           </div>
         </div>
       {{ form_end(registrationForm) }}
@@ -170,6 +175,8 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+
+<script src="js/register.js"></script>
 </body>
 
 </html>
