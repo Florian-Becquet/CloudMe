@@ -35,6 +35,7 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setIdTva($tva);
+            $user->setStatus('0');
             $user->setDateInscription($date);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

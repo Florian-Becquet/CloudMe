@@ -112,6 +112,11 @@ class User implements UserInterface
      */
     private $id_tva;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->factures = new ArrayCollection();
@@ -410,6 +415,18 @@ class User implements UserInterface
     public function setIdTva(?TVA $id_tva): self
     {
         $this->id_tva = $id_tva;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

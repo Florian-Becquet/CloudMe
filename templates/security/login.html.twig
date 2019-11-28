@@ -56,6 +56,11 @@
       <p class="mb-1 text-center">
         <a href="forgot-password.html">Mot de passe oublié</a>
       </p>
+      <span>
+        {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+      <span>
       <p class="mb-0 text-center">
         <a href="{{path('app_register')}}" class="text-center">Créer un compte</a>
       </p>

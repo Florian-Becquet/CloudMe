@@ -14,9 +14,14 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        dump($this->getUSer());
+        if ($this->getUser() && $this->getUser()->getStatus() == 1) {
+            return $this->redirectToRoute('home');
+        }
+         
+        if($this->getUser() && $this->getUser()->getStatus() == 0){
+            $this->addFlash('danger', 'Le compte n\'a pas été validé par un Administrateur');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
