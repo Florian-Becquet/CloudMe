@@ -78,6 +78,11 @@ class Services
      */
     private $subscriptions;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $service_type;
+
     public function __construct()
     {
         $this->subscriptions = new ArrayCollection();
@@ -247,6 +252,18 @@ class Services
                 $subscription->setIdServices(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getServiceType(): ?string
+    {
+        return $this->service_type;
+    }
+
+    public function setServiceType(?string $service_type): self
+    {
+        $this->service_type = $service_type;
 
         return $this;
     }
