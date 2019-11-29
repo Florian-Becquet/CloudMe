@@ -16,16 +16,22 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
+     * 
+     * fonction d'enregistrement d'un nouvel utilisateur une fois enregistré il est redirigé vers le login.
+     * @author CSM
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        //on set la date d'aujourd'hui, on instancie User
         $date = new DateTime();
         $user = new User();
+        //on recupere la TVA avec l'id 1
         $repo = $this->getDoctrine()->getRepository(TVA::class);
         $tva = $repo->find(1);
+        //création du formulaire d'enregistrement
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        //si le form est valide et soumis on encode le password et on insere l'User dans la BDD, puis redirection vers login
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -41,11 +47,9 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-
             return $this->redirectToRoute('app_login');
         }
-
+        //sinon on affiche la page de registration
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
