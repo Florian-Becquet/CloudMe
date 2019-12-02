@@ -40,27 +40,5 @@ class SecurityController extends AbstractController
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
-    /**
-     * @Route("/home", name="home")
-     */
-    public function home(){
-
-        return $this->render('base.html.twig');
-    }
-       /**
-     * @Route("/intro", name="intro")
-     */
-    public function intro(){
-
-        return $this->render('pages/home.html.twig');
-    }
-
-     /**
-     * @Route("/serveur", name="serveur")
-     */
-    public function serveur(){
-        $serveur = $this->getDoctrine()->getRepository(Services::class);
-        $vps = $serveur->findBy(['service_type' => 'vps']);
-        return $this->render('pages/serveur.html.twig', ['vps' => $vps]);
-    }
+    
 }

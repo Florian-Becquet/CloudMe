@@ -184,24 +184,23 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+             {% if vps %}
+               {% for vips in vps %}
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>VPS 1</p>
+                      <p>{{ vips }}</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  {% endfor %}
+                  {% else %}
+                    <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>VPS 2</p>
+                      <p>Pas de souscriptions</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>VPS 3</p>
-                    </a>
-                  </li>
+              {% endif %}
+              
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -212,42 +211,24 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link" id="createServe">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Souscrire à un serveur</p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Consulter serveur
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
+          <ul class="nav nav-treeview">
+             {% if serveur %}
+               {% for serv in serveur %}
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Serveur 1</p>
+                      <p>{{ serv }}</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  {% endfor %}
+                  {% else %}
+                    <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Serveur 2</p>
+                      <p>Pas de souscriptions</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Serveur 3</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {% endif %}
+              
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -259,43 +240,26 @@
                 {# <span class="badge badge-info right">6</span> #}
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Souscrire à un BV </p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Consulter BV
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
+           <ul class="nav nav-treeview">
+             {% if bureauVirtuel %}
+               {% for bv in bureauVirtuel %}
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>BV 1</p>
+                      <p>{{ bv }}</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  {% endfor %}
+                  {% else %}
+                    <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>BV 2</p>
+                      <p>Pas de souscriptions</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>BV 3</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {% endif %}
+              
             </ul>
+           
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -306,42 +270,25 @@
                 {# <span class="badge badge-info right">6</span> #}
               </p>
             </a>
+            
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Souscrire à une BDD</p>
-                </a>
-              </li>
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Consulter BDD
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
+             {% if bdd %}
+               {% for db in bdd %}
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>BDD 1</p>
+                      <p>{{ db }}</p>
                     </a>
                   </li>
-                  <li class="nav-item">
+                  {% endfor %}
+                  {% else %}
+                    <li class="nav-item">
                     <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>BDD 2</p>
+                      <p>Pas de souscriptions</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-dot-circle nav-icon"></i>
-                      <p>BDD 3</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {% endif %}
+              
             </ul>
           </li>
           <li class="nav-item">
