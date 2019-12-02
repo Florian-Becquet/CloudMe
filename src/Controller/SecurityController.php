@@ -63,5 +63,4 @@ class SecurityController extends AbstractController
         $vps = $serveur->findBy(['service_type' => 'vps']);
         return $this->render('pages/serveur.html.twig', ['vps' => $vps]);
     }
-    
 }
