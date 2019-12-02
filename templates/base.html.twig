@@ -187,7 +187,7 @@
              {% if vps %}
                {% for vips in vps %}
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a  data-target= "infovps" data-def="VPS" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ vips }}</p>
                     </a>
@@ -215,7 +215,7 @@
              {% if serveur %}
                {% for serv in serveur %}
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a  data-target= "infoserveur" data-def="Serveur" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ serv }}</p>
                     </a>
@@ -244,7 +244,7 @@
              {% if bureauVirtuel %}
                {% for bv in bureauVirtuel %}
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a  data-target= "infobv" data-def="Bureau virtuel" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ bv }}</p>
                     </a>
@@ -275,7 +275,7 @@
              {% if bdd %}
                {% for db in bdd %}
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a  data-target= "infobdd" data-def="Base de donnée" href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ db }}</p>
                     </a>
@@ -320,7 +320,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
-              <li class="breadcrumb-item active" id="navigation">Dashboard</li>
+              <li class="breadcrumb-item active" id="def">Home</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

@@ -3,8 +3,11 @@ $(document).ready(function(){
     $('#root').load('intro');
 
     // chargement ajax des autres pages sur le click de chaques sections differentes
-    $('#createServe').on('click',function(){
-        $('#root').load('serveur');
+    $('.navigation').on('click',function(){
+        var target = $(this).data('target');
+        var def = $(this).data('def');
+        $('#root').load(target);
+        $('#def').html(def);
     })
 
     //
