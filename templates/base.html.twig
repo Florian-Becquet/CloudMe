@@ -156,13 +156,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <h5 style="color:white" class="d-block">{{ app.user.FirstName }} {{ app.user.name }} </h5>
-        </div>
+      <div class="user-panel mt-3  d-flex justify-content-center">
+          <h5 style="color:white" class="d-block text-center">Bienvenue <p><small>{{ app.user.FirstName }} {{ app.user.name }}</small></p> </h5>
       </div>
 
       <!-- Sidebar Menu -->
@@ -237,7 +232,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" id="createServe">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Crée un serveur</p>
                 </a>
@@ -398,10 +393,27 @@
 
 
     <!-- Main content -->
-      <div class="container-fluid">
-        <!-- Info boxes -->
-      </div>
+     
               {% block body %}{% endblock %}
+              <div class="content-wrapper">
+                 <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    
+    <div id="root"></div>
+    </div>
         <!-- /.row -->
 
   <!-- Control Sidebar -->
@@ -442,7 +454,7 @@
 
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
-
+<script src="js/global.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -44,6 +44,22 @@ class SecurityController extends AbstractController
      */
     public function home(){
 
+        return $this->render('base.html.twig');
+    }
+       /**
+     * @Route("/intro", name="intro")
+     */
+    public function intro(){
+
         return $this->render('pages/home.html.twig');
     }
+
+     /**
+     * @Route("/serveur", name="serveur")
+     */
+    public function serveur(){
+
+        return $this->render('pages/serveur.html.twig');
+    }
+    
 }
