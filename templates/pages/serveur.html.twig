@@ -1,1 +1,21 @@
-<h1>Salut je suis un super serveur !</h1>
+
+<table class="table">
+  <thead >
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Achitecture</th>
+      <th scope="col">Description</th>
+      <th scope="col">Headline</th>
+    </tr>
+  </thead>
+  {% for info in vps %}
+  <tbody>
+    <tr>
+      <th scope="row">{{ info.id }}</th>
+      <td>{{ info.architecture }}</td>
+      <td>{{ info.description }}</td>
+      <td>{{ info.headline }}</td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>

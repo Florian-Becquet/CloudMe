@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Services;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -14,7 +15,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        dump($this->getUSer());
+        
         if ($this->getUser() && $this->getUser()->getStatus() == 1) {
             return $this->redirectToRoute('home');
         }
@@ -58,8 +59,8 @@ class SecurityController extends AbstractController
      * @Route("/serveur", name="serveur")
      */
     public function serveur(){
-
-        return $this->render('pages/serveur.html.twig');
+        $serveur = $this->getDoctrine()->getRepository(Services::class);
+        $vps = $serveur->findBy(['service_type' => 'vps']);
+        return $this->render('pages/serveur.html.twig', ['vps' => $vps]);
     }
-    
 }
