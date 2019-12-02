@@ -68,6 +68,16 @@ class Subscription
      */
     private $sub_name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ip_adresse;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +199,30 @@ class Subscription
     public function setSubName(string $sub_name): self
     {
         $this->sub_name = $sub_name;
+
+        return $this;
+    }
+
+    public function getIpAdresse(): ?string
+    {
+        return $this->ip_adresse;
+    }
+
+    public function setIpAdresse(string $ip_adresse): self
+    {
+        $this->ip_adresse = $ip_adresse;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
