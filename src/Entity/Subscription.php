@@ -63,6 +63,11 @@ class Subscription
      */
     private $id_services;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sub_name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,6 +177,18 @@ class Subscription
     public function setIdServices(?Services $id_services): self
     {
         $this->id_services = $id_services;
+
+        return $this;
+    }
+
+    public function getSubName(): ?string
+    {
+        return $this->sub_name;
+    }
+
+    public function setSubName(string $sub_name): self
+    {
+        $this->sub_name = $sub_name;
 
         return $this;
     }
