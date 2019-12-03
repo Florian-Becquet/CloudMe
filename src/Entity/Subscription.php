@@ -78,6 +78,16 @@ class Subscription
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $high_availability;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $options;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -223,6 +233,30 @@ class Subscription
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getHighAvailability(): ?string
+    {
+        return $this->high_availability;
+    }
+
+    public function setHighAvailability(?string $high_availability): self
+    {
+        $this->high_availability = $high_availability;
+
+        return $this;
+    }
+
+    public function getOptions(): ?string
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?string $options): self
+    {
+        $this->options = $options;
 
         return $this;
     }
