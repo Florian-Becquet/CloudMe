@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Services;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -29,10 +30,11 @@ class NavigationController extends AbstractController
     }     /**
      * @Route("/serveur", name="serveur")
      */
-    public function serveur(){
+    public function serveur(Request $request){
+        $info = $request->request->get('serv');
         $serveur = $this->getDoctrine()->getRepository(Services::class);
-        $vps = $serveur->findBy(['service_type' => 'vps']);
-        return $this->render('pages/serveur.html.twig', ['vps' => $vps]);
+        $service = $serveur->findBy(['service_type' => $info]);
+        return $this->render('pages/serveur.html.twig', ['vps' => $service, 'test'=> $info]);
     }
          /**
      * @Route("/infovps", name="infovps")
@@ -58,7 +60,7 @@ class NavigationController extends AbstractController
          /**
      * @Route("/infobv", name="infobv")
      */
-    public function inBv(){
+    public function infoBv(){
 
         return $this->render('pages/infoBv.html.twig');
     }

@@ -9,7 +9,6 @@ $(document).ready(function(){
         $('#root').load(target);
         $('#def').html(def);
     })
-
     //
 })
 
