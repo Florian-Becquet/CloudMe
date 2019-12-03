@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Services;
+use App\Repository\ServicesRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class NavigationController extends AbstractController
+class NavigationController extends Controller
 {
   /**
      * @Route("/home", name="home")
@@ -30,11 +32,20 @@ class NavigationController extends AbstractController
     }     /**
      * @Route("/serveur", name="serveur")
      */
-    public function serveur(Request $request){
+    public function serveur(Request $request,ServicesRepository $repo,PaginatorInterface $paginator){
         $info = $request->request->get('serv');
-        $serveur = $this->getDoctrine()->getRepository(Services::class);
-        $service = $serveur->findBy(['service_type' => $info]);
-        return $this->render('pages/serveur.html.twig', ['vps' => $service, 'test'=> $info]);
+        $allVps = $repo ->findBy(['service_type' => $info]);
+    
+            $vps = $this->get('knp_paginator')->paginate(
+                // Doctrine Query, not results
+                $allVps,
+                // Define the page parameter
+                $request->query->getInt('page', 1),
+                // Items per page
+                5
+            );
+            return $this->render('pages/serveur.html.twig', [
+                'allvps' => $vps]);
     }
          /**
      * @Route("/infovps", name="infovps")
