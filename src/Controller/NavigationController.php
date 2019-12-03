@@ -71,4 +71,13 @@ class NavigationController extends AbstractController
 
         return $this->render('pages/infoMetrics.html.twig');
     }
+        /**
+     * @Route("/forfait", name="forfait")
+     */
+    public function forfait(Request $request){
+        $info = $request->request->get('forfait');
+        $serveur = $this->getDoctrine()->getRepository(Services::class);
+        $description = $serveur->findBy(['id' => $info]);
+        return $this->render('pages/forfait.html.twig',['info' => $description]);
+    }
 }
