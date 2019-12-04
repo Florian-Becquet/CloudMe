@@ -91,7 +91,7 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['name' => 'Serveur1', 'cpu' => 4,'ram' =>10,'space' => 300,'id' => 1],
+        $metrics = array(['name' => 'Serveur1', 'cpu' => 4,'ram' =>10,'space' => 450,'id' => 1],
                          ['name' => 'Serveur2', 'cpu' => 12,'ram' =>16,'space' => 500,'id' => 2],
                          ['name' => 'Serveur3', 'cpu' => 18,'ram' =>16,'space' => 800,'id' => 3],
                         );
@@ -131,7 +131,7 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['name' => 'Bureau Virtuel1', 'cpu' => 6,'ram' =>10,'space' => 250,'id' => 1],
+        $metrics = array(['name' => 'Bureau Virtuel1', 'cpu' => 6,'ram' =>10,'space' => 350,'id' => 1],
                          ['name' => 'Bureau Virtuel2', 'cpu' => 12,'ram' =>12,'space' => 400,'id' => 2],
                          ['name' => 'Bureau Virtuel3', 'cpu' => 16,'ram' =>16,'space' => 600,'id' => 3],
                         );
