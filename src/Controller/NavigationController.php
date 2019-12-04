@@ -29,7 +29,8 @@ class NavigationController extends Controller
     public function intro(){
 
         return $this->render('pages/home.html.twig');
-    }     /**
+    }     
+    /**
      * @Route("/serveur", name="serveur")
      */
     public function serveur(Request $request,ServicesRepository $repo,PaginatorInterface $paginator){
@@ -45,7 +46,8 @@ class NavigationController extends Controller
                 5
             );
             return $this->render('pages/serveur.html.twig', [
-                'allvps' => $vps]);
+                'allvps' => $vps,
+                ]);
     }
          /**
      * @Route("/infovps", name="infovps")

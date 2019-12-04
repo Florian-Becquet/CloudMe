@@ -88,6 +88,16 @@ class Subscription
      */
     private $options;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $IP;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $backup;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -257,6 +267,30 @@ class Subscription
     public function setOptions(?string $options): self
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    public function getIP(): ?string
+    {
+        return $this->IP;
+    }
+
+    public function setIP(?string $IP): self
+    {
+        $this->IP = $IP;
+
+        return $this;
+    }
+
+    public function getBackup(): ?string
+    {
+        return $this->backup;
+    }
+
+    public function setBackup(?string $backup): self
+    {
+        $this->backup = $backup;
 
         return $this;
     }
