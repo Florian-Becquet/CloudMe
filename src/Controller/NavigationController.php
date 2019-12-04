@@ -29,23 +29,29 @@ class NavigationController extends Controller
     public function intro(){
 
         return $this->render('pages/home.html.twig');
-    }     /**
+    }     
+    /**
      * @Route("/serveur", name="serveur")
      */
     public function serveur(Request $request,ServicesRepository $repo,PaginatorInterface $paginator){
         $info = $request->request->get('serv');
         $allVps = $repo ->findBy(['service_type' => $info]);
-    
+        if($request->request->getInt('page', 1) == 0){
+            $page = 1;
+        }
+        else{
+            $page = $request->request->getInt('page');
+        }
             $vps = $this->get('knp_paginator')->paginate(
                 // Doctrine Query, not results
                 $allVps,
                 // Define the page parameter
-                $request->query->getInt('page', 1),
+                $page,
                 // Items per page
                 5
             );
             return $this->render('pages/serveur.html.twig', [
-                'allvps' => $vps]);
+                'allvps' => $vps ]);
     }
          /**
      * @Route("/infovps", name="infovps")
@@ -81,5 +87,14 @@ class NavigationController extends Controller
     public function infoMetrics(){
 
         return $this->render('pages/infoMetrics.html.twig');
+    }
+        /**
+     * @Route("/forfait", name="forfait")
+     */
+    public function forfait(Request $request){
+        $info = $request->request->get('forfait');
+        $serveur = $this->getDoctrine()->getRepository(Services::class);
+        $description = $serveur->findBy(['id' => $info]);
+        return $this->render('pages/forfait.html.twig',['info' => $description]);
     }
 }

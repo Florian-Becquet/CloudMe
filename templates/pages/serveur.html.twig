@@ -16,7 +16,7 @@
   </thead>
   {% for info in allvps %}
   <tbody>
-    <tr>
+    <tr class="choix" data-target="{{ info.id }}">
       <td>{{ info.architecture }}</td>
       <td>{{ info.description }}</td>
       <td>{{ info.headline }}</td>
@@ -34,3 +34,5 @@
   <div class="pagination justify-content-center">
   {{ knp_pagination_render(allvps) }}
 </div>
+
+<script src="js/Nav.js"></script>

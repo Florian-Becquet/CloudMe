@@ -83,6 +83,11 @@ class Services
      */
     private $service_type;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $use_consumption;
+
     public function __construct()
     {
         $this->subscriptions = new ArrayCollection();
@@ -264,6 +269,18 @@ class Services
     public function setServiceType(?string $service_type): self
     {
         $this->service_type = $service_type;
+
+        return $this;
+    }
+
+    public function getUseConsumption(): ?string
+    {
+        return $this->use_consumption;
+    }
+
+    public function setUseConsumption(?string $use_consumption): self
+    {
+        $this->use_consumption = $use_consumption;
 
         return $this;
     }
