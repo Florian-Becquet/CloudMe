@@ -157,7 +157,7 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3  d-flex justify-content-center">
-          <h5 style="color:white" class="d-block text-center">Commander</h5>
+          <h5 style="color:white" class="d-block text-center">Bienvenue <small><p>{{app.user.name}} {{app.user.firstName}}</p></small></h5>
       </div>
 
       <!-- Sidebar Menu -->
@@ -166,7 +166,15 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a  data-target="intro" data-def="home" href="#" class="nav-link active navigation">
+            <a  data-target="commander" id="commander" href="#" class="nav-link active navigation">
+              <i class="nav-icon fas fa-shopping-basket"></i>
+              <p style="font-size:17px">
+                Commander
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  data-target="intro" data-def="home" href="#" class="nav-link navigation">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -326,7 +334,31 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    
+    <div class="card card-outline" id="divCommande" style="display:none;z-index:1;width:auto;position:absolute;">
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times "></i></button>
+                <!-- /.card-tools -->
+        </div>
+      <!-- /Le corps de la card -->
+      <div class="row">
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-cloud text-center "><p><small>VPS</small></p></i>
+        </div>
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-server text-center"><p><small>Serveur</small></p></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-desktop text-center"><p><small><a href="#" data-target="bdd" style="color: black">Bureau Virteul</a></small></p></i>
+        </div>
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-database text-center"><p><small>BDD</small></p></i>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
     </div>
         <!-- /.row -->
