@@ -1,1 +1,32 @@
-<h1> Mon bureau virtuel </h1>
+
+{% for data in info %}
+    <h3 class="lead text-center mb-5"> Données du service : <strong>{{ data.name }}</strong></h3>
+     <div id="stockage" style="display:none;">
+        <span id="cpu">{{ data.cpu }}</span>
+        <span id="ram">{{ data.ram }}</span>
+        <span id="space">{{ data.space }}</span>
+    </div>
+
+       
+<div class="row">
+      
+
+        <div class="col-md-4 col-sm-12 text-center">
+        <h4>CPU</h4>
+        <h4 class="lead">total : <strong>{{data.cpu}}</strong> GB</h4>
+        <canvas id="fromageCpu"></canvas>
+        </div>
+         <div class="col-md-4 col-sm-12 text-center">
+         <h4>RAM</h4>
+         <h4 class="lead">total : <strong>{{data.ram}}</strong> GB</h4>
+        <canvas id="fromageRam"></canvas>
+        </div>
+         <div class="col-md-4 col-sm-12 text-center">
+         <h4>Espace disque</h4>
+         <h4 class="lead">total : <strong>{{data.space}}</strong> GO</h4>
+        <canvas id="fromageEspace"></canvas>
+        </div>
+     
+</div>
+{% endfor %}
+<script src="js/camembert.js"></script>
