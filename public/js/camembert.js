@@ -10,7 +10,7 @@ var ramDispo = ram - ramUsed;
 //recupération des données space dans la div stockage.
 var space = $('#stockage').children('#space').html();
 //calcul pour avoir l'espace disque dispo et la ram utilisée
-var spaceUsed = 300;
+var spaceUsed = 100;
 var spaceDispo = space - spaceUsed;
 
 

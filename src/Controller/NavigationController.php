@@ -70,15 +70,15 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['name' => 'VPS1', 'cpu' => 2,'ram' =>8,'space' => 500,'id' => 1],
-                         ['name' => 'VPS2', 'cpu' => 8,'ram' =>16,'space' => 800,'id' => 2],
-                         ['name' => 'VPS3', 'cpu' => 6,'ram' =>12,'space' => 1000,'id' => 3],
+        $metrics = array(['name' => 'VPS1', 'ip' => '192.65.36.1','HA'=>'None','status' => 'running','cpu' => 2,'ram' =>8,'space' => 500,'id' => 1],
+                         ['name' => 'VPS2', 'ip' => '193.70.30.1','HA'=>'Avaible','status' => 'running','cpu' => 8,'ram' =>16,'space' => 410,'id' => 2],
+                         ['name' => 'VPS3', 'ip' => '182.68.40.1','HA'=>'Avaible','status' => 'not running','cpu' => 6,'ram' =>12,'space' => 260,'id' => 3],
                         );
 
        //mise en place des données dans un tableau clé valeur result
         foreach ( $metrics as $met){
                 if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
                 }
         }
         
@@ -91,15 +91,15 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['name' => 'Serveur1', 'cpu' => 4,'ram' =>10,'space' => 450,'id' => 1],
-                         ['name' => 'Serveur2', 'cpu' => 12,'ram' =>16,'space' => 500,'id' => 2],
-                         ['name' => 'Serveur3', 'cpu' => 18,'ram' =>16,'space' => 800,'id' => 3],
+        $metrics = array(['name' => 'Serveur1', 'ip' => '190.15.30.2','HA'=>'Avaible','status' => 'not running','cpu' => 4,'ram' =>10,'space' => 380,'id' => 1],
+                         ['name' => 'Serveur2', 'ip' => '193.60.65.1','HA'=>'None','status' => 'not running','cpu' => 12,'ram' =>16,'space' => 500,'id' => 2],
+                         ['name' => 'Serveur3', 'ip' => '198.75.56.3','HA'=>'None','status' => 'running','cpu' => 18,'ram' =>16,'space' => 260,'id' => 3],
                         );
 
        //mise en place des données dans un tableau clé valeur result
         foreach ( $metrics as $met){
                 if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
                 }
         }
         return $this->render('pages/infoServeur.html.twig',['info' => $result]);
@@ -111,15 +111,15 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['name' => 'Base de donnée 1', 'cpu' => 8,'ram' =>11,'space' => 400,'id' => 1],
-                         ['name' => 'Base de donnée 2', 'cpu' => 14,'ram' =>14,'space' => 600,'id' => 2],
-                         ['name' => 'Base de donnée 3', 'cpu' => 16,'ram' =>16,'space' => 700,'id' => 3],
+        $metrics = array(['name' => 'Base de donnée 1', 'ip' => '197.67.37.7','HA'=>'None','status' => 'running','cpu' => 8,'ram' =>11,'space' => 200,'id' => 1],
+                         ['name' => 'Base de donnée 2', 'ip' => '190.60.30.0','HA'=>'None','status' => 'not running','cpu' => 14,'ram' =>14,'space' => 400,'id' => 2],
+                         ['name' => 'Base de donnée 3', 'ip' => '193.33.33.3','HA'=>'None','status' => 'not running','cpu' => 16,'ram' =>16,'space' => 450,'id' => 3],
                         );
 
        //mise en place des données dans un tableau clé valeur result
         foreach ( $metrics as $met){
                 if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
                 }
         }
         return $this->render('pages/infoBdd.html.twig',['info' => $result]);
@@ -131,15 +131,15 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['name' => 'Bureau Virtuel1', 'cpu' => 6,'ram' =>10,'space' => 350,'id' => 1],
-                         ['name' => 'Bureau Virtuel2', 'cpu' => 12,'ram' =>12,'space' => 400,'id' => 2],
-                         ['name' => 'Bureau Virtuel3', 'cpu' => 16,'ram' =>16,'space' => 600,'id' => 3],
+        $metrics = array(['name' => 'Bureau Virtuel1', 'ip' => '195.55.35.5','HA'=>'Avaible','status' => 'running','cpu' => 6,'ram' =>10,'space' => 350,'id' => 1],
+                         ['name' => 'Bureau Virtuel2', 'ip' => '194.45.34.4','HA'=>'None','status' => 'not running','cpu' => 12,'ram' =>12,'space' => 400,'id' => 2],
+                         ['name' => 'Bureau Virtuel3', 'ip' => '199.69.96.9','HA'=>'None','status' => 'running','cpu' => 16,'ram' =>16,'space' => 300,'id' => 3],
                         );
 
        //mise en place des données dans un tableau clé valeur result
         foreach ( $metrics as $met){
                 if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
                 }
         }
         return $this->render('pages/infoBv.html.twig',['info' => $result]);
