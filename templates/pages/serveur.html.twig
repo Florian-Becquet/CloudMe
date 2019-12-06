@@ -1,38 +1,50 @@
+<div class="card text-center">
+  <div class="card-header">
+    <h1>Configure ton {{ choix }}</h1>
+  </div>
+  <div class="card-body">
+        {{ form_start(subscriptionForm) }}
+        <div id="page1">
+          <div class="input-group mb-3">
+            {{ form_row(subscriptionForm.cpu) }}
+          </div> 
+          <div class="input-group mb-3">
+            {{ form_row(subscriptionForm.ram) }}
+          </div>
+          <div class="input-group mb-3">
+            {{ form_row(subscriptionForm.disk_space) }}
+          </div>
+          <div>
+          {% if liste %}
+            <select class="custom-select" name="serveur">
+            {% for info in liste %}
+              <option value="{{ info.id }}">{{ info.headline }}</option>
+            {% endfor %}
+            </select>
+          {% endif %}
+        </div>
+          <button type="submit" data-target="page2" class="btn btn-primary pr-3 pl-3 tabNav">Page Suivante</button>
+        </div>
+        <div id="page2">
+          <div class="input-group mb-3">
+            {{ form_row(subscriptionForm.high_availability) }}
+          </div>
+          <div class="input-group mb-3">
+            {{ form_row(subscriptionForm.IP) }}
+          </div>
+          <div class="input-group mb-3">
+            {{ form_row(subscriptionForm.backup) }}
+          </div>
+          <button type="submit" data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Page Précédente</button>
+          <button type="submit" id="boutonSub" class="btn btn-primary pr-3 pl-3">Confirmer</button>
+        </div>
+          {{ form_end(subscriptionForm) }}
+      
+  </div>
 
-<table class="table mx-auto" style="width:40%; border: 1px solid">
-  <thead class="thead-dark text-center">
-    <tr>
-      <th scope="col">Achitecture</th>
-      <th scope="col">Description</th>
-      <th scope="col">Headline</th>
-      {# <th scope="col">Location</th> #}
-      <th scope="col">OS</th>
-      <th scope="col">Package</th>
-      <th scope="col">Section</th>
-      <th scope="col">Template</th>
-      <th scope="col">Type</th>
-      <th scope="col">Version</th>
-    </tr>
-  </thead>
-  {% for info in allvps %}
-  <tbody>
-    <tr class="choix" data-target="{{ info.id }}">
-      <td>{{ info.architecture }}</td>
-      <td>{{ info.description }}</td>
-      <td>{{ info.headline }}</td>
-      {# <td><a href="{{ info.location }}">Lien</a></td> #}
-      <td>{{ info.os }}</td>
-      <td>{{ info.package }}</td>
-      <td>{{ info.section }}</td>
-      <td>{{ info.template }}</td>
-      <td>{{ info.type }}</td>
-      <td>{{ info.version }}</td>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
-  <div class="pagination justify-content-center">
-  {{ knp_pagination_render(allvps) }}
 </div>
+ {# {% for info in allvps %}
 
-<script src="js/Nav.js"></script>
+  <option value="{{ info.architecture }}"></options>
+{% endfor %} #}
+<script src="js/tabNav.js"></script>
