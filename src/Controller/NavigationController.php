@@ -38,9 +38,13 @@ class NavigationController extends Controller
      /**
      * @Route("/intro", name="intro")
      */
-    public function intro(){
+    public function intro(Request $request){
+        $id = $request->request->get('id');
 
-        return $this->render('pages/home.html.twig');
+        //fausses données 
+        $metrics = array (['CPU' => '24', 'RAM' => '32','Disque'=>'15','id' => 1]);
+        
+        return $this->render('pages/home.html.twig', ['service'=>$metrics]);
     }     
     /**
      * @Route("/serveur", name="serveur")
