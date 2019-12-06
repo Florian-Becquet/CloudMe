@@ -1,6 +1,7 @@
 
 {% for data in info %}
     <h3 class="lead text-center mb-5"> Données du service : </h3>
+   <p>Envelope icon: </p>
     <div class="container ">
     <div class="row custyle">
     <div class="col-md-12 table-responsive mb-5">
@@ -28,18 +29,9 @@
                 <td>{{data.ip}}</td>
                 <td>{{data.status}}</td>
 
-                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                <td class="text-center"><a class='btn btn-success btn-xs pl-2 pr-2' title="Lancer le serveur"href="#"><span class="fas fa-play"></span></a> <a href="#" title="Arreter le serveur"class="btn btn-danger btn-xs pl-2 pr-2"><span class="fas fa-stop"></span></a><a class='btn btn-warning btn-xs pl-2 pr-2 ml-1' title="Changer la configuration"href="#"><i class="fas fa-cog" style="color:white;"></i></td>
             </tr>
-           <tr>
-                <td>fixe</td>
-                <td>[1-8]</td>
-                <td>[1-16]</td>
-                <td>[1-500]</td>
-                <td>fixe</td>
-                <td>fixe</td>
-                <td>fixe</td>
-               
-            </tr>
+          
     </table>
     </div>
     </div>
