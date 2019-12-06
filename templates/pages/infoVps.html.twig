@@ -1,1 +1,75 @@
-<h1> Mon vps </h1>
+
+{% for data in info %}
+    <h3 class="lead text-center mb-5"> Données du service : </h3>
+    <div class="container ">
+    <div class="row custyle">
+    <div class="col-md-12 table-responsive mb-5">
+    <table class="table table-striped custab">
+    <thead>
+    
+        <tr>
+            <th>Nom</th>
+            <th>CPU</th>
+            <th>RAM</th>
+            <th>Espace disque</th>
+            <th>HA</th>
+            <th>IP</th>
+            <th>Status</th>
+            
+            <th class="">Options</th>
+        </tr>
+    </thead>
+            <tr>
+                <td>{{ data.name }}</td>
+                <td>{{data.cpu}}</td>
+                <td>{{ data.ram }}</td>
+                <td>{{ data.space }}</td>
+                <td>{{data.HA}}</td>
+                <td>{{data.ip}}</td>
+                <td>{{data.status}}</td>
+
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+            </tr>
+           <tr>
+                <td>fixe</td>
+                <td>[1-8]</td>
+                <td>[1-16]</td>
+                <td>[1-500]</td>
+                <td>fixe</td>
+                <td>fixe</td>
+                <td>fixe</td>
+               
+            </tr>
+    </table>
+    </div>
+    </div>
+</div>
+     <div id="stockage" style="display:none;">
+        <span id="cpu">{{ data.cpu }}</span>
+        <span id="ram">{{ data.ram }}</span>
+        <span id="space">{{ data.space }}</span>
+    </div>
+
+       
+<div class="row">
+      
+
+        <div class="col-md-4 col-sm-12 text-center">
+        <h4>CPU</h4>
+        
+        <canvas id="fromageCpu"></canvas>
+        </div>
+         <div class="col-md-4 col-sm-12 text-center">
+         <h4>RAM</h4>
+      
+        <canvas id="fromageRam"></canvas>
+        </div>
+         <div class="col-md-4 col-sm-12 text-center">
+         <h4>Espace disque</h4>
+       
+        <canvas id="fromageEspace"></canvas>
+        </div>
+     
+</div>
+{% endfor %}
+<script src="js/camembert.js"></script>

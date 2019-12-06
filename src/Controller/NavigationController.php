@@ -18,9 +18,18 @@ class NavigationController extends Controller
      * @Route("/home", name="home")
      */
     public function home(){
-            $vps = array('vps0001','vps0002','vps0003');
-            $serveur = array('serv0001','serv0002','serv0003');
-            $bureauVirtuel = array('BV0001','BV0002','BV0003');
+            $vps = array(
+                ['name' => 'vps0001' , 'id' => '1'],
+                ['name' => 'vps0002' , 'id' => '2'],
+                ['name' => 'vps0003' , 'id' => '3']);
+            $serveur = array(
+                ['name' => 'serveur0001' , 'id' => '1'],
+                ['name' => 'serveur0002' , 'id' => '2'],
+                ['name' => 'serveur0003' , 'id' => '3']);
+            $bureauVirtuel = array(
+                ['name' => 'BV0001' , 'id' => '1'],
+                ['name' => 'BV0002' , 'id' => '2'],
+                ['name' => 'BV0003' , 'id' => '3']);
             $bdd = array();
         return $this->render('base.html.twig' , ['vps' => $vps , 'serveur' => $serveur, 'bureauVirtuel' => $bureauVirtuel,'bdd' => $bdd]);
     }
@@ -75,30 +84,84 @@ class NavigationController extends Controller
          /**
      * @Route("/infovps", name="infovps")
      */
-    public function infoVps(){
+    public function infoVps(Request $request){
+        //recupération de l'id du service vps
+        $id = $request->request->get('id');
 
-        return $this->render('pages/infoVps.html.twig');
+        //fausses données 
+        $metrics = array(['name' => 'VPS1', 'ip' => '192.65.36.1','HA'=>'None','status' => 'running','cpu' => 2,'ram' =>8,'space' => 500,'id' => 1],
+                         ['name' => 'VPS2', 'ip' => '193.70.30.1','HA'=>'Avaible','status' => 'running','cpu' => 8,'ram' =>16,'space' => 410,'id' => 2],
+                         ['name' => 'VPS3', 'ip' => '182.68.40.1','HA'=>'Avaible','status' => 'not running','cpu' => 6,'ram' =>12,'space' => 260,'id' => 3],
+                        );
+
+       //mise en place des données dans un tableau clé valeur result
+        foreach ( $metrics as $met){
+                if($met['id'] == $id){
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                }
+        }
+        
+        return $this->render('pages/infoVps.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infoserveur", name="infoserveur")
      */
-    public function infoServeur(){
+    public function infoServeur(Request $request){
+        $id = $request->request->get('id');
 
-        return $this->render('pages/infoServeur.html.twig');
+        //fausses données 
+        $metrics = array(['name' => 'Serveur1', 'ip' => '190.15.30.2','HA'=>'Avaible','status' => 'not running','cpu' => 4,'ram' =>10,'space' => 380,'id' => 1],
+                         ['name' => 'Serveur2', 'ip' => '193.60.65.1','HA'=>'None','status' => 'not running','cpu' => 12,'ram' =>16,'space' => 500,'id' => 2],
+                         ['name' => 'Serveur3', 'ip' => '198.75.56.3','HA'=>'None','status' => 'running','cpu' => 18,'ram' =>16,'space' => 260,'id' => 3],
+                        );
+
+       //mise en place des données dans un tableau clé valeur result
+        foreach ( $metrics as $met){
+                if($met['id'] == $id){
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                }
+        }
+        return $this->render('pages/infoServeur.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infobdd", name="infobdd")
      */
-    public function infoBdd(){
+    public function infoBdd(Request $request){
+        $id = $request->request->get('id');
 
-        return $this->render('pages/infoBdd.html.twig');
+        //fausses données 
+        $metrics = array(['name' => 'Base de donnée 1', 'ip' => '197.67.37.7','HA'=>'None','status' => 'running','cpu' => 8,'ram' =>11,'space' => 200,'id' => 1],
+                         ['name' => 'Base de donnée 2', 'ip' => '190.60.30.0','HA'=>'None','status' => 'not running','cpu' => 14,'ram' =>14,'space' => 400,'id' => 2],
+                         ['name' => 'Base de donnée 3', 'ip' => '193.33.33.3','HA'=>'None','status' => 'not running','cpu' => 16,'ram' =>16,'space' => 450,'id' => 3],
+                        );
+
+       //mise en place des données dans un tableau clé valeur result
+        foreach ( $metrics as $met){
+                if($met['id'] == $id){
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                }
+        }
+        return $this->render('pages/infoBdd.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infobv", name="infobv")
      */
-    public function infoBv(){
+    public function infoBv(Request $request){
+        $id = $request->request->get('id');
 
-        return $this->render('pages/infoBv.html.twig');
+        //fausses données 
+        $metrics = array(['name' => 'Bureau Virtuel1', 'ip' => '195.55.35.5','HA'=>'Avaible','status' => 'running','cpu' => 6,'ram' =>10,'space' => 350,'id' => 1],
+                         ['name' => 'Bureau Virtuel2', 'ip' => '194.45.34.4','HA'=>'None','status' => 'not running','cpu' => 12,'ram' =>12,'space' => 400,'id' => 2],
+                         ['name' => 'Bureau Virtuel3', 'ip' => '199.69.96.9','HA'=>'None','status' => 'running','cpu' => 16,'ram' =>16,'space' => 300,'id' => 3],
+                        );
+
+       //mise en place des données dans un tableau clé valeur result
+        foreach ( $metrics as $met){
+                if($met['id'] == $id){
+                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+                }
+        }
+        return $this->render('pages/infoBv.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infometrics", name="infometrics")

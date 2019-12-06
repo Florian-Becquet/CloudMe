@@ -5,9 +5,24 @@ $(document).ready(function(){
     // chargement ajax des autres pages sur le click de chaques sections differentes
     $('.navigation').on('click',function(){
         var target = $(this).data('target');
+        var id = $(this).data('id');
         var def = $(this).data('def');
-        $('#root').load(target);
-        $('#def').html(def);
+
+        $.ajax({
+            type: 'POST',
+            url: target,
+            data: 'id=' + id,
+            success: function(data){
+                $('#root').html(data);
+                $('#def').html(def);
+            }
+            })
+        
+       
+    })
+    //
+    $('#commander').on('click',function(){
+        $('#divCommande').css('display','block');
     })
     //
 })

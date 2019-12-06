@@ -157,7 +157,7 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3  d-flex justify-content-center">
-          <h5 style="color:white" class="d-block text-center">Bienvenue <p><small>{{ app.user.FirstName }} {{ app.user.name }}</small></p> </h5>
+          <h5 style="color:white" class="d-block text-center">Bienvenue <small><p>{{app.user.name}} {{app.user.firstName}}</p></small></h5>
       </div>
 
       <!-- Sidebar Menu -->
@@ -166,7 +166,15 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a  data-target="intro" data-def="home" href="#" class="nav-link active navigation">
+            <a  data-target="commander" id="commander" href="#" class="nav-link active navigation">
+              <i class="nav-icon fas fa-shopping-basket"></i>
+              <p style="font-size:17px">
+                Commander
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  data-target="intro" data-def="home" href="#" class="nav-link navigation">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -187,9 +195,9 @@
              {% if vps %}
                {% for vips in vps %}
                   <li class="nav-item">
-                    <a  data-target= "infovps" data-def="VPS" href="#" class="nav-link navigation">
+                    <a  data-target= "infovps" data-id="{{ vips.id }}" data-def="VPS" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>{{ vips }}</p>
+                      <p>{{ vips.name }}</p>
                     </a>
                   </li>
                   {% endfor %}
@@ -215,9 +223,9 @@
              {% if serveur %}
                {% for serv in serveur %}
                   <li class="nav-item">
-                    <a  data-target= "infoserveur" data-def="Serveur" href="#" class="nav-link navigation">
+                    <a  data-target= "infoserveur" data-def="Serveur" data-id="{{ serv.id }}" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>{{ serv }}</p>
+                      <p>{{ serv.name }}</p>
                     </a>
                   </li>
                   {% endfor %}
@@ -233,7 +241,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cloud"></i>
+              <i class="nav-icon fas fa-desktop"></i>
               <p>
                 Bureau Virtuel
                 <i class="fas fa-angle-left right"></i>
@@ -244,9 +252,9 @@
              {% if bureauVirtuel %}
                {% for bv in bureauVirtuel %}
                   <li class="nav-item">
-                    <a  data-target= "infobv" data-def="Bureau virtuel" href="#" class="nav-link navigation">
+                    <a  data-target= "infobv" data-def="Bureau virtuel" data-id="{{ bv.id }}" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>{{ bv }}</p>
+                      <p>{{ bv.name }}</p>
                     </a>
                   </li>
                   {% endfor %}
@@ -263,7 +271,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-cloud"></i>
+              <i class="nav-icon fas fa-database"></i>
               <p>
                 Base de donnée
                 <i class="fas fa-angle-left right"></i>
@@ -275,9 +283,9 @@
              {% if bdd %}
                {% for db in bdd %}
                   <li class="nav-item">
-                    <a  data-target= "infobdd" data-def="Base de donnée" href="#" class="nav-link">
+                    <a  data-target= "infobdd" data-def="Base de donnée" data-id="{{ bd.id }}"href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>{{ db }}</p>
+                      <p>{{ bd.name }}</p>
                     </a>
                   </li>
                   {% endfor %}
@@ -326,7 +334,31 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    
+    <div class="card card-outline" id="divCommande" style="display:none;z-index:1;width:auto;position:absolute;">
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="remove">
+            <i class="fas fa-times "></i></button>
+                <!-- /.card-tools -->
+        </div>
+      <!-- /Le corps de la card -->
+      <div class="row">
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-cloud text-center "><p><small>VPS</small></p></i>
+        </div>
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-server text-center"><p><small>Serveur</small></p></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-desktop text-center"><p><small><a href="#" data-target="bdd" style="color: black">Bureau Virteul</a></small></p></i>
+        </div>
+        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+          <i class="fas fa-database text-center"><p><small>BDD</small></p></i>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
     </div>
         <!-- /.row -->
