@@ -5,13 +5,62 @@
 
     <!-- /.content-header -->
    <section class="content">
-      <div class="container-fluid text-center">
+      <div class="container-fluid">
         <!-- /.row -->
-        <h1> Bienvenue {{app.user.name}} {{app.user.firstName}}</h1>
-      </div>
-      <div class="text-center">
-        <h4><p>Vous n'êtes souscrit à aucun service </h4>
-      </div>
+        <h1 class="text-center"> Bonjour {{app.user.name}} {{app.user.firstName}}</h1>
+        <hr>
+        {% for data in service %}
+      <div class="row mt-4 justify-content-center text-right">
+          <div class="col-12 col-sm-4 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-cog"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text text-center">CPU(Global)</span>
+                <span class="info-box-text">Capacité</span>
+                <span class="info-box-number">
+                  {{data.CPU}}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-4 col-md-3">
+            <div class="info-box mb-4">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-memory"></i></span>
 
+              <div class="info-box-content">
+                <span class="info-box-text text-center">RAM (Global) </span>
+                <span class="info-box-text">Capacité</span>
+                <span class="info-box-number">{{data.RAM}}GB</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-4 col-md-3">
+            <div class="info-box mb-4">
+              <span class="info-box-icon bg-dark elevation-1"><i class="fas fa-hdd"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text text-center">Disque(Global)</span>
+                <span class="info-box-text">Capacité</span>
+                <span class="info-box-number">
+                  {{data.Disque}}TO
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+      </div>
+      {% endfor %}
           <!-- ./col -->
   <script src='js/Nav.js'></script>
