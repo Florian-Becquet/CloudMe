@@ -8,6 +8,7 @@ use App\Entity\Services;
 use App\Entity\Subscription;
 use App\Form\SubscriptionType;
 use App\Repository\ServicesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,18 +46,16 @@ class NavigationController extends Controller
     /**
      * @Route("/serveur", name="serveur")
      */
-    public function serveur(Request $request,ServicesRepository $repo){
+    public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em){
         $info = $request->request->get('serv');
-        // $allVps = $repo ->findBy(['service_type' => $info]);
-        //     return $this->render('pages/serveur.html.twig', [
-        //         'allvps' => $allVps ]);
         $date = new DateTime;
         $sub = new Subscription;
         $user = new User;
         $service = new Services;
         $user = $this->getUser();
         $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
-        $form = $this->createForm(SubscriptionType::class, $sub);
+        $form = $this->createForm(SubscriptionType::class, $sub, 
+        ['action' => $this->generateUrl('serveur')]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $sub_name = 'CL12'. $user->getId() . $info . $sub->getId();
@@ -67,14 +66,12 @@ class NavigationController extends Controller
             $sub->setSubName($sub_name);
             $sub->setPrice('50');
             $serveur = $request->request->get('serveur');
-            $vpsChosen = $repo->findBy(['id' => $serveur]);
-            $service = $vpsChosen;
-            $sub->setIdServices($service);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            dump($user);
-            return $this->redirectToRoute('serveur');
+            $vpsChosen = $repo->findOneBy(['id' => $serveur]);
+            $sub->setIdServices($vpsChosen);
+            $em->persist($sub);
+            $em->flush();
+            return $this->redirectToRoute('home');
+            // return var_dump($sub);
         }
         return $this->render('pages/serveur.html.twig', [
             'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $info

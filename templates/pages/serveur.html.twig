@@ -23,7 +23,7 @@
             </select>
           {% endif %}
         </div>
-          <button type="submit" data-target="page2" class="btn btn-primary pr-3 pl-3 tabNav">Page Suivante</button>
+          <button data-target="page2" class="btn btn-primary pr-3 pl-3 tabNav">Page Suivante</button>
         </div>
         <div id="page2">
           <div class="input-group mb-3">
@@ -35,7 +35,7 @@
           <div class="input-group mb-3">
             {{ form_row(subscriptionForm.backup) }}
           </div>
-          <button type="submit" data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Page Précédente</button>
+          <button data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Page Précédente</button>
           <button type="submit" id="boutonSub" class="btn btn-primary pr-3 pl-3">Confirmer</button>
         </div>
           {{ form_end(subscriptionForm) }}
