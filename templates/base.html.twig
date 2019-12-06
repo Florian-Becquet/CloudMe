@@ -30,28 +30,54 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{path('home')}}" class="nav-link">Accueil</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fa fa-shopping-basket"></i>
+          <span class="col-xs-12">Commander</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
+            <div class="row">
+              <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+                <a href="#" class="subscription" data-target="vps" style="color: black">
+                <i class="fas fa-cloud text-center">
+                  <p><small>VPS</small></p></i></a>
+              </div>
+              <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+                <a href="#" class="subscription" data-target="srv" style="color: black">
+                <i class="fas fa-server text-center">
+                  <p><small>Serveur</small></p></i></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+                <a href="#" class="subscription" data-target="vdi" style="color: black">
+                <i class="fas fa-desktop text-center">
+                  <p><small>Bureau Virteul</small></p></i></a>
+              </div>
+              <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
+               <a href="#" class="subscription" data-target="bdd" style="color: black">
+                <i class="fas fa-database text-center">
+                  <p><small>BDD</small></p></i></a>
+              </div>
+            </div>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
+      {# <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li>  #}
     </ul>
-
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+          <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -156,7 +182,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3  d-flex justify-content-center">
+      <div class="user-panel mt-3  d-flex justify-content-center brand-text">
           <h5 style="color:white" class="d-block text-center">Bienvenue <small><p>{{app.user.name}} {{app.user.firstName}}</p></small></h5>
       </div>
 
@@ -166,15 +192,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a  data-target="commander" id="commander" href="#" class="nav-link active navigation">
-              <i class="nav-icon fas fa-shopping-basket"></i>
-              <p style="font-size:17px">
-                Commander
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a  data-target="intro" data-def="home" href="#" class="nav-link navigation">
+            <a data-target="intro" data-def="home" href="#" class="nav-link navigation active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -334,30 +352,6 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <div class="card card-outline" id="divCommande" style="display:none;z-index:1;width:auto;position:absolute;">
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="remove">
-            <i class="fas fa-times "></i></button>
-                <!-- /.card-tools -->
-        </div>
-      <!-- /Le corps de la card -->
-      <div class="row">
-        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
-          <i class="fas fa-cloud text-center "><p><small>VPS</small></p></i>
-        </div>
-        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
-          <i class="fas fa-server text-center"><p><small>Serveur</small></p></i>
-        </div>
-      </div>
-      <div class="row">
-        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
-          <i class="fas fa-desktop text-center"><p><small><a href="#" data-target="bdd" style="color: black">Bureau Virteul</a></small></p></i>
-        </div>
-        <div class="card-body col-lg-6 col-6 d-flex justify-content-center">
-          <i class="fas fa-database text-center"><p><small>BDD</small></p></i>
-        </div>
-      </div>
-    </div>
 
     <div id="root"></div>
     </div>
@@ -402,6 +396,7 @@
 <!-- PAGE SCRIPTS -->
 <script src="dist/js/pages/dashboard2.js"></script>
 <script src="js/global.js"></script>
+<script src='js/Nav.js'></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

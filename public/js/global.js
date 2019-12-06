@@ -17,14 +17,10 @@ $(document).ready(function(){
                 $('#def').html(def);
             }
             })
-        
-       
     })
     //
-    $('#commander').on('click',function(){
-        $('#divCommande').css('display','block');
-    })
-    //
+
+
 })
 
 
