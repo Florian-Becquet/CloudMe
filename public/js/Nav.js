@@ -1,13 +1,6 @@
 $(document).ready(function(){
-  
-
-  
-  
   $('.subscription').on('click',function(){
     var val = $(this).html();
-
-    
-  
         var target = $(this).data('target');
         $.ajax({
           type: 'POST',
