@@ -1,38 +1,32 @@
-<div class="card text-center">
+<div class="card col-10 text-center" style="margin-left: auto; margin-right: auto;">
   <div class="card-header">
-    <h1>Configure ton {{ choix }}</h1>
+    <h1>Configuration de {{ choix }}</h1>
   </div>
-  <div class="card-body">
+  <div class="card-body d-flex justify-content-center">
         {{ form_start(subscriptionForm) }}
         <div id="page1">
-          <div class="input-group mb-3">
+        <h3 class="mb-3"><b>Etape 1</b></h3>
+          <div class="input-group mb-3 d-flex justify-content-around" >
             {{ form_row(subscriptionForm.cpu) }}
-          </div> 
-          <div class="input-group mb-3">
             {{ form_row(subscriptionForm.ram) }}
-          </div>
-          <div class="input-group mb-3">
             {{ form_row(subscriptionForm.disk_space) }}
           </div>
-          <div>
+          <div class="input-group mb-3 form-group">
           {% if liste %}
-            <select class="custom-select" name="serveur">
+            <select class="custom-select mb-3 form-group" name="serveur">
             {% for info in liste %}
               <option value="{{ info.id }}">{{ info.headline }}</option>
             {% endfor %}
             </select>
           {% endif %}
-        </div>
+          </div>
           <button data-target="page2" class="btn btn-primary pr-3 pl-3 tabNav">Page Suivante</button>
         </div>
         <div id="page2">
-          <div class="input-group mb-3">
+         <h3 class="mb-3"><b>Etape 2</b></h3>
+          <div class="input-group mb-3 d-flex justify-content-around">
             {{ form_row(subscriptionForm.high_availability) }}
-          </div>
-          <div class="input-group mb-3">
             {{ form_row(subscriptionForm.IP) }}
-          </div>
-          <div class="input-group mb-3">
             {{ form_row(subscriptionForm.backup) }}
           </div>
           <button data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Page Précédente</button>
@@ -41,10 +35,5 @@
           {{ form_end(subscriptionForm) }}
       
   </div>
-
 </div>
- {# {% for info in allvps %}
-
-  <option value="{{ info.architecture }}"></options>
-{% endfor %} #}
 <script src="js/tabNav.js"></script>

@@ -18,14 +18,14 @@ class SubscriptionType extends AbstractType
         $builder
             ->add('cpu', IntegerType::class,[
                 'attr' => [
-                    'class' => "form-control ",
+                    'class' => "form-control ml-2",
                     'min' => 1,
                     'max' => 8,
                 ]
             ])
             ->add('ram', IntegerType::class,[
                 'attr' => [
-                    'class' => "form-control ",
+                    'class' => "form-control ml-2",
                     'min' => 1,
                     'max' => 16,
                 ]
@@ -33,7 +33,7 @@ class SubscriptionType extends AbstractType
             ->add('disk_space', IntegerType::class,[
                 'label' => 'Espace disque',
                 'attr' => [
-                    'class' => "form-control ",
+                    'class' => "form-control ml-2",
                     'min' => 1,
                     'max' => 500,
                 ]
@@ -42,7 +42,7 @@ class SubscriptionType extends AbstractType
                 'label' => 'Haute disponibilité',
                 'required' => false,
                 'attr' => [
-                    'class' => "form-control browser-default custom-select",
+                    'class' => "form-control ml-2",
                 ],
                 'choices' => [
                     'Protection par HA ' => 'Protection par HA',
@@ -52,7 +52,7 @@ class SubscriptionType extends AbstractType
             ->add('IP', ChoiceType::class,[
                 'required' => false,
                 'attr' => [
-                    'class' => "form-control browser-default custom-select",
+                    'class' => "form-control ml-2",
                 ],
                 'choices' => [
                     'WAN' => 'WAN',
@@ -63,7 +63,7 @@ class SubscriptionType extends AbstractType
                 'label' => 'Rétention des données (en jours, par défaut 7 jours)',
                 'required' => false,
                 'attr' => [
-                    'class' => 'js-datepicker'
+                    'class' => 'form-control ml-2'
                 ],
             ])
         ;

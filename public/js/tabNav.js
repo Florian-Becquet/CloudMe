@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('#page1').css('display','inline-block');
     $('#page2').css('display','none');
     $('.tabNav').on('click',function(e){
         e.preventDefault();
@@ -6,11 +7,11 @@ $(document).ready(function(){
         console.log(target);
         if(target == 'page2'){
             $('#page1').css('display','none');
-            $('#page2').css('display','block');
+            $('#page2').css('display','inline-block');
             
         }
         else if(target == 'page1'){
-            $('#page1').css('display','block');
+            $('#page1').css('display','inline-block');
             $('#page2').css('display','none');
         }
     })

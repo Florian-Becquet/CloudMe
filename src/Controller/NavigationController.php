@@ -45,20 +45,28 @@ class NavigationController extends Controller
     }     
     /**
      * @Route("/serveur", name="serveur")
+     * 
+     * controller pour la page serveur qui va afficher soit un formulaire soit une liste des services possibles
      */
     public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em){
+        //info contient le type de service choisi (vps/vdi/srv/bdd) et on cherche dans la bdd ce service disponible
         $info = $request->request->get('serv');
+        $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
+        //on set different objet utile
         $date = new DateTime;
         $sub = new Subscription;
         $user = new User;
-        $service = new Services;
+        //on recupere les infos de l'user courant
         $user = $this->getUser();
-        $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
+        //création du formulaire de souscription, avec le parametre action qui indique le controller dans lequel le form sera traité
         $form = $this->createForm(SubscriptionType::class, $sub, 
         ['action' => $this->generateUrl('serveur')]);
         $form->handleRequest($request);
+        //si le form est valide est soumis
         if ($form->isSubmitted() && $form->isValid()) {
+            //on crée le nom de la souscription
             $sub_name = 'CL12'. $user->getId() . $info . $sub->getId();
+            //le status est set a 0 par défaut, l'admin pourra le set a 1 pour activer
             $sub->setStatus('0');
             $sub->setDateSub($date);
             $sub->setIpAdresse('231');
@@ -71,7 +79,6 @@ class NavigationController extends Controller
             $em->persist($sub);
             $em->flush();
             return $this->redirectToRoute('home');
-            // return var_dump($sub);
         }
         return $this->render('pages/serveur.html.twig', [
             'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $info
