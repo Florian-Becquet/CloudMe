@@ -70,16 +70,18 @@ class NavigationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             //on crée le nom de la souscription
             $sub_name = 'CL12'. $user->getId() . $info . $sub->getId();
-            //le status est set a 0 par défaut, l'admin pourra le set a 1 pour activer
+            //le status est set a 0 par défaut, l'admin pourra le set a 1 pour activer, set la date de debut, l'adresse ip, l'id user et le nom de la souscription
             $sub->setStatus('0');
             $sub->setDateSub($date);
             $sub->setIpAdresse('231');
             $sub->setIdUser($user);
             $sub->setSubName($sub_name);
             $sub->setPrice('50');
+            //receration et instanciation du service choisis
             $serveur = $request->request->get('serveur');
             $vpsChosen = $repo->findOneBy(['id' => $serveur]);
             $sub->setIdServices($vpsChosen);
+            //envoie en bdd et redirection vers home
             $em->persist($sub);
             $em->flush();
             return $this->redirectToRoute('home');
