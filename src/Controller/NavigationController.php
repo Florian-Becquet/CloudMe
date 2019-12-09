@@ -68,6 +68,7 @@ class NavigationController extends Controller
         $form->handleRequest($request);
         //si le form est valide est soumis
         if ($form->isSubmitted() && $form->isValid()) {
+           
             //on crée le nom de la souscription
             $sub_name = 'CL12'. $user->getId() . $info . $sub->getId();
             //le status est set a 0 par défaut, l'admin pourra le set a 1 pour activer, set la date de debut, l'adresse ip, l'id user et le nom de la souscription

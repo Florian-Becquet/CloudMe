@@ -15,4 +15,14 @@ $(document).ready(function(){
             $('#page2').css('display','none');
         }
     })
+    // $('#subscription_cpu').on('change', function(){
+    //     console.log($(this).val())
+    // })
+	$('.custom-range').on('change', function() {
+        var $set = $(this).val();
+        console.log($set);
+        var target = $(this).data('target');
+        console.log(target);
+        $('#'+ target).html($set);
+	});
 })
