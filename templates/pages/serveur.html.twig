@@ -3,7 +3,7 @@
     <div class="card-header">
       <h1>Configuration de {{ choix }}</h1>
     </div>
-    <div class="card-body register-card-body ml-4 " >
+    <div class="card-body ml-4 " >
     {{ form_start(subscriptionForm) }}
     <div id="page1">
     <h3>Etape 1</h3>
@@ -52,12 +52,13 @@
             <button data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Précédente</button>
           </div>
           <div class="col-6">
-            <button type="submit" id="buttonRegister" class="btn btn-primary pr-3 pl-3">Valider</button>
+            <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
           </div>
+          {{ form_end(subscriptionForm) }}
         </div>
         </div>
     </div>
   </div>
 </div>
-{{ form_end(subscriptionForm) }}
+
 <script src="js/tabNav.js"></script>
