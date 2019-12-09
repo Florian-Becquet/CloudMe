@@ -33,9 +33,10 @@
         </div>
         <div id="page2">
         <h3>Etape 2</h3>
-          <div class="input-group mb-3 d-flex justify-content-around">
-            <div class="d-flex">
-              {{ form_row(subscriptionForm.high_availability) }}
+          <div class="input-group mb-3 ">
+            <div class="form-check">
+            {{ form_label(subscriptionForm.high_availability, 'Haute disponibilité', {'label_attr': {'class': 'form-check'}}) }}
+              {{ form_widget(subscriptionForm.high_availability, {'attr': {'class': 'form-check-input'}}) }}
             </div>
             <div class="d-flex">
               {{ form_row(subscriptionForm.IP) }}
