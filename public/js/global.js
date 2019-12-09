@@ -7,6 +7,7 @@ $(document).ready(function(){
         var target = $(this).data('target');
         var id = $(this).data('id');
         var def = $(this).data('def');
+        
 
         $.ajax({
             type: 'POST',
@@ -15,6 +16,14 @@ $(document).ready(function(){
             success: function(data){
                 $('#root').html(data);
                 $('#def').html(def);
+                if(def == "facture") {
+                    var mes = "Mes";
+                    $('#def2').html(mes + " " + def);
+                }
+                else {
+                    $('#def2').html(def);
+                }
+        
             }
             })
     })

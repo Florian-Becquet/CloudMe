@@ -163,10 +163,26 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_logout')}}">
-        <i class="fas fa-sign-out-alt"></i></a>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-user"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-header" style="text-transform: uppercase; color:black"><b>{{app.user.name}} {{app.user.firstName}}</b></span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-user-cog"></i> Paramètre de compte
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" data-target="infofacture" data-def="Facture"  class="dropdown-item navigation">
+            <i class="fas fa-file-invoice"></i> Mes factures
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="{{path('app_logout')}}" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i> Déconnexion
+          </a>
       </li>
+
     </ul>
   </nav>
   <!-- /.navbar  -->
@@ -190,7 +206,7 @@
           <li class="nav-item">
             <a data-target="intro" data-def="home" href="#" class="nav-link navigation active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
+              <p> 
                 Dashboard
                 {# <span class="right badge badge-danger">New</span> #}
               </p>
@@ -337,7 +353,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h1 class="m-0 text-dark" id="def2">Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

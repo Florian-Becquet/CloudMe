@@ -189,4 +189,12 @@ class NavigationController extends Controller
         $description = $serveur->findBy(['id' => $info]);
         return $this->render('pages/forfait.html.twig',['info' => $description]);
     }
+
+    /**
+     * @Route("/infofacture", name="infofacture")
+     */
+    public function infofacture(){
+        
+        return $this->render('pages/facture.html.twig');
+    }
 }
