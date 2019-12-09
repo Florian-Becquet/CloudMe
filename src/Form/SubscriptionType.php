@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
@@ -15,26 +16,30 @@ class SubscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('cpu', IntegerType::class,[
+        ->add('cpu', RangeType::class,[
             'attr' => [
-                'class' => "form-group ml-2",
+                'class' => "custom-range",
                 'min' => 1,
                 'max' => 8,
+                'data-target' => 'cpuVal'
             ]
         ])
-        ->add('ram', IntegerType::class,[
+        ->add('ram', RangeType::class,[
             'attr' => [
-                'class' => "form-group ml-2",
+                'class' => "custom-range",
                 'min' => 1,
                 'max' => 16,
+                'data-target' => 'ramVal',
             ]
         ])
-        ->add('disk_space', IntegerType::class,[
+        ->add('disk_space', RangeType::class,[
             'label' => 'Espace disque',
             'attr' => [
-                'class' => "form-group ml-2",
-                'min' => 1,
+                'class' => "custom-range",
+                'min' => 5,
                 'max' => 500,
+                'data-target' => 'diskVal',
+                'step' => 5
             ]
         ])
         ->add('high_availability', ChoiceType::class, [

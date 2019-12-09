@@ -9,15 +9,38 @@
     <h3>Etape 1</h3>
         <div class="input-group mb-3 d-flex justify-content-around">
         <div class="d-flex">
-          {{ form_row(subscriptionForm.cpu) }}
+          <div>
+          {{ form_label(subscriptionForm.cpu) }}
+          <div class="d-flex">
+            <p>1<p>
+            {{ form_widget(subscriptionForm.cpu) }} 
+            </p>8</p>
+          </div>
+          </div>
+          <p id="cpuVal"></p>
         </div>
         <div class="d-flex">
-          {{ form_row(subscriptionForm.ram) }}
+        <div>
+          {{ form_label(subscriptionForm.ram) }}
+          <div class="d-flex">
+            <p>1<p>
+            {{ form_widget(subscriptionForm.ram) }} 
+            </p>16</p>
           </div>
+          </div>
+          <p id="ramVal"></p>
         </div>
         <div class="input-group mb-3 d-flex justify-content-around">
         <div class="d-flex">
-          {{ form_row(subscriptionForm.disk_space) }}
+        <div>
+          {{ form_label(subscriptionForm.disk_space) }}
+          <div class="d-flex">
+            <p>5<p>
+            {{ form_widget(subscriptionForm.disk_space) }} 
+            </p>500</p>
+          </div>
+          </div>
+          <p id="diskVal"></p>
         </div>
         <div class="d-flex">
         {% if liste %}
@@ -30,6 +53,7 @@
         </div>
         </div>
         <button data-target="page2" class="btn btn-primary pr-3 pl-3 tabNav">Suivante</button>
+        </div>
         </div>
         <div id="page2">
         <h3>Etape 2</h3>
