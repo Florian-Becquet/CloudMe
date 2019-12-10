@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Services;
 use App\Entity\Subscription;
 use App\Form\SubscriptionType;
+use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,10 +53,11 @@ class NavigationController extends Controller
      * 
      * controller pour la page serveur qui va afficher soit un formulaire soit une liste des services possibles
      */
-    public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em){
+    public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em, PricingRepository $repoPrice){
         //info contient le type de service choisi (vps/vdi/srv/bdd) et on cherche dans la bdd ce service disponible
         $info = $request->request->get('serv');
         $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
+        $price = $repoPrice->findAll();
         //on set different objet utile
         $date = new DateTime;
         $sub = new Subscription;
@@ -88,7 +90,7 @@ class NavigationController extends Controller
             return $this->redirectToRoute('home');
         }
         return $this->render('pages/serveur.html.twig', [
-            'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $info
+            'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $info,'price' => $price
         ]);
 
     }

@@ -21,7 +21,8 @@ class SubscriptionType extends AbstractType
                 'class' => "custom-range",
                 'min' => 1,
                 'max' => 8,
-                'data-target' => 'cpuVal'
+                'data-target' => 'cpuVal',
+                'value' => 1
             ]
         ])
         ->add('ram', RangeType::class,[
@@ -30,6 +31,7 @@ class SubscriptionType extends AbstractType
                 'min' => 1,
                 'max' => 16,
                 'data-target' => 'ramVal',
+                'value' => 1
             ]
         ])
         ->add('disk_space', RangeType::class,[
@@ -39,13 +41,15 @@ class SubscriptionType extends AbstractType
                 'min' => 5,
                 'max' => 500,
                 'data-target' => 'diskVal',
-                'step' => 5
+                'step' => 5,
+                'value' => 1
             ]
         ])
         ->add('high_availability', ChoiceType::class, [
             'label' => "Haute disponibilité",
             'attr' => [
                     'class' => "form-check",
+                    
             ],
             'choices'  => [
                 'Protection par HA' => 'protectionHA',
@@ -54,6 +58,7 @@ class SubscriptionType extends AbstractType
                 ],
             'expanded'  => true,
             'multiple'  => true,
+            
         ])
         ->add('IP', ChoiceType::class,[
             'required' => false,

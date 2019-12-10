@@ -1,5 +1,16 @@
 <div class="register-box  col-12" style="margin-left: auto; margin-right: auto;">
   <div class="card col-lg-12 col-12 text-center">
+  
+           <div id="price" style="display:none">
+           {% for data in price %}
+            <span id="price_{{ data.id }}">{{ data.price }}</span>
+            <p id="unit">{{ data.unit }}</p>
+            {% endfor %}
+
+            
+           </div>
+
+      
     <div class="card-header">
       <h1>Configuration de {{ choix }}</h1>
     </div>
@@ -10,10 +21,10 @@
         <div class="input-group mb-3 d-flex justify-content-around">
         <div class="d-flex">
           <div>
-          {{ form_label(subscriptionForm.cpu) }}
+          {{ form_label(subscriptionForm.cpu) }} 
           <div class="d-flex">
             <p>1<p>
-            {{ form_widget(subscriptionForm.cpu) }} 
+            {{ form_widget(subscriptionForm.cpu, {'attr': {'data-unit': price[0].unit,  'data-price': price[0].price }}) }} 
             </p>8</p>
           </div>
           </div>
@@ -24,7 +35,7 @@
           {{ form_label(subscriptionForm.ram) }}
           <div class="d-flex">
             <p>1<p>
-            {{ form_widget(subscriptionForm.ram) }} 
+            {{ form_widget(subscriptionForm.ram, {'attr': {'data-unit': price[1].unit, 'data-price': price[1].price }}) }} 
             </p>16</p>
           </div>
           </div>
@@ -36,7 +47,7 @@
           {{ form_label(subscriptionForm.disk_space) }}
           <div class="d-flex">
             <p>5<p>
-            {{ form_widget(subscriptionForm.disk_space) }} 
+            {{ form_widget(subscriptionForm.disk_space, {'attr': {'data-unit': price[2].unit, 'data-price': price[2].price}}) }} 
             </p>500</p>
           </div>
           </div>
@@ -60,18 +71,23 @@
           <div class="input-group mb-3 ">
             <div class="form-check">
             {{ form_label(subscriptionForm.high_availability, 'Haute disponibilité', {'label_attr': {'class': 'form-check'}}) }}
-              {{ form_widget(subscriptionForm.high_availability, {'attr': {'class': 'form-check-input'}}) }}
+              {{ form_widget(subscriptionForm.high_availability, {'attr': {'class': 'page2prix', 'id': 'HA'}}) }}
             </div>
             <div class="d-flex">
-              {{ form_row(subscriptionForm.IP) }}
+            {{ form_label(subscriptionForm.IP) }}
+              {{ form_widget(subscriptionForm.IP, {'attr': {'class': 'page2prix', 'data-price': price[5].price }})}}
           </div>
         </div>
           <div class="input-group mb-3 d-flex justify-content-around">
             <div class="d-flex">
-              {{ form_row(subscriptionForm.backup) }}
+              {{ form_label(subscriptionForm.backup) }}
+              {{ form_widget(subscriptionForm.backup, {'attr': {'class': 'page2prix', 'data-price': price[7].price }} ) }}
             </div>
           </div>
         <!-- /.col -->
+        <div id="prix">
+            <p id="prixTotal"></p>
+        </div>
         <div class="row mt-2 mb-2  d-flex justify-content-center">
           <div class="col-6">
             <button data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Précédente</button>
@@ -79,6 +95,10 @@
           <div class="col-6">
             <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
           </div>
+          <div class="col-6">
+            <button data-target="page3" id="page3" class="btn btn-primary pr-3 pl-3 tabNav">Précédente</button>
+          </div>
+          <h1 ></h1>
           {{ form_end(subscriptionForm) }}
         </div>
         </div>
