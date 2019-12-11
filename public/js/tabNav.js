@@ -1,6 +1,8 @@
 $(document).ready(function(){
     
-   
+   $('.custom-range').each(function(){
+       $(this).removeClass('form-control');
+   })
     
     $('.tabNav').on('click',function(e){
         e.preventDefault();

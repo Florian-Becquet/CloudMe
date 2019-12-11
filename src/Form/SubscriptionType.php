@@ -18,7 +18,7 @@ class SubscriptionType extends AbstractType
         $builder
         ->add('cpu', RangeType::class,[
             'attr' => [
-                'class' => "custom-range",
+                
                 'min' => 1,
                 'max' => 8,
                 'data-target' => 'cpuVal',
@@ -48,7 +48,7 @@ class SubscriptionType extends AbstractType
         ->add('high_availability', ChoiceType::class, [
             'label' => "Haute disponibilité",
             'attr' => [
-                    'class' => "form-check",
+                    
                     
             ],
             'choices'  => [
