@@ -12,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class NavigationController extends Controller
 {
@@ -196,6 +198,37 @@ class NavigationController extends Controller
      */
     public function infofacture(){
         
-        return $this->render('pages/facture.html.twig');
+        return $this->render('pages/infoFacture.html.twig');
+    }
+
+    /**
+     * @Route("/facture", name="facture")
+     */
+    public function facture(){
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        // repo->findall()
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('pages/facture.html.twig');
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
     }
 }
