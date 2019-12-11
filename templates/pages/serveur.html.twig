@@ -1,89 +1,115 @@
-<div class="register-box  col-12" style="margin-left: auto; margin-right: auto;">
-  <div class="card col-lg-12 col-12 text-center">
-    <div class="card-header">
-      <h1>Configuration de {{ choix }}</h1>
-    </div>
-    <div class="card-body ml-4 " >
-    {{ form_start(subscriptionForm) }}
-    <div id="page1">
-    <h3>Etape 1</h3>
-        <div class="input-group mb-3 d-flex justify-content-around">
-        <div class="d-flex">
-          <div>
-          {{ form_label(subscriptionForm.cpu) }}
-          <div class="d-flex">
-            <p>1<p>
-            {{ form_widget(subscriptionForm.cpu) }} 
-            </p>8</p>
-          </div>
-          </div>
-          <p id="cpuVal"></p>
-        </div>
-        <div class="d-flex">
-        <div>
-          {{ form_label(subscriptionForm.ram) }}
-          <div class="d-flex">
-            <p>1<p>
-            {{ form_widget(subscriptionForm.ram) }} 
-            </p>16</p>
-          </div>
-          </div>
-          <p id="ramVal"></p>
-        </div>
-        <div class="input-group mb-3 d-flex justify-content-around">
-        <div class="d-flex">
-        <div>
-          {{ form_label(subscriptionForm.disk_space) }}
-          <div class="d-flex">
-            <p>5<p>
-            {{ form_widget(subscriptionForm.disk_space) }} 
-            </p>500</p>
-          </div>
-          </div>
-          <p id="diskVal"></p>
-        </div>
-        <div class="d-flex">
-        {% if liste %}
-            <select class="custom-select mb-3 form-group" name="serveur">
-            {% for info in liste %}
-              <option value="{{ info.id }}">{{ info.headline }}</option>
+<div class="col-md-6" style="margin-left: auto; margin-right: auto;">
+  <div class="card text-center">
+  
+           <div id="price" style="display:none">
+           {% for data in price %}
+            <span id="price_{{ data.id }}">{{ data.price }}</span>
+            <p id="unit">{{ data.unit }}</p>
             {% endfor %}
-            </select>
-          {% endif %}
-        </div>
-        </div>
-        <button data-target="page2" class="btn btn-primary pr-3 pl-3 tabNav">Suivante</button>
-        </div>
-        </div>
-        <div id="page2">
-        <h3>Etape 2</h3>
-          <div class="input-group mb-3 ">
-            <div class="form-check">
-            {{ form_label(subscriptionForm.high_availability, 'Haute disponibilité', {'label_attr': {'class': 'form-check'}}) }}
-              {{ form_widget(subscriptionForm.high_availability, {'attr': {'class': 'form-check-input'}}) }}
-            </div>
-            <div class="d-flex">
-              {{ form_row(subscriptionForm.IP) }}
-          </div>
-        </div>
-          <div class="input-group mb-3 d-flex justify-content-around">
-            <div class="d-flex">
-              {{ form_row(subscriptionForm.backup) }}
-            </div>
-          </div>
-        <!-- /.col -->
-        <div class="row mt-2 mb-2  d-flex justify-content-center">
-          <div class="col-6">
-            <button data-target="page1" class="btn btn-primary pr-3 pl-3 tabNav">Précédente</button>
-          </div>
-          <div class="col-6">
-            <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
-          </div>
-          {{ form_end(subscriptionForm) }}
-        </div>
-        </div>
-    </div>
-  </div>
-</div>
 
+            
+           </div>
+
+      
+   <div class="card ">
+             
+                         <nav class="nav nav-tabs">
+                              <a class="nav-item nav-link tabNav onglet active " href="#" data-target="page1" id="onglet1" data-toggle="tab">Config</a>
+                              <a class="nav-item nav-link tabNav onglet" href="#" data-target="page2" id="onglet2" data-toggle="tab">Options</a>
+                              <a class="nav-item nav-link tabNav onglet" href="#" data-target="page3" id="onglet3" data-toggle="tab">Récap</a>
+                            </nav>
+                           
+             
+              <!-- /.card-header -->
+             
+              <div class="card-body">
+                {{ form_start(subscriptionForm)}}
+                 
+                  
+                  
+                  <div class="row ">
+                    <div class="col-md-8 ml-auto mr-auto">
+                    
+                        <div id="page1" >
+                              <h3 class="mb-4">Configuration du service</h3>
+                            <div class="form-group">
+                              {{ form_label(subscriptionForm.cpu) }}
+                              {{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price }}) }}
+                            </div>
+                            <div class="form-group">
+                              {{ form_label(subscriptionForm.ram) }}
+                              {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price }}) }}
+                            </div>
+                            <div class="form-group">
+                              {{ form_label(subscriptionForm.disk_space) }}
+                              {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price }}) }}
+                            </div>
+                             <div class="d-flex">
+                                {% if liste %}
+                                    <select class="custom-select mb-3 form-group" name="serveur">
+                                    {% for info in liste %}
+                                      <option value="{{ info.id }}">{{ info.headline }}</option>
+                                    {% endfor %}
+                                    </select>
+                                  {% endif %}
+                                </div>
+                            <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Suivante</button>
+                        </div>
+                    </div>
+                  </div>
+                
+                 <div class="row">
+                
+                    <div class="col-md-8 ml-auto mr-auto">
+                       <div id="page2" style="display:none">
+                        <h3 class="h3 mb-4">Options avancées</h3>
+                        <div class="">
+                          <div class="">
+                                <label><b>Haute disponibilité</b></label>
+                              {{ form_widget(subscriptionForm.high_availability) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          {{ form_label(subscriptionForm.IP,'IP') }}
+                          {{ form_widget(subscriptionForm.IP, {'attr': {'class': 'custom-select'}})}}
+                          </div>
+                          <div class="form-group">
+                            
+                            {{ form_label(subscriptionForm.backup) }}
+                            {{ form_widget(subscriptionForm.backup, {'attr': {'class': ''}} ) }}
+                  
+                          </div>
+                          <div class="row mt-2 mb-2  d-flex justify-content-center">
+                            <div class="col-6">
+                              <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page1">Précédente</button>
+                            </div>
+                            <div class="col-6">
+                               <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page3">Suivante</button>
+                              </div>
+                          </div>
+                       </div>
+                    
+         
+                    </div> 
+                    <div class="row">
+                      <div class="col-md-8 ml-auto mr-auto">
+                          <div id="page3" style="display:none">
+                            <h3>Récapitulatif de la commande</h3>
+                            <div class="col-6">
+                              <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Précédente</button>
+                            </div>
+                            
+                          </div>
+                           
+                      </div>
+                            <div class="col-6">
+                                      <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
+                              </div>
+                      {{ form_end(subscriptionForm)}}
+                    </div>
+          
+               
+              </div>
+              <!-- /.card-body -->
+            </div>
 <script src="js/tabNav.js"></script>

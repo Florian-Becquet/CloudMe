@@ -18,10 +18,11 @@ class SubscriptionType extends AbstractType
         $builder
         ->add('cpu', RangeType::class,[
             'attr' => [
-                'class' => "custom-range",
+                
                 'min' => 1,
                 'max' => 8,
-                'data-target' => 'cpuVal'
+                'data-target' => 'cpuVal',
+                'value' => 1
             ]
         ])
         ->add('ram', RangeType::class,[
@@ -30,6 +31,7 @@ class SubscriptionType extends AbstractType
                 'min' => 1,
                 'max' => 16,
                 'data-target' => 'ramVal',
+                'value' => 1
             ]
         ])
         ->add('disk_space', RangeType::class,[
@@ -39,18 +41,17 @@ class SubscriptionType extends AbstractType
                 'min' => 5,
                 'max' => 500,
                 'data-target' => 'diskVal',
-                'step' => 5
+                'step' => 5,
+                'value' => 1
             ]
         ])
         ->add('high_availability', ChoiceType::class, [
-            'label' => "Haute disponibilité",
             'attr' => [
-                    'class' => "form-check",
             ],
+            'label_attr' => ['class' => 'checkbox-inline'],
             'choices'  => [
                 'Protection par HA' => 'protectionHA',
                 'Replication du service' => 'replicationServ',
-                
                 ],
             'expanded'  => true,
             'multiple'  => true,
