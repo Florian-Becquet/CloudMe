@@ -29,15 +29,28 @@
                               <h3 class="mb-4">Configuration du service</h3>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.cpu) }}
-                              {{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price }}) }}
+                             <div class="row">
+                                <div class="d-flex col-md-12">
+                              <h6 class="mr-1">1</h6>{{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price }}) }} <h6 class="ml-1">8</h6>
+                              </div>
+                              </div>
+                             
                             </div>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.ram) }}
-                              {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price }}) }}
+                               <div class="row">
+                                <div class="d-flex col-md-12">
+                              <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price }}) }} <h6 class="ml-1">16</h6>
+                              </div>
+                              </div>
                             </div>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.disk_space) }}
-                              {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price }}) }}
+                                <div class="row">
+                                <div class="d-flex col-md-12">
+                               <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price }}) }}<h6 class="ml-1">500</h6>
+                              </div>
+                              </div>
                             </div>
                              <div class="d-flex">
                                 {% if liste %}
