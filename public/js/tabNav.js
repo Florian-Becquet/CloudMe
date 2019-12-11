@@ -56,7 +56,7 @@ $(document).ready(function(){
 
     $('#prixTotal').html(total + "Euros");
 
-    $('#page3').on('click', function(e){
+    $('#onglet3').on('click', function(e){
         e.preventDefault();
         var prixRange = 0 ;
         var prixProtection = 0;
@@ -87,9 +87,10 @@ $(document).ready(function(){
         var priceRange = $(this).data('price');
         var total = $set / unit * priceRange;
         prixRange += Number(total);
-        
+       
        })
-    
+            
+
        var prixService = Number(prixIp) + Number(prixJours) + Number(prixProtection) + Number(prixRange) + Number(prixReplictation) ;
      
        console.log(prixService);

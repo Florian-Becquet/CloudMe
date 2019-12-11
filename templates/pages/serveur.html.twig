@@ -34,15 +34,15 @@
                               <h3 class="mb-4">Configuration du service</h3>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.cpu) }}
-                              {{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger'}}) }}
+                              {{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price }}) }}
                             </div>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.ram) }}
-                              {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info'}}) }}
+                              {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price }}) }}
                             </div>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.disk_space) }}
-                              {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success'}}) }}
+                              {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price }}) }}
                             </div>
                              <div class="d-flex">
                                 {% if liste %}
@@ -98,14 +98,17 @@
                             <div class="col-6">
                               <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Précédente</button>
                             </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
-                              </div>
+                            
                           </div>
+                           
                       </div>
+                            <div class="col-6">
+                                      <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
+                              </div>
+                      {{ form_end(subscriptionForm)}}
                     </div>
           
-                {{ form_end(subscriptionForm)}}
+               
               </div>
               <!-- /.card-body -->
             </div>
