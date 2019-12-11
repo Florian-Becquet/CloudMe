@@ -3,15 +3,11 @@ $(document).ready(function(){
    $('.custom-range').each(function(){
        $(this).removeClass('form-control');
    });
-  
-    
     $('.tabNav').on('click',function(e){
         e.preventDefault();
-       
         var target = $(this).data('target');
         console.log(target);
         if(target == 'page2'){
-            
             $('#page1').css('display','none');
             $('#page2').css('display','block');
             $('#page3').css('display','none');
@@ -36,13 +32,8 @@ $(document).ready(function(){
             $('#onglet3').attr('class',"nav-item nav-link tabNav onglet active");
         }
     })
-    
 	$('.custom-range').on('change', function() {
-        
-        var unit = $(this).data('unit');
         var $set = Number($(this).val());
-        var priceRange = $(this).data('price');
-
         var target = $(this).data('target');
         console.log(target);
         $('#'+ target).html($set);

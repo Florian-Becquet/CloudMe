@@ -8,21 +8,16 @@
             {% endfor %}
 
             
-           </div>
-
-      
-   <div class="card ">
-             
-                         <nav class="nav nav-tabs">
-                              <a class="nav-item nav-link tabNav onglet active " href="#" data-target="page1" id="onglet1" data-toggle="tab">Config</a>
-                              <a class="nav-item nav-link tabNav onglet" href="#" data-target="page2" id="onglet2" data-toggle="tab">Options</a>
-                              <a class="nav-item nav-link tabNav onglet" href="#" data-target="page3" id="onglet3" data-toggle="tab">Récap</a>
-                            </nav>
-                           
+           </div>        
              
               <!-- /.card-header -->
              
               <div class="card-body">
+              <nav class="nav nav-tabs mb-3">
+                <a class="nav-item nav-link tabNav onglet active " href="#" data-target="page1" id="onglet1" data-toggle="tab">Config</a>
+                <a class="nav-item nav-link tabNav onglet" href="#" data-target="page2" id="onglet2" data-toggle="tab">Options</a>
+                <a class="nav-item nav-link tabNav onglet" href="#" data-target="page3" id="onglet3" data-toggle="tab">Récap</a>
+              </nav>
                 {{ form_start(subscriptionForm)}}
                  
                   
@@ -88,21 +83,63 @@
                               </div>
                           </div>
                        </div>
-                    
+                    </div>
          
                     </div> 
                     <div class="row">
                       <div class="col-md-8 ml-auto mr-auto">
                           <div id="page3" style="display:none">
-                            <h3>Récapitulatif de la commande</h3>
-                            <div class="col-6">
-                              <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Précédente</button>
+                            <h3 class="mb-4">Récapitulatif de la commande</h3>
+                            <div class="">
+                            <table class="table table-striped">
+                              <tbody>
+                                <tr>
+                                  <th>Nom:</th>
+                                  <td>Turnkey PHP</td>
+                                </tr>
+                                <tr>
+                                  <th>CPU:</th>
+                                  <td>5 </td>
+                                </tr>
+                                <tr>
+                                  <th>RAM:</th>
+                                  <td>12</td>
+                                </tr>
+                                <tr>
+                                  <th>Espace disque</th>
+                                  <td>300</td>
+                                </tr>
+                                <tr>
+                                  <th>Protection par HA:</th>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th>Réplication du service:</th>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th>IP:</th>
+                                  <td>WAN</td>
+                                </tr>
+                                <tr>
+                                  <th>Rétention des données:</th>
+                                  <td>10 jours</td>
+                                </tr>
+                              </tbody>
+                            </table>
                             </div>
-                             <div class="col-6">
-                                      <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
+                            <div>
+                              <b>Solde: <b><h5 class="text-danger"><span class="fas fa-euro-sign" style="color: #dc3545;"></span>  130</h5>
+                            </div>
+                            <div class="row mt-2 mb-2  d-flex justify-content-center">
+                              <div class="col-6">
+                                <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Précédente</button>
                               </div>
+                              <div class="col-6">
+                                  <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
+                                </div>
+                            </div>
                           </div>
-                          
                       </div>
                             
                       {{ form_end(subscriptionForm)}}
