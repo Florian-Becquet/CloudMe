@@ -46,19 +46,15 @@ class SubscriptionType extends AbstractType
             ]
         ])
         ->add('high_availability', ChoiceType::class, [
-            'label' => "Haute disponibilité",
             'attr' => [
-                    
-                    
             ],
+            'label_attr' => ['class' => 'checkbox-inline'],
             'choices'  => [
                 'Protection par HA' => 'protectionHA',
                 'Replication du service' => 'replicationServ',
-                
                 ],
             'expanded'  => true,
             'multiple'  => true,
-            
         ])
         ->add('IP', ChoiceType::class,[
             'required' => false,

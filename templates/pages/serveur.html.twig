@@ -65,12 +65,11 @@
                 
                     <div class="col-md-8 ml-auto mr-auto">
                        <div id="page2" style="display:none">
-                        <div class="form-group">
-                          <div class="custom-control custom-checkbox">
-                                {{ form_label(subscriptionForm.high_availability, 'Haute disponibilité', {'label_attr': {'class': 'form-check'}}) }}
-                              {{ form_widget(subscriptionForm.high_availability, {'attr': {'class': 'custom-control', 'id': 'HA'}}) }}
+                        <div class="">
+                          <div class="">
+                                <label><b>Haute disponibilité</b></label>
+                              {{ form_widget(subscriptionForm.high_availability) }}
                             </div>
-                          
                         </div>
                         <div class="form-group">
                           {{ form_label(subscriptionForm.IP,'IP') }}
