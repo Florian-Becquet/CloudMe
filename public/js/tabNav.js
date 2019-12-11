@@ -2,20 +2,38 @@ $(document).ready(function(){
     
    $('.custom-range').each(function(){
        $(this).removeClass('form-control');
-   })
+   });
+  
     
     $('.tabNav').on('click',function(e){
         e.preventDefault();
+       
         var target = $(this).data('target');
         console.log(target);
         if(target == 'page2'){
+            
             $('#page1').css('display','none');
             $('#page2').css('display','block');
-            
+            $('#page3').css('display','none');
+            $('#onglet2').attr('class',"nav-item nav-link tabNav onglet active");
+            $('#onglet1').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet ");
         }
         else if(target == 'page1'){
             $('#page1').css('display','block');
             $('#page2').css('display','none');
+            $('#page3').css('display','none');
+            $('#onglet2').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet1').attr('class',"nav-item nav-link tabNav onglet active");
+        }
+        else if(target == 'page3'){
+            $('#page3').css('display','block');
+            $('#page1').css('display','none');
+            $('#page2').css('display','none');
+            $('#onglet1').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet2').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet active");
         }
     })
     

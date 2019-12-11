@@ -14,9 +14,9 @@
    <div class="card ">
              
                          <nav class="nav nav-tabs">
-                              <a class="nav-item nav-link active tabNav" href="#" data-target="page1" data-toggle="tab">Config</a>
-                              <a class="nav-item nav-link tabNav" href="#" data-target="page2" data-toggle="tab">Options</a>
-                              <a class="nav-item nav-link" href="#" data-toggle="tab">Récap</a>
+                              <a class="nav-item nav-link tabNav onglet active " href="#" data-target="page1" id="onglet1" data-toggle="tab">Config</a>
+                              <a class="nav-item nav-link tabNav onglet" href="#" data-target="page2" id="onglet2" data-toggle="tab">Options</a>
+                              <a class="nav-item nav-link tabNav onglet" href="#" data-target="page3" id="onglet3" data-toggle="tab">Récap</a>
                             </nav>
                            
              
@@ -25,16 +25,13 @@
               <div class="card-body">
                 {{ form_start(subscriptionForm)}}
                  
-                    <div class="tab-content">
-                              <div class="tab-pane fade show active" id="p1">Configuration du service</div>
-                              <div class="tab-pane fade" id="p2">Options avancées</div>
-                                  <div class="tab-pane fade" id="p3">Récapitulatif</div>
-                            </div>
+                  
                   
                   <div class="row ">
                     <div class="col-md-8 ml-auto mr-auto">
                     
                         <div id="page1" >
+                              <h3 class="mb-4">Configuration du service</h3>
                             <div class="form-group">
                               {{ form_label(subscriptionForm.cpu) }}
                               {{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger'}}) }}
@@ -56,7 +53,7 @@
                                     </select>
                                   {% endif %}
                                 </div>
-                            <button  class="btn btn-primary pr-3 pl-3">Suivante</button>
+                            <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Suivante</button>
                         </div>
                     </div>
                   </div>
@@ -65,6 +62,7 @@
                 
                     <div class="col-md-8 ml-auto mr-auto">
                        <div id="page2" style="display:none">
+                        <h3 class="h3 mb-4">Options avancées</h3>
                         <div class="">
                           <div class="">
                                 <label><b>Haute disponibilité</b></label>
@@ -83,17 +81,29 @@
                           </div>
                           <div class="row mt-2 mb-2  d-flex justify-content-center">
                             <div class="col-6">
-                              <button  class="btn btn-primary pr-3 pl-3">Précédente</button>
+                              <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page1">Précédente</button>
                             </div>
-                              <div class="col-6">
-                                <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
+                            <div class="col-6">
+                               <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page3">Suivante</button>
                               </div>
                           </div>
                        </div>
                     
          
                     </div> 
-               
+                    <div class="row">
+                      <div class="col-md-8 ml-auto mr-auto">
+                          <div id="page3" style="display:none">
+                            <h3>Récapitulatif de la commande</h3>
+                            <div class="col-6">
+                              <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Précédente</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary pr-3 pl-3">Valider</button>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
           
                 {{ form_end(subscriptionForm)}}
               </div>
