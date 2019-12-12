@@ -60,16 +60,16 @@ class NavigationController extends Controller
         //info contient le type de service choisi (vps/vdi/srv/bdd) et on cherche dans la bdd ce service disponible
         $info = $request->request->get('serv');
         if($info == "srv"){
-            $info = "Serveur";
+            $choix = "Serveur";
         }
         else if($info =="bdd"){
-            $info = "Base de donnée";
+            $choix = "Base de donnée";
         }
         else if($info =="vdi"){
-            $info = "Bureau virtuel";
+            $choix = "Bureau virtuel";
         }
         else if($info =="vps"){
-            $info = "VPS";
+            $choix = "VPS";
         }
         
         $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
@@ -109,7 +109,7 @@ class NavigationController extends Controller
             return $this->redirectToRoute('home');
         }
         return $this->render('pages/serveur.html.twig', [
-            'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $info,'price' => $price
+            'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $choix,'price' => $price
         ]);
 
     }
