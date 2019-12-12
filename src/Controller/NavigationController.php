@@ -81,7 +81,8 @@ class NavigationController extends Controller
             $sub->setIpAdresse('231');
             $sub->setIdUser($user);
             $sub->setSubName($sub_name);
-            $sub->setPrice('50');
+            $prixService = $request->request->get('prixService');
+            $sub->setPrice($prixService);
             //receration et instanciation du service choisis
             $serveur = $request->request->get('serveur');
             $vpsChosen = $repo->findOneBy(['id' => $serveur]);

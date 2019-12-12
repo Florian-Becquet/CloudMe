@@ -13,14 +13,14 @@ $(document).ready(function(){
             $('#page3').css('display','none');
             $('#onglet2').attr('class',"nav-item nav-link tabNav onglet active");
             $('#onglet1').attr('class',"nav-item nav-link tabNav onglet ");
-            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet prix");
         }
         else if(target == 'page1'){
             $('#page1').css('display','block');
             $('#page2').css('display','none');
             $('#page3').css('display','none');
             $('#onglet2').attr('class',"nav-item nav-link tabNav onglet ");
-            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet ");
+            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet prix");
             $('#onglet1').attr('class',"nav-item nav-link tabNav onglet active");
         }
         else if(target == 'page3'){
@@ -29,7 +29,7 @@ $(document).ready(function(){
             $('#page2').css('display','none');
             $('#onglet1').attr('class',"nav-item nav-link tabNav onglet ");
             $('#onglet2').attr('class',"nav-item nav-link tabNav onglet ");
-            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet active");
+            $('#onglet3').attr('class',"nav-item nav-link tabNav onglet prix active");
         }
     })
 	$('.custom-range').on('change', function() {
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     $('#prixTotal').html(total + "Euros");
 
-    $('#onglet3').on('click', function(e){
+    $('.prix').on('click', function(e){
         e.preventDefault();
         var prixRange = 0 ;
         var prixProtection = 0;
@@ -80,11 +80,29 @@ $(document).ready(function(){
         prixRange += Number(total);
        
        })
-            
-
        var prixService = Number(prixIp) + Number(prixJours) + Number(prixProtection) + Number(prixRange) + Number(prixReplictation) ;
-     
-       console.log(prixService);
+       $('#tabIp').html($('#subscription_IP').val());
+       $('#tabName').html($('#subscription_name option:selected').html());
+       $('#tabRam').html($('#subscription_ram').val());
+       $('#tabCpu').html($('#subscription_cpu').val());
+       $('#tabDisk').html($('#subscription_disk_space').val());
+       if($('#subscription_backup').val()){
+        $('#tabRetention').html($('#subscription_backup').val() + ' jours');
+        }
+       $('#prixTotal').html(prixService);
+       $('#prixService').val(prixService);
+       if($('input[value=protectionHA]').prop('checked')){
+        $('#tabProtection').attr('class', 'fas fa-check text-success');
+       }
+       else{
+        $('#tabProtection').attr('class', 'fas fa-times-circle text-danger');
+       }
+       if($('input[value=replicationServ]').prop('checked')){
+        $('#tabReplication').attr('class', 'fas fa-check text-success');
+       }
+       else{
+        $('#tabReplication').attr('class', 'fas fa-times-circle text-danger');
+       }
     })
    
 })
