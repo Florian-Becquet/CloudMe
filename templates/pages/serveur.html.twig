@@ -28,27 +28,28 @@
                         <div id="page1" >
                               <h3 class="mb-4">Configuration du service</h3>
                             <div class="form-group">
-                              {{ form_label(subscriptionForm.cpu) }}
+                              {{ form_label(subscriptionForm.cpu) }} : <b class="ml-auto mr-auto text-danger" id="valCpu"></b>
                              <div class="row">
                                 <div class="d-flex col-md-12">
-                              <h6 class="mr-1">1</h6>{{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price }}) }} <h6 class="ml-1">8</h6>
+                              <h6 class="mr-1">1</h6>{{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price, 'data-target': 'valCpu' }}) }} <h6 class="ml-1">8</h6>
                               </div>
+                              
                               </div>
                              
                             </div>
                             <div class="form-group">
-                              {{ form_label(subscriptionForm.ram) }}
+                              {{ form_label(subscriptionForm.ram) }} : <b class="ml-auto mr-auto text-info" id="valRam"></b>
                                <div class="row">
                                 <div class="d-flex col-md-12">
-                              <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price }}) }} <h6 class="ml-1">16</h6>
+                              <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price, 'data-target': 'valRam' }}) }} <h6 class="ml-1">16</h6>
                               </div>
                               </div>
                             </div>
                             <div class="form-group">
-                              {{ form_label(subscriptionForm.disk_space) }}
+                              {{ form_label(subscriptionForm.disk_space) }} : <b class="ml-auto mr-auto text-success" id="valDisk"></b>
                                 <div class="row">
                                 <div class="d-flex col-md-12">
-                               <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price }}) }}<h6 class="ml-1">500</h6>
+                               <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price, 'data-target': 'valDisk' }}) }}<h6 class="ml-1">500</h6>
                               </div>
                               </div>
                             </div>
