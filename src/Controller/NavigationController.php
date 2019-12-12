@@ -22,20 +22,35 @@ class NavigationController extends Controller
   /**
      * @Route("/home", name="home")
      */
-    public function home(){
-            $vps = array(
-                ['name' => 'vps0001' , 'id' => '1'],
-                ['name' => 'vps0002' , 'id' => '2'],
-                ['name' => 'vps0003' , 'id' => '3']);
-            $serveur = array(
-                ['name' => 'serveur0001' , 'id' => '1'],
-                ['name' => 'serveur0002' , 'id' => '2'],
-                ['name' => 'serveur0003' , 'id' => '3']);
-            $bureauVirtuel = array(
-                ['name' => 'BV0001' , 'id' => '1'],
-                ['name' => 'BV0002' , 'id' => '2'],
-                ['name' => 'BV0003' , 'id' => '3']);
-            $bdd = array();
+    public function home(ServicesRepository $serviceRepo){
+        $user = $this->getUser();
+        $vps = array();
+        $serveur = array();
+        $bureauVirtuel = array();
+        $bdd = array();
+        $subscriptions = $user->getSubscriptions();
+        for($i=0; $i<count($subscriptions);$i++){
+            $id_serv = $subscriptions[$i]->getIdServices();
+            $serv = $serviceRepo->findOneBy(['id' => $id_serv]);
+            if($serv->getServiceType() == "vps"){
+                $countVps = count($vps);
+                $vps[$countVps] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
+                
+            }
+            else if($serv->getServiceType() == "srv"){
+                $countServ = count($serveur);;
+                $serveur[$countServ] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
+            }
+            else if($serv->getServiceType() == "vdi"){
+                $countVdi = count($bureauVirtuel);;
+                $bureauVirtuel[$countVdi] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
+            }
+            else if($serv->getServiceType() == "bdd"){
+                $countBdd = count($bdd);;
+                $bdd[$countBdd] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
+            }
+        }
+           
         return $this->render('base.html.twig' , ['vps' => $vps , 'serveur' => $serveur, 'bureauVirtuel' => $bureauVirtuel,'bdd' => $bdd]);
     }
   
