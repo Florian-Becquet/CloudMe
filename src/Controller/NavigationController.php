@@ -211,7 +211,7 @@ class NavigationController extends Controller
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-        
+        $pdfOptions->setDpi(150);
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
         // repo->findall()
