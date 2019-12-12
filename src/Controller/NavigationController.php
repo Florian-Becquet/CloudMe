@@ -38,15 +38,15 @@ class NavigationController extends Controller
                 
             }
             else if($serv->getServiceType() == "srv"){
-                $countServ = count($serveur);;
+                $countServ = count($serveur);
                 $serveur[$countServ] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
             }
             else if($serv->getServiceType() == "vdi"){
-                $countVdi = count($bureauVirtuel);;
+                $countVdi = count($bureauVirtuel);
                 $bureauVirtuel[$countVdi] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
             }
             else if($serv->getServiceType() == "bdd"){
-                $countBdd = count($bdd);;
+                $countBdd = count($bdd);
                 $bdd[$countBdd] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
             }
         }
