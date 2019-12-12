@@ -131,22 +131,43 @@ class NavigationController extends Controller
          /**
      * @Route("/infovps", name="infovps")
      */
-    public function infoVps(Request $request){
+    public function infoVps(Request $request, SubscriptionRepository $sub){
         //recupération de l'id du service vps
         $id = $request->request->get('id');
+        $info = $sub->findOneBy(['id' => $id]);
+        $protection ="";
+        $replication = "";
 
-        //fausses données 
-        $metrics = array(['name' => 'VPS1', 'ip' => '192.65.36.1','HA'=>'None','status' => 'running','cpu' => 2,'ram' =>8,'space' => 500,'id' => 1],
-                         ['name' => 'VPS2', 'ip' => '193.70.30.1','HA'=>'Available','status' => 'running','cpu' => 8,'ram' =>16,'space' => 410,'id' => 2],
-                         ['name' => 'VPS3', 'ip' => '182.68.40.1','HA'=>'Available','status' => 'not running','cpu' => 6,'ram' =>12,'space' => 260,'id' => 3],
-                        );
-
-       //mise en place des données dans un tableau clé valeur result
-        foreach ( $metrics as $met){
-                if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+        if($info->getHighAvailability()){
+        $arr = explode(',',$info->getHighAvailability());
+            if(count($arr)==2){
+                $protection = $arr[0];
+                $replication = $arr[1];
+            }
+            else if (count($arr) == 1){
+                if($arr[0] == "protectionHA"){
+                    $protection = $arr[0];
                 }
+                else if ($arr[0] == "replicationServ"){
+                    $replication = $arr[0];
+                }
+            } 
+            
         }
+
+        $result = array(['name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
+        //fausses données 
+    //     $metrics = array(['name' => 'VPS1', 'ip' => '192.65.36.1','HA'=>'None','status' => 'running','cpu' => 2,'ram' =>8,'space' => 500,'id' => 1],
+    //                      ['name' => 'VPS2', 'ip' => '193.70.30.1','HA'=>'Available','status' => 'running','cpu' => 8,'ram' =>16,'space' => 410,'id' => 2],
+    //                      ['name' => 'VPS3', 'ip' => '182.68.40.1','HA'=>'Available','status' => 'not running','cpu' => 6,'ram' =>12,'space' => 260,'id' => 3],
+    //                     );
+
+    //    //mise en place des données dans un tableau clé valeur result
+    //     foreach ( $metrics as $met){
+    //             if($met['id'] == $id){
+    //                 $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
+    //             }
+    //     }
         
         return $this->render('pages/infoVps.html.twig',['info' => $result]);
     }
