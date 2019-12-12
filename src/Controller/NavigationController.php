@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use DateTime;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\User;
 use App\Entity\Services;
 use App\Entity\Subscription;
@@ -10,11 +12,10 @@ use App\Form\SubscriptionType;
 use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 
 class NavigationController extends Controller
 {
@@ -55,7 +56,7 @@ class NavigationController extends Controller
      * 
      * controller pour la page serveur qui va afficher soit un formulaire soit une liste des services possibles
      */
-    public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em, PricingRepository $repoPrice){
+    public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em, PricingRepository $repoPrice, SubscriptionRepository $repoSub){
         //info contient le type de service choisi (vps/vdi/srv/bdd) et on cherche dans la bdd ce service disponible
         $info = $request->request->get('serv');
         $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
@@ -72,21 +73,23 @@ class NavigationController extends Controller
         $form->handleRequest($request);
         //si le form est valide est soumis
         if ($form->isSubmitted() && $form->isValid()) {
-           
-            //on crée le nom de la souscription
-            $sub_name = 'CL12'. $user->getId() . $info . $sub->getId();
             //le status est set a 0 par défaut, l'admin pourra le set a 1 pour activer, set la date de debut, l'adresse ip, l'id user et le nom de la souscription
             $sub->setStatus('0');
             $sub->setDateSub($date);
             $sub->setIpAdresse('231');
             $sub->setIdUser($user);
-            $sub->setSubName($sub_name);
+            //recuperation du prix
             $prixService = $request->request->get('prixService');
             $sub->setPrice($prixService);
-            //receration et instanciation du service choisis
+            //recuperation et instanciation du service choisis
             $serveur = $request->request->get('serveur');
             $vpsChosen = $repo->findOneBy(['id' => $serveur]);
             $sub->setIdServices($vpsChosen);
+            //on crée le nom de la souscription
+            $allSub = $repoSub->findAll();
+            $subId = count($allSub) + 1;
+            $sub_name = 'CL12'. $user->getId() . $vpsChosen->getServiceType() . $subId;
+            $sub->setSubName($sub_name);
             //envoie en bdd et redirection vers home
             $em->persist($sub);
             $em->flush();
