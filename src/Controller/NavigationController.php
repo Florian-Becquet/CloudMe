@@ -59,6 +59,19 @@ class NavigationController extends Controller
     public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em, PricingRepository $repoPrice, SubscriptionRepository $repoSub){
         //info contient le type de service choisi (vps/vdi/srv/bdd) et on cherche dans la bdd ce service disponible
         $info = $request->request->get('serv');
+        if($info == "srv"){
+            $info = "Serveur";
+        }
+        else if($info =="bdd"){
+            $info = "Base de donnée";
+        }
+        else if($info =="vdi"){
+            $info = "Bureau virtuel";
+        }
+        else if($info =="vps"){
+            $info = "VPS";
+        }
+        
         $vps = $repo->findBy(['service_type' => $info, 'available' => '1']);
         $price = $repoPrice->findAll();
         //on set different objet utile
@@ -215,7 +228,7 @@ class NavigationController extends Controller
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
-        
+        $pdfOptions->setDpi(150);
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
         // repo->findall()
