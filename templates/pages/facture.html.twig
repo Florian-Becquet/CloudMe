@@ -1,22 +1,22 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="dist/css/style.css" media="all" />
-      <div id="logo">
-        <img src="dist/img/logo.png">
-      </div>
-      <h1>FACTURE N°111121901</h1>
-      <div id="company" class="clearfix">
+
+      <h6 class="text-center">FACTURE N°111121901</h6><hr>
+      <div class="text-right clearfix" style="font-size:20px" id="company">
         <div>CloudMe</div>
         <div>455 Foggy Heights,<br /> AZ 85004, US</div>
         <div>03 20 20 20 20</div>
         <div><a href="mailto:cloudme@example.com">cloudme@example.com</a></div>
       </div>
-      <div id="project">
+      <div class="text-left" style="font-size:18px" id="project">
+        <div style="font-size:24px">Information client</div>
         <div><span>CLIENT</span> {{app.user.name}} {{app.user.firstName}}</div>
         <div><span>ADDRESS</span> {{app.user.adresse}},{{app.user.ville}}</div>
         <div><span>EMAIL</span> <a href="mailto:{{app.user.email}}">{{app.user.email}}</a></div>
         <div><span>DATE</span> 11 Décembre, 2019</div>
       </div>
-      <table style="margin-top:150px">
-        <thead>
+      <table class="table" style="margin-top:150px;font-size:20px; border:solid">
+        <thead class="thead-dark">
           <tr>
             <th class="service">SERVICE</th>
             <th class="desc">HEADLIN</th>
@@ -47,23 +47,26 @@
             <td class="qty">15€</td>
             <td>15€</td>
           </tr>
+        </tbody>
+      </table>
+      
+      <table class="table mt-2" style="width:45%;font-size:16px; border:solid; margin-left:320%">
+        <thead class="thead-light">
           <tr>
-            <td colspan="4">TOTAL</td>
-            <td class="total">45€</td>
+            <th scope="col">Total HT</th>
+            <th scope="col">Taux TVA</th>
+            <th scope="col">Total TVA</th>
+            <th scope="col">Total TCC</th>
           </tr>
+        </thead>
+        <tbody>
           <tr>
-            <td colspan="4">TAX 20%</td>
-            <td class="total">7,50€</td>
-          </tr>
-          <tr>
-            <td colspan="4" class="grand total">Prix à payé</td>
-            <td class="grand total">52,50€</td>
+            <th>45€</th>
+            <td>20,00%</td>
+            <td>7,50€</td>
+            <td>52,50€</td>
           </tr>
         </tbody>
       </table>
-      <div id="notices">
-        <div>NOTICE:</div>
-      <div class="notice">Une charge financière de 1,5% sera prélevée sur les soldes impayés après 30 jours.</div>
-      </div>
     <footer>
     </footer>
