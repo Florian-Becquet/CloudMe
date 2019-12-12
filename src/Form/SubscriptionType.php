@@ -62,6 +62,7 @@ class SubscriptionType extends AbstractType
                 'class' => "form-group ml-2",
             ],
             'choices' => [
+                'Choisissez une option' => '',
                 'WAN' => 'WAN',
                 'LAN' => 'LAN'
             ]
@@ -70,7 +71,10 @@ class SubscriptionType extends AbstractType
             'label' => 'Rétention des données (en jours, par défaut 7 jours)',
             'required' => false,
             'attr' => [
-                'class' => 'form-group ml-2'
+                'class' => 'form-group ml-2',
+                'min' => 7,
+                'max' => 180,
+                'value' => 7,
             ],
         ]);
     ;
