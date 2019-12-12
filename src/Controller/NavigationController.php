@@ -6,6 +6,7 @@ use DateTime;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\User;
+use App\Entity\Facture;
 use App\Entity\Services;
 use App\Entity\Subscription;
 use App\Form\SubscriptionType;
@@ -202,15 +203,29 @@ class NavigationController extends Controller
     /**
      * @Route("/infofacture", name="infofacture")
      */
-    public function infofacture(){
+    public function infofacture(Request $request){
+        $id = $request->request->get('id');
+
+        //fausses données 
+        $metrics = array(['commande' => '12345', 'date' => '21/07/2019','type' => 'CD', 'etat' => 'Payé', 'total'=>'15€', 'id'=> 1],
+                        ['commande' => '23456', 'date' => '21/08/2019','type' => 'CD', 'etat' => 'En attente', 'total'=>'15€', 'id'=> 2],);
         
-        return $this->render('pages/infoFacture.html.twig');
+        return $this->render('pages/infoFacture.html.twig',
+        ['service'=>$metrics]);
     }
 
     /**
      * @Route("/facture", name="facture")
      */
-    public function facture(){
+    public function facture(Request $request){
+
+        $user = new User();
+        $date = new Datetime();
+        $id = $request->request->get('id');
+        $user=$this->getUser();
+        //fausses données 
+        $metrics = array(['service' => 'VPS', 'headline' => 'TurnKey phpBB','dateSous' => '21/11/2019', 'dateEche' => '04/12/2019', 'prix'=>'15€', 'id'=> 1]);
+        
 
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -221,7 +236,7 @@ class NavigationController extends Controller
         // repo->findall()
         
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('pages/facture.html.twig');
+        $html = $this->renderView('pages/facture.html.twig',['service'=>$metrics]);
         
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
@@ -233,8 +248,8 @@ class NavigationController extends Controller
         $dompdf->render();
 
         // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => true
+        $dompdf->stream($user->getId().$date->format('d-m-Y'), [
+            "Attachment" => true, 
         ]);
     }
 }

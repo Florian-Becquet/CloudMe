@@ -16,41 +16,29 @@
         <div><span>DATE</span> 11 Décembre, 2019</div>
       </div>
       <table class="table" style="margin-top:150px;font-size:20px; border:solid">
-        <thead class="thead-dark">
+        <thead class="thead-light">
           <tr>
-            <th class="service">SERVICE</th>
-            <th class="desc">HEADLIN</th>
-            <th>DATE</th>
+            <th>SERVICE</th>
+            <th>HEADLIN</th>
+            <th>DATE SOUSCRIPTION</th>
+            <th>DATE D'ECHEANCE</th>
             <th>PRIX</th>
-            <th>TOTAL</th>
           </tr>
         </thead>
+          {% for data in service %}
         <tbody>
           <tr>
-            <td class="service">VPS</td>
-            <td class="desc">TurnKey phpBB</td>
-            <td class="unit">11/12/2019</td>
-            <td class="qty">15€</td>
-            <td>15€</td>
-          </tr>
-          <tr>
-            <td class="service">Server</td>
-            <td class="desc">Windows Server 2012 R2 </td>
-            <td class="unit">05/12/2019</td>
-            <td class="qty">15€</td>
-            <td>15€</td>
-          </tr>
-          <tr>
-            <td class="service">Bureau virtuel</td>
-            <td class="desc">VDI Windows 10 </td>
-            <td class="unit">08/12/2019</td>
-            <td class="qty">15€</td>
-            <td>15€</td>
+            <td>{{data.service}}</td>
+            <td>{{data.headline}}</td>
+            <td>{{data.dateSous}}</td>
+            <td>{{data.dateEche}}</td>
+            <td>{{data.prix}}</td>
           </tr>
         </tbody>
+        {% endfor %}
       </table>
       
-      <table class="table mt-2" style="width:45%;font-size:16px; border:solid; margin-left:320%">
+      <table class="table mt-2" style="width:45%;font-size:18px; border:solid; margin-left:302%">
         <thead class="thead-light">
           <tr>
             <th scope="col">Total HT</th>

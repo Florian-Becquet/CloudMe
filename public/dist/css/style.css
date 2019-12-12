@@ -92,26 +92,6 @@ table th {
   font-weight: normal;
 }
 
-table .service,
-table .desc {
-  text-align: left;
-}
-
-table td {
-  padding: 20px;
-  text-align: right;
-}
-
-table td.service,
-table td.desc {
-  vertical-align: top;
-}
-
-
-table td.grand {
-  border-top: 1px solid #5D6975;;
-}
-
 /* #notices .notice {
   color: #5D6975;
   font-size: 1.2em;

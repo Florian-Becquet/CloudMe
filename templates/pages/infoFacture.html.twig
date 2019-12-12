@@ -9,36 +9,23 @@
       <th scope="col-sm-3">Export</th>
     </tr>
   </thead>
+  {% for data in service %}
   <tbody>
     <tr>
-      <th scope="row">12345</th>
-      <td>21/07/2019</td>
-      <td>CB</td>
-      <td><span class="badge badge-success">Payé</span></td>
-      <td>15€</td>
-      <td><a href="{{path('facture')}}">
-        <i class="fas fa-file-pdf"></i> PDF
-        </a></td>
-    </tr>
-    <tr>
-      <th scope="row">24634</th>
-      <td>21/08/2019</td>
-      <td>CB</td>
-      <td><span class="badge badge-success">Payé</span></td>
-      <td>15€</td>
-      <td><a href="{{path('facture')}}">
-        <i class="fas fa-file-pdf"></i> PDF
-        </a></td>
-    </tr>
-    <tr>
-      <th scope="row">63928</th>
-      <td>21/09/2019</td>
-      <td>CB</td>
-      <td><span class="badge badge-warning">En cours</span></td>
-      <td>15€</td>
+      <th>{{data.commande}}</th>
+      <td>{{data.date}}</td>
+      <td>{{data.type}}</td>
+      <td>{% if data.etat == "Payé" %}
+      <span class="badge badge-success">
+      {% else %}
+      <span class="badge badge-warning">
+      {% endif %}
+      {{data.etat}}</span></td>
+      <td>{{data.total}}</td>
       <td><a href="{{path('facture')}}">
         <i class="fas fa-file-pdf"></i> PDF
         </a></td>
     </tr>
   </tbody>
+  {% endfor %}
 </table>
