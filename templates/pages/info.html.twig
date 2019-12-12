@@ -1,6 +1,7 @@
 
 {% for data in info %}
     <h3 class="lead text-center mb-5"> Données du service : </h3>
+ 
     <div class="container ">
     <div class="row custyle">
     <div class="col-md-12 table-responsive mb-5">
@@ -12,7 +13,9 @@
             <th>CPU</th>
             <th>RAM</th>
             <th>Espace disque</th>
-            <th>HA</th>
+            <th>Protection</th>
+            <th>Replication</th>
+            <th>Backup</th>
             <th>IP</th>
             <th>Status</th>
             
@@ -24,9 +27,11 @@
                 <td>{{data.cpu}}</td>
                 <td>{{ data.ram }}</td>
                 <td>{{ data.space }}</td>
-                <td>{{data.HA}}</td>
+                <td><i id="protection"></i></td>
+                <td><i id="replication"></i></td>
+                <td>{{data.backup}}</td>
                 <td>{{data.ip}}</td>
-                <td>{{data.status}}</td>
+                <td>Running</td>
 
                 <td class="text-center"><a class='btn btn-success btn-xs pl-2 pr-2' title="Lancer le serveur"href="#"><span class="fas fa-play"></span></a> <a href="#" title="Arreter le serveur"class="btn btn-danger btn-xs pl-2 pr-2"><span class="fas fa-stop"></span></a><a class='btn btn-warning btn-xs pl-2 pr-2 ml-1' title="Changer la configuration"href="#"><i class="fas fa-cog" style="color:white;"></i></td>
             </tr>
@@ -39,6 +44,8 @@
         <span id="cpu">{{ data.cpu }}</span>
         <span id="ram">{{ data.ram }}</span>
         <span id="space">{{ data.space }}</span>
+        <span id="prot">{{ data.protection }}</span>
+        <span id="repli">{{ data.replication }}</span>
     </div>
 
        

@@ -65,3 +65,17 @@ options: {
 responsive: true
 }
 });
+
+//affichage icone selon valeur replication et protection HA
+if($('#stockage').children('#prot').html() == 'protectionHA'){
+    $('#protection').attr('class', 'fas fa-check text-success');
+}
+else{
+    $('#protection').attr('class', 'fas fa-times-circle text-danger');
+}
+if($('#stockage').children('#repli').html() == 'replicationServ'){
+    $('#replication').attr('class', 'fas fa-check text-success');
+}
+else{
+    $('#replication').attr('class', 'fas fa-times-circle text-danger');
+}

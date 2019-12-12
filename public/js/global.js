@@ -34,7 +34,7 @@ $(document).ready(function(){
         var target = $(this).data('target');
         $.ajax({
           type: 'POST',
-          url: 'serveur',
+          url: 'formSub',
           data: 'serv=' + target ,
           success: function(data){
             $('#root').html(data);
