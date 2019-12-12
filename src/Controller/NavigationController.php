@@ -67,11 +67,11 @@ class NavigationController extends Controller
         return $this->render('pages/home.html.twig', ['service'=>$metrics]);
     }     
     /**
-     * @Route("/serveur", name="serveur")
+     * @Route("/formSub", name="formSub")
      * 
      * controller pour la page serveur qui va afficher soit un formulaire soit une liste des services possibles
      */
-    public function serveur(Request $request,ServicesRepository $repo,EntityManagerInterface $em, PricingRepository $repoPrice, SubscriptionRepository $repoSub){
+    public function formSub(Request $request,ServicesRepository $repo,EntityManagerInterface $em, PricingRepository $repoPrice, SubscriptionRepository $repoSub){
         //info contient le type de service choisi (vps/vdi/srv/bdd) et on cherche dans la bdd ce service disponible
         $info = $request->request->get('serv');
         if($info == "srv"){
@@ -97,7 +97,7 @@ class NavigationController extends Controller
         $user = $this->getUser();
         //création du formulaire de souscription, avec le parametre action qui indique le controller dans lequel le form sera traité
         $form = $this->createForm(SubscriptionType::class, $sub, 
-        ['action' => $this->generateUrl('serveur')]);
+        ['action' => $this->generateUrl('formSub')]);
         $form->handleRequest($request);
         //si le form est valide est soumis
         if ($form->isSubmitted() && $form->isValid()) {
@@ -123,7 +123,7 @@ class NavigationController extends Controller
             $em->flush();
             return $this->redirectToRoute('home');
         }
-        return $this->render('pages/serveur.html.twig', [
+        return $this->render('pages/formSub.html.twig', [
             'subscriptionForm' => $form->createView(), 'liste' => $vps, 'choix' => $choix,'price' => $price
         ]);
 
@@ -158,66 +158,6 @@ class NavigationController extends Controller
         $result = array(['name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
         
         return $this->render('pages/info.html.twig',['info' => $result]);
-    }
-         /**
-     * @Route("/infoserveur", name="infoserveur")
-     */
-    public function infoServeur(Request $request){
-        $id = $request->request->get('id');
-
-        //fausses données 
-        $metrics = array(['name' => 'Serveur1', 'ip' => '190.15.30.2','HA'=>'Available','status' => 'not running','cpu' => 4,'ram' =>10,'space' => 380,'id' => 1],
-                         ['name' => 'Serveur2', 'ip' => '193.60.65.1','HA'=>'None','status' => 'not running','cpu' => 12,'ram' =>16,'space' => 500,'id' => 2],
-                         ['name' => 'Serveur3', 'ip' => '198.75.56.3','HA'=>'None','status' => 'running','cpu' => 18,'ram' =>16,'space' => 260,'id' => 3],
-                        );
-
-       //mise en place des données dans un tableau clé valeur result
-        foreach ( $metrics as $met){
-                if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
-                }
-        }
-        return $this->render('pages/infoServeur.html.twig',['info' => $result]);
-    }
-         /**
-     * @Route("/infobdd", name="infobdd")
-     */
-    public function infoBdd(Request $request){
-        $id = $request->request->get('id');
-
-        //fausses données 
-        $metrics = array(['name' => 'Base de donnée 1', 'ip' => '197.67.37.7','HA'=>'None','status' => 'running','cpu' => 8,'ram' =>11,'space' => 200,'id' => 1],
-                         ['name' => 'Base de donnée 2', 'ip' => '190.60.30.0','HA'=>'Available','status' => 'not running','cpu' => 14,'ram' =>14,'space' => 400,'id' => 2],
-                         ['name' => 'Base de donnée 3', 'ip' => '193.33.33.3','HA'=>'None','status' => 'not running','cpu' => 16,'ram' =>16,'space' => 450,'id' => 3],
-                        );
-
-       //mise en place des données dans un tableau clé valeur result
-        foreach ( $metrics as $met){
-                if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
-                }
-        }
-        return $this->render('pages/infoBdd.html.twig',['info' => $result]);
-    }
-         /**
-     * @Route("/infobv", name="infobv")
-     */
-    public function infoBv(Request $request){
-        $id = $request->request->get('id');
-
-        //fausses données 
-        $metrics = array(['name' => 'Bureau Virtuel1', 'ip' => '195.55.35.5','HA'=>'Available','status' => 'running','cpu' => 6,'ram' =>10,'space' => 350,'id' => 1],
-                         ['name' => 'Bureau Virtuel2', 'ip' => '194.45.34.4','HA'=>'None','status' => 'not running','cpu' => 12,'ram' =>12,'space' => 400,'id' => 2],
-                         ['name' => 'Bureau Virtuel3', 'ip' => '199.69.96.9','HA'=>'None','status' => 'running','cpu' => 16,'ram' =>16,'space' => 300,'id' => 3],
-                        );
-
-       //mise en place des données dans un tableau clé valeur result
-        foreach ( $metrics as $met){
-                if($met['id'] == $id){
-                    $result = array(['name' => $met['name'],'ip' => $met['ip'],'HA' => $met['HA'],'status'=> $met['status'],'cpu' => $met['cpu'] , 'ram'=> $met['ram'] , 'space'=> $met['space'],'id' => $id]); 
-                }
-        }
-        return $this->render('pages/infoBv.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infometrics", name="infometrics")
