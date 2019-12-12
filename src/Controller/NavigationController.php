@@ -129,9 +129,9 @@ class NavigationController extends Controller
 
     }
          /**
-     * @Route("/infovps", name="infovps")
+     * @Route("/info", name="info")
      */
-    public function infoVps(Request $request, SubscriptionRepository $sub){
+    public function info(Request $request, SubscriptionRepository $sub){
         //recupération de l'id du service vps
         $id = $request->request->get('id');
         $info = $sub->findOneBy(['id' => $id]);
@@ -157,7 +157,7 @@ class NavigationController extends Controller
 
         $result = array(['name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
         
-        return $this->render('pages/infoVps.html.twig',['info' => $result]);
+        return $this->render('pages/info.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infoserveur", name="infoserveur")

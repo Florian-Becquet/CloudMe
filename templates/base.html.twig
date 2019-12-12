@@ -224,7 +224,7 @@
              {% if vps %}
                {% for vips in vps %}
                   <li class="nav-item">
-                    <a  data-target= "infovps" data-id="{{ vips.id }}" data-def="VPS" href="#" class="nav-link navigation">
+                    <a  data-target= "info" data-id="{{ vips.id }}" data-def="VPS" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ vips.name }}</p>
                     </a>
@@ -252,7 +252,7 @@
              {% if serveur %}
                {% for serv in serveur %}
                   <li class="nav-item">
-                    <a  data-target= "infoserveur" data-def="Serveur" data-id="{{ serv.id }}" href="#" class="nav-link navigation">
+                    <a  data-target= "info" data-def="Serveur" data-id="{{ serv.id }}" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ serv.name }}</p>
                     </a>
@@ -281,7 +281,7 @@
              {% if bureauVirtuel %}
                {% for bv in bureauVirtuel %}
                   <li class="nav-item">
-                    <a  data-target= "infobv" data-def="Bureau virtuel" data-id="{{ bv.id }}" href="#" class="nav-link navigation">
+                    <a  data-target= "info" data-def="Bureau virtuel" data-id="{{ bv.id }}" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ bv.name }}</p>
                     </a>
@@ -312,7 +312,7 @@
              {% if bdd %}
                {% for db in bdd %}
                   <li class="nav-item">
-                    <a  data-target= "infobdd" data-def="Base de donnée" data-id="{{ bd.id }}"href="#" class="nav-link">
+                    <a  data-target= "info" data-def="Base de donnée" data-id="{{ bd.id }}"href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ bd.name }}</p>
                     </a>
