@@ -16,7 +16,7 @@
               <nav class="nav nav-tabs mb-3">
                 <a class="nav-item nav-link tabNav onglet active " href="#" data-target="page1" id="onglet1" data-toggle="tab">Config</a>
                 <a class="nav-item nav-link tabNav onglet" href="#" data-target="page2" id="onglet2" data-toggle="tab">Options</a>
-                <a class="nav-item nav-link tabNav onglet" href="#" data-target="page3" id="onglet3" data-toggle="tab">Récap</a>
+                <a class="nav-item nav-link tabNav onglet prix" href="#" data-target="page3" id="onglet3" data-toggle="tab">Récap</a>
               </nav>
                 {{ form_start(subscriptionForm)}}
                  
@@ -28,33 +28,34 @@
                         <div id="page1" >
                               <h3 class="mb-4">Configuration du service</h3>
                             <div class="form-group">
-                              {{ form_label(subscriptionForm.cpu) }}
+                              {{ form_label(subscriptionForm.cpu) }} : <b class="ml-auto mr-auto text-danger" id="valCpu"></b>
                              <div class="row">
                                 <div class="d-flex col-md-12">
-                              <h6 class="mr-1">1</h6>{{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price }}) }} <h6 class="ml-1">8</h6>
+                              <h6 class="mr-1">1</h6>{{ form_widget(subscriptionForm.cpu,{'attr': {'class': 'custom-range custom-range-danger','data-unit': price[0].unit,  'data-price': price[0].price, 'data-target': 'valCpu' }}) }} <h6 class="ml-1">8</h6>
                               </div>
+                              
                               </div>
                              
                             </div>
                             <div class="form-group">
-                              {{ form_label(subscriptionForm.ram) }}
+                              {{ form_label(subscriptionForm.ram) }} : <b class="ml-auto mr-auto text-info" id="valRam"></b>
                                <div class="row">
                                 <div class="d-flex col-md-12">
-                              <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price }}) }} <h6 class="ml-1">16</h6>
+                              <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.ram,{'attr': {'class': 'custom-range custom-range-info','data-unit': price[1].unit,  'data-price': price[1].price, 'data-target': 'valRam' }}) }} <h6 class="ml-1">16</h6>
                               </div>
                               </div>
                             </div>
                             <div class="form-group">
-                              {{ form_label(subscriptionForm.disk_space) }}
+                              {{ form_label(subscriptionForm.disk_space) }} : <b class="ml-auto mr-auto text-success" id="valDisk"></b>
                                 <div class="row">
                                 <div class="d-flex col-md-12">
-                               <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price }}) }}<h6 class="ml-1">500</h6>
+                               <h6 class="mr-1">1</h6> {{ form_widget(subscriptionForm.disk_space,{'attr': {'class': 'custom-range custom-range-success','data-unit': price[2].unit,  'data-price': price[2].price, 'data-target': 'valDisk' }}) }}<h6 class="ml-1">500</h6>
                               </div>
                               </div>
                             </div>
                              <div class="d-flex">
                                 {% if liste %}
-                                    <select class="custom-select mb-3 form-group" name="serveur">
+                                    <select id="subscription_name" class="custom-select mb-3 form-group" name="serveur">
                                     {% for info in liste %}
                                       <option value="{{ info.id }}">{{ info.headline }}</option>
                                     {% endfor %}
@@ -71,28 +72,30 @@
                     <div class="col-md-8 ml-auto mr-auto">
                        <div id="page2" style="display:none">
                         <h3 class="h3 mb-4">Options avancées</h3>
-                        <div class="">
+                       
+                        <div class="form-group">
+                          {{ form_label(subscriptionForm.IP,'IP') }}
+                          {{ form_widget(subscriptionForm.IP, {'attr': {'class': 'custom-select'}})}}
+                          </div>
+                           <div class="mb-3">
                           <div class="">
                                 <label><b>Haute disponibilité</b></label>
                               {{ form_widget(subscriptionForm.high_availability) }}
                             </div>
                         </div>
-                        <div class="form-group">
-                          {{ form_label(subscriptionForm.IP,'IP') }}
-                          {{ form_widget(subscriptionForm.IP, {'attr': {'class': 'custom-select'}})}}
-                          </div>
                           <div class="form-group">
                             
                             {{ form_label(subscriptionForm.backup) }}
                             {{ form_widget(subscriptionForm.backup, {'attr': {'class': ''}} ) }}
                   
                           </div>
+                          
                           <div class="row mt-2 mb-2  d-flex justify-content-center">
                             <div class="col-6">
                               <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page1">Précédente</button>
                             </div>
                             <div class="col-6">
-                               <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page3">Suivante</button>
+                               <button  class="btn btn-primary pr-3 pl-3 tabNav prix" data-target="page3">Suivante</button>
                               </div>
                           </div>
                        </div>
@@ -108,42 +111,44 @@
                               <tbody>
                                 <tr>
                                   <th>Nom:</th>
-                                  <td>Turnkey PHP</td>
+                                  <td id="tabName"></td>
                                 </tr>
                                 <tr>
                                   <th>CPU:</th>
-                                  <td>5 </td>
+                                  <td id="tabCpu"></td>
                                 </tr>
                                 <tr>
                                   <th>RAM:</th>
-                                  <td>12</td>
+                                  <td id="tabRam"></td>
                                 </tr>
                                 <tr>
                                   <th>Espace disque</th>
-                                  <td>300</td>
+                                  <td id="tabDisk"></td>
                                 </tr>
                                 <tr>
                                   <th>Protection par HA:</th>
-                                  <td></td>
+                                  <td id="tabProtection"></td>
                                 </tr>
                                 <tr>
                                   <th>Réplication du service:</th>
-                                  <td></td>
+                                  <td id="tabReplication"></td>
                                 </tr>
                                 <tr>
                                   <th>IP:</th>
-                                  <td>WAN</td>
+                                  <td id="tabIp"></td>
                                 </tr>
                                 <tr>
                                   <th>Rétention des données:</th>
-                                  <td>10 jours</td>
+                                  <td id="tabRetention"></td>
                                 </tr>
                               </tbody>
                             </table>
                             </div>
                             <div>
-                              <b>Solde: <b><h5 class="text-danger"><span class="fas fa-euro-sign" style="color: #dc3545;"></span>  130</h5>
+                              <b>Solde: </b><h5  class="text-danger"><span id="prixTotal" class="fas fa-euro-sign" style="color: #dc3545;"></span></h5>
+                              <input type="hidden" name="prixService" id="prixService">
                             </div>
+                            
                             <div class="row mt-2 mb-2  d-flex justify-content-center">
                               <div class="col-6">
                                 <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Précédente</button>
