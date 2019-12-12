@@ -87,7 +87,7 @@ class NavigationController extends Controller
             $sub->setIdServices($vpsChosen);
             //on crée le nom de la souscription
             $allSub = $repoSub->findAll();
-            $subId = count($allSub) + 1;
+            $subId = $allSub[count($allSub) -1]->getId() +1;
             $sub_name = 'CL12'. $user->getId() . $vpsChosen->getServiceType() . $subId;
             $sub->setSubName($sub_name);
             //envoie en bdd et redirection vers home
