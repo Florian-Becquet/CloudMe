@@ -6,8 +6,6 @@
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-      
-
             <!-- Font Awesome Icons -->
             <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
             <!-- overlayScrollbars -->
@@ -16,6 +14,12 @@
             <link rel="stylesheet" href="dist/css/adminlte.min.css">
             <!-- Google Font: Source Sans Pro -->
             <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+            <style>
+              .border1{
+                background-image: url("dist/img/border.png");
+                background-color: #f9f9f9;
+            }
+            </style>
            
         <title>{% block title %}Cloudme{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
@@ -34,29 +38,29 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fa fa-shopping-basket"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-md dropdown-menu-left text-align">
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-left text-align border1" style="min-width:12rem;">
             <div class="row">
               <div class="card-body col-md-6 col-6 d-flex justify-content-center">
                 <a href="#" class="subscription" data-target="vps" style="color: #343A40">
-                 <i class="fas fa-cloud text-center">
-                  <p class="mt-1">VPS</p></i></a>
+                 <img src="https://img.icons8.com/ultraviolet/40/000000/cloud.png">
+                  <p class="mt-1 text-center">VPS</p></a>
               </div>
               <div class="card-body col-md-6 col-6 d-flex justify-content-center">
                 <a href="#" class="subscription" data-target="srv" style="color: #343A40">
-                 <i class="fas fa-server text-center">
-                  <p class="mt-1">Serveur</p></i></a>
+                 <img src="https://img.icons8.com/ultraviolet/40/000000/cloud-storage.png">
+                  <p class="mt-1" style="margin-left:-8%">Serveur</p></a>
               </div>
             </div>
             <div class="row">
               <div class="card-body col-md-6 col-6 d-flex justify-content-center">
                 <a href="#" class="subscription" data-target="vdi" style="color: #343A40">
-                 <i class="fas fa-desktop text-center">
-                  <p class="mt-1">Bureau Virteul</p></i></a>
+                 <img src="https://img.icons8.com/ultraviolet/40/000000/monitor.png">
+                  <p class="mt-1 text-center">Cloud</p></a>
               </div>
               <div class="card-body col-md-6 col-6 d-flex justify-content-center">
                <a href="#" class="subscription" data-target="bdd" style="color: #343A40">
-                 <i class="fas fa-database text-center">
-                  <p class="mt-1">BDD</p></i></a>
+                 <img src="https://img.icons8.com/office/40/000000/database.png">
+                  <p class="mt-1 text-center">BDD</p></a>
               </div>
             </div>
       </li>

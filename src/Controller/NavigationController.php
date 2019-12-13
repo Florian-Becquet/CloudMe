@@ -184,8 +184,8 @@ class NavigationController extends Controller
         $id = $request->request->get('id');
 
         //fausses données 
-        $metrics = array(['commande' => '12345', 'date' => '21/07/2019','type' => 'CD', 'etat' => 'Payé', 'total'=>'15€', 'id'=> 1],
-                        ['commande' => '23456', 'date' => '21/08/2019','type' => 'CD', 'etat' => 'En attente', 'total'=>'15€', 'id'=> 2],);
+        $metrics = array(['commande' => '12345', 'date' => '21/07/2019','type' => 'CB', 'etat' => 'Payé', 'total'=>'15€', 'id'=> 1],
+                        ['commande' => '23456', 'date' => '21/08/2019','type' => 'CB', 'etat' => 'En attente', 'total'=>'15€', 'id'=> 2],);
         
         return $this->render('pages/infoFacture.html.twig',
         ['service'=>$metrics]);
