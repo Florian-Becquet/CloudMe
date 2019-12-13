@@ -9,6 +9,7 @@
         <!-- /.row -->
         <h1 class="text-center"> Bonjour {{app.user.name}} {{app.user.firstName}}</h1>
         <hr>
+        {% if souscription %}
         {% for data in service %}
       <div class="row mt-4 justify-content-center text-right">
           <div class="col-12 col-sm-4 col-md-3">
@@ -84,5 +85,8 @@
                   </tbody>
                 </table>
               </div>
+            {% else %}
+            <h1 class="text-center">Vous n'avez souscris à aucun service</h1>
+            {% endif %}
           <!-- ./col -->
   <script src='js/Nav.js'></script>
