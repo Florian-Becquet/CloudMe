@@ -29,6 +29,7 @@ class NavigationController extends Controller
         $serveur = array();
         $bureauVirtuel = array();
         $bdd = array();
+        $allSub = array();
         $subscriptions = $user->getSubscriptions();
         for($i=0; $i<count($subscriptions);$i++){
             $id_serv = $subscriptions[$i]->getIdServices();
@@ -59,13 +60,21 @@ class NavigationController extends Controller
      /**
      * @Route("/intro", name="intro")
      */
-    public function intro(Request $request){
+    public function intro(Request $request, ServicesRepository $serviceRepo){
+        $user = $this->getUser();
+        $allSub = array();
+        $subscriptions = $user->getSubscriptions();
+        for($i=0; $i<count($subscriptions);$i++){
+            $id_serv = $subscriptions[$i]->getIdServices();
+            $serv = $serviceRepo->findOneBy(['id' => $id_serv]);
+            $allSub[$i] = ['name' => $subscriptions[$i]->getSubName(), 'id' => $subscriptions[$i]->getId(), 'status' => $subscriptions[$i]->getStatus(),'headline' => $serv->getHeadline(), 'type' => $serv->getServiceType()];
+        }
         $id = $request->request->get('id');
 
         //fausses données 
         $metrics = array (['CPU' => '24', 'RAM' => '32','Disque'=>'15','id' => 1]);
         
-        return $this->render('pages/home.html.twig', ['service'=>$metrics]);
+        return $this->render('pages/home.html.twig', ['service'=>$metrics, 'souscription' => $allSub]);
     }     
     /**
      * @Route("/formSub", name="formSub")
@@ -132,13 +141,13 @@ class NavigationController extends Controller
          /**
      * @Route("/info", name="info")
      */
-    public function info(Request $request, SubscriptionRepository $sub){
+    public function info(Request $request, SubscriptionRepository $sub, ServicesRepository $serviceRepo){
         //recupération de l'id du service vps
         $id = $request->request->get('id');
         $info = $sub->findOneBy(['id' => $id]);
         $protection ="";
         $replication = "";
-
+        $serv = $serviceRepo->findOneBy(['id' => $info->getIdServices()]);
         if($info->getHighAvailability()){
         $arr = explode(',',$info->getHighAvailability());
             if(count($arr)==2){
@@ -156,7 +165,7 @@ class NavigationController extends Controller
             
         }
 
-        $result = array(['name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
+        $result = array(['headline' => $serv->getHeadline(), 'name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
         
         return $this->render('pages/info.html.twig',['info' => $result]);
     }

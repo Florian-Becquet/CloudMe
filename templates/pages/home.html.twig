@@ -62,5 +62,27 @@
           <!-- /.col -->
       </div>
       {% endfor %}
+      <div class="col-md-9 mr-auto ml-auto">
+        <table class="table table-head-fixed table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Headline</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for allSub in souscription %}
+                    <tr class="tabAccueil" data-id="{{ allSub.id }}">
+                      <td>{{ allSub.name }}</td>
+                      <td>{{ allSub.headline }}</td>
+                      <td>{{ allSub.type }}</td>
+                      <td>{{ allSub.status }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
           <!-- ./col -->
   <script src='js/Nav.js'></script>

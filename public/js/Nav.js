@@ -1,18 +1,14 @@
 $(document).ready(function(){
- 
-
-
-
-    $('.choix').on('click',function(){
-      var target = $(this).data('target');
-      $.ajax({
+  $('.tabAccueil').on('click',function(){
+    var id = $(this).data('id');
+    $.ajax({
         type: 'POST',
-        url: 'forfait',
-        data: 'forfait=' + target,
+        url: 'info',
+        data: 'id=' + id,
         success: function(data){
-          $('#root').html(data);
+            $('#root').html(data);
         }
-      })
-    })
+        })
+})
   })
   

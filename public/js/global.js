@@ -7,8 +7,6 @@ $(document).ready(function(){
         var target = $(this).data('target');
         var id = $(this).data('id');
         var def = $(this).data('def');
-        
-
         $.ajax({
             type: 'POST',
             url: target,
@@ -23,7 +21,6 @@ $(document).ready(function(){
                 else {
                     $('#def2').html(def);
                 }
-        
             }
             })
     })
