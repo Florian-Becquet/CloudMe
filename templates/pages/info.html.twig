@@ -1,12 +1,12 @@
 
 {% for data in info %}
-    <h3 class="lead text-center mb-5"> Données du service : </h3>
+    <h3 class="lead text-center mb-5"> Données du service : {{ data.headline }}</h3>
  
     <div class="container ">
     <div class="row custyle">
     <div class="col-md-12 table-responsive mb-5">
     <table class="table table-striped custab mx-auto" style="width:90%">
-    <thead>
+    <thead> 
     
         <tr>
             <th>Nom</th>

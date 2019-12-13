@@ -1,3 +1,5 @@
+
+                                {% if liste %}
 <div class="col-md-6" style="margin-left: auto; margin-right: auto;">
   <div class="card text-center">
   
@@ -58,13 +60,11 @@
                               </div>
                             </div>
                              <div class="d-flex">
-                                {% if liste %}
                                     <select id="subscription_name" class="custom-select mb-3 form-group" name="serveur">
                                     {% for info in liste %}
                                       <option value="{{ info.id }}">{{ info.headline }}</option>
                                     {% endfor %}
                                     </select>
-                                  {% endif %}
                                 </div>
                             <button  class="btn btn-primary pr-3 pl-3 tabNav" data-target="page2">Suivante</button>
                         </div>
@@ -171,4 +171,8 @@
               </div>
               <!-- /.card-body -->
             </div>
+            {% else %}
+            <h1 class="text-center text-danger">Pas de {{ choix }} disponible</h1>
+            
+                                  {% endif %}
 <script src="js/tabNav.js"></script>

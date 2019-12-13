@@ -16,11 +16,13 @@ $('select').on('change',function(){
 $('#verifPwd').on('keyup',function(){
     var pwd = $('#registration_form_plainPassword').val();
     if($(this).val() == pwd){
-        $('#messagePwd').html('Validé').css('color','green');
+        $('#verifPwd').attr('class', 'form-control is-valid');
+        $('#registration_form_plainPassword').attr('class', 'form-control is-valid');
         $('#buttonRegister').prop('disabled',false);
     }
     else {
-        $('#messagePwd').html('Les mots de passe ne correspondent pas').css('color','red');
+        $('#verifPwd').attr('class', 'form-control is-invalid');
+        $('#registration_form_plainPassword').attr('class', 'form-control is-invalid');
         $('#buttonRegister').prop('disabled',true);
     }
         
