@@ -108,7 +108,7 @@ $(document).ready(function(){
         $('#tabReplication').attr('class', 'fas fa-times-circle text-danger');
        }
        if($('#subscription_IP').prop('checked')){
-        $('#tabIp').html($('#subscription_IP').val());
+        $('#tabIp').html('LAN + ' + $('#subscription_IP').val());
        }
        else if($('#subscription_IP').prop('checked') == false){
         $('#tabIp').html('LAN');
