@@ -9,7 +9,9 @@
     <thead> 
     
         <tr>
+        {% if retention %}
             <th></th>
+        {% endif %}
             <th>Nom</th>
             <th>CPU</th>
             <th>RAM</th>
@@ -24,9 +26,11 @@
         </tr>
     </thead>
             <tr>
+            {% if retention %}
                 <td id="imgRetention">
                 <img  title="voir les sauvegardes de données"src="https://img.icons8.com/flat_round/24/000000/plus.png">
                 </td>
+            {% endif %}
             
             
                 <td>{{ data.name }}</td>

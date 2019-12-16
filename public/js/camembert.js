@@ -86,7 +86,9 @@ $('#imgRetention').on('click',function(event){
     if($('#retentionData').css('display') =="none"){
     $('#retentionData').css('display','block');
     }
-  
+    else{
+        $('#retentionData').css('display','none');
+    }
 
 });
 

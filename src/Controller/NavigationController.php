@@ -144,7 +144,7 @@ class NavigationController extends Controller
     public function info(Request $request, SubscriptionRepository $sub, ServicesRepository $serviceRepo){
 
         //envoie fausses donées backup
-        $backup = array('backup du 17/12/2019','backup du 29/01/2020' ,'backup du 15/03/2020');
+        $backup = array('Sauvegarde du 12/11/2019' ,'Sauvegarde du 13/12/2019' ,'Sauvegarde du 20/01/2020');
 
         //recupération de l'id du service vps
         $id = $request->request->get('id');
