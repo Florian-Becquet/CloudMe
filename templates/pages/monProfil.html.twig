@@ -1,0 +1,97 @@
+
+<style>
+body{
+    margin-top:20px;
+    background:#f8f8f8
+}
+</style>
+<div class="container">
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+                <div class="text-right">
+                    <div><small>Membre depuis le {{app.user.dateInscription|date('d/m/Y')}}</small></div>
+                </div>
+                {{ form_start(formProfil) }}
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form class="form" novalidate="">
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Nom</label>
+                              {{ form_row(formProfil.name) }}
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Prenom</label>
+                              {{ form_row(formProfil.first_name) }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Email</label>
+                              {{ form_row(formProfil.email) }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Adresse</label>
+                              {{ form_row(formProfil.adresse) }}
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                      <div class="col-12 col-sm-6 mb-3">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Numero de téléphone</label>
+                              {{ form_row(formProfil.numero_tel) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                              <label>Pays</label>
+                              {{ form_row(formProfil.pays) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Code Postal</label>
+                              {{ form_row(formProfil.code_postal) }}
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Ville</label>
+                              {{ form_row(formProfil.ville) }}
+                            </div>
+                          </div>
+                        </div>
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Sauvegarder</button>
+                    </div>
+                  </form>
+                    {{ form_start(formProfil) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+</div>

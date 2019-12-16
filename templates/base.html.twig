@@ -18,7 +18,11 @@
               .border1{
                 background-image: url("dist/img/border.png");
                 background-color: #f9f9f9;
-            }
+              }
+
+              .card-body1{
+                padding: 0rem !important;
+              }
             </style>
            
         <title>{% block title %}Cloudme{% endblock %}</title>
@@ -38,29 +42,29 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fa fa-shopping-basket"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-md dropdown-menu-left text-align border1" style="min-width:12rem;">
-            <div class="row">
-              <div class="card-body col-md-6 col-6 d-flex justify-content-center">
+        <div class="dropdown-menu dropdown-menu-xs dropdown-menu-left text-align border1" style="top: 71% !important;">
+            <div class="row mt-1">
+              <div class="card-body card-body1 col-xs-6 col-6 d-flex justify-content-center">
                 <a href="#" class="subscription" data-target="vps" style="color: #343A40">
-                 <img src="https://img.icons8.com/ultraviolet/40/000000/cloud.png">
-                  <p class="mt-1 text-center">VPS</p></a>
+                 <img src="https://img.icons8.com/ultraviolet/32/000000/cloud.png">
+                  <p class="mt-1 text-center"><small>VPS</small></p></a>
               </div>
-              <div class="card-body col-md-6 col-6 d-flex justify-content-center">
+              <div class="card-body card-body1 col-xs-6 col-6 d-flex justify-content-center">
                 <a href="#" class="subscription" data-target="srv" style="color: #343A40">
-                 <img src="https://img.icons8.com/ultraviolet/40/000000/cloud-storage.png">
-                  <p class="mt-1" style="margin-left:-8%">Serveur</p></a>
+                 <img src="https://img.icons8.com/ultraviolet/32/000000/cloud-storage.png">
+                  <p class="mt-1" style="margin-left:-8%"><small>Serveur</small></p></a>
               </div>
             </div>
             <div class="row">
-              <div class="card-body col-md-6 col-6 d-flex justify-content-center">
+              <div class="card-body card-body1 col-xs-6 col-6 d-flex justify-content-center">
                 <a href="#" class="subscription" data-target="vdi" style="color: #343A40">
-                 <img src="https://img.icons8.com/ultraviolet/40/000000/monitor.png">
-                  <p class="mt-1 text-center">Cloud</p></a>
+                 <img src="https://img.icons8.com/ultraviolet/32/000000/monitor.png">
+                  <p class="mt-1 text-center"><small>Cloud</small></p></a>
               </div>
-              <div class="card-body col-md-6 col-6 d-flex justify-content-center">
+              <div class="card-body card-body1 col-xs-6 col-6 d-flex justify-content-center">
                <a href="#" class="subscription" data-target="bdd" style="color: #343A40">
-                 <img src="https://img.icons8.com/office/40/000000/database.png">
-                  <p class="mt-1 text-center">BDD</p></a>
+                 <img src="https://img.icons8.com/office/32/000000/database.png">
+                  <p class="mt-1 text-center"><small>BDD</small></p></a>
               </div>
             </div>
       </li>
@@ -173,7 +177,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-header" style="text-transform: uppercase; color:black"><b>{{app.user.name}} {{app.user.firstName}}</b></span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="#" data-target="profil" data-def="Profil" class="dropdown-item navigation">
             <i class="fas fa-user-cog"></i> Paramètre de compte
           </a>
           <div class="dropdown-divider"></div>
