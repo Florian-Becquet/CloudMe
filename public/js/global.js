@@ -6,7 +6,12 @@ $(document).ready(function(){
     $('.navigation').on('click',function(){
         var target = $(this).data('target');
         var id = $(this).data('id');
+        console.log(id);
         var def = $(this).data('def');
+        $('.navigation').each(function(){
+            $(this).removeClass('active');
+        })
+        $('#'+id).addClass('active');
         $.ajax({
             type: 'POST',
             url: target,
@@ -21,13 +26,12 @@ $(document).ready(function(){
                 else {
                     $('#def2').html(def);
                 }
+                
             }
             })
     })
-    //
-
+    //au click sur la class soucription on charge formsub du service selectionné
     $('.subscription').on('click',function(){
-        
         var target = $(this).data('target');
         $.ajax({
           type: 'POST',
