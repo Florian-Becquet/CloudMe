@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class SubscriptionType extends AbstractType
 {
@@ -42,7 +43,7 @@ class SubscriptionType extends AbstractType
                 'max' => 500,
                 'data-target' => 'diskVal',
                 'step' => 5,
-                'value' => 1
+                'value' => 5
             ]
         ])
         ->add('high_availability', ChoiceType::class, [
@@ -56,16 +57,12 @@ class SubscriptionType extends AbstractType
             'expanded'  => true,
             'multiple'  => true,
         ])
-        ->add('IP', ChoiceType::class,[
+        ->add('IP', CheckboxType::class,[
             'required' => false,
-            'attr' => [
-                'class' => "form-group ml-2",
-            ],
-            'choices' => [
-                'Choisissez une option' => '',
-                'WAN' => 'WAN',
-                'LAN' => 'LAN'
-            ]
+            'label_attr' => ['class' => 'checkbox-inline'],
+            'label' => 'WAN',
+            'value' => 'WAN',
+            'attr' => ['title' => 'par défaut LAN']
         ])
         ->add('backup', IntegerType::class,[
             'label' => 'Rétention des données (en jours, par défaut 7 jours)',
@@ -88,7 +85,6 @@ class SubscriptionType extends AbstractType
                     return implode(',',$tagAsArray);
                 }
                 ));
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
