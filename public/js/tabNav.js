@@ -84,7 +84,7 @@ $(document).ready(function(){
        })
        //on crée prixService la somme des prix sur le formulaire et on set les valeurs dans le tableau de la page3
        var prixService = Number(prixIp) + Number(prixJours) + Number(prixProtection) + Number(prixRange) + Number(prixReplictation) ;
-    //    $('#tabIp').html($('#subscription_IP').val());
+ 
        $('#tabName').html($('#subscription_name option:selected').html());
        $('#tabRam').html($('#subscription_ram').val());
        $('#tabCpu').html($('#subscription_cpu').val());

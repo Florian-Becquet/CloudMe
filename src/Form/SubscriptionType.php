@@ -43,7 +43,7 @@ class SubscriptionType extends AbstractType
                 'max' => 500,
                 'data-target' => 'diskVal',
                 'step' => 5,
-                'value' => 5
+                'value' => 50
             ]
         ])
         ->add('high_availability', ChoiceType::class, [
