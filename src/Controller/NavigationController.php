@@ -142,6 +142,10 @@ class NavigationController extends Controller
      * @Route("/info", name="info")
      */
     public function info(Request $request, SubscriptionRepository $sub, ServicesRepository $serviceRepo){
+
+        //envoie fausses donées backup
+        $backup = array('backup du 17/12/2019','backup du 29/01/2020' ,'backup du 15/03/2020');
+
         //recupération de l'id du service vps
         $id = $request->request->get('id');
         $info = $sub->findOneBy(['id' => $id]);
@@ -167,7 +171,7 @@ class NavigationController extends Controller
 
         $result = array(['headline' => $serv->getHeadline(), 'name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
         
-        return $this->render('pages/info.html.twig',['info' => $result]);
+        return $this->render('pages/info.html.twig',['info' => $result,'retention'=>$backup]);
     }
          /**
      * @Route("/infometrics", name="infometrics")
