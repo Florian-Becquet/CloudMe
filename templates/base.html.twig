@@ -216,7 +216,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li id="vps" class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cloud"></i>
               <p>
@@ -229,7 +229,7 @@
              {% if vps %}
                {% for vips in vps %}
                   <li class="nav-item">
-                    <a  data-target= "info" data-id="{{ vips.id }}" data-def="VPS" href="#" class="nav-link navigation">
+                    <a id="{{ vips.id }}" data-target= "info" data-id="{{ vips.id }}" data-def="VPS" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ vips.name }}</p>
                     </a>
@@ -245,7 +245,7 @@
               
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li id="srv" class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-server"></i>
               <p>
@@ -257,7 +257,7 @@
              {% if serveur %}
                {% for serv in serveur %}
                   <li class="nav-item">
-                    <a  data-target= "info" data-def="Serveur" data-id="{{ serv.id }}" href="#" class="nav-link navigation">
+                    <a id="{{ serv.id }}" data-target= "info" data-def="Serveur" data-id="{{ serv.id }}" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ serv.name }}</p>
                     </a>
@@ -273,7 +273,7 @@
               
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li id="vdi" class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-desktop"></i>
               <p>
@@ -286,7 +286,7 @@
              {% if bureauVirtuel %}
                {% for bv in bureauVirtuel %}
                   <li class="nav-item">
-                    <a  data-target= "info" data-def="Bureau virtuel" data-id="{{ bv.id }}" href="#" class="nav-link navigation">
+                    <a id="{{ bv.id }}" data-target= "info" data-def="Bureau virtuel" data-id="{{ bv.id }}" href="#" class="nav-link navigation">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ bv.name }}</p>
                     </a>
@@ -303,7 +303,7 @@
             </ul>
            
           </li>
-          <li class="nav-item has-treeview">
+          <li id="bdd" class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
@@ -317,7 +317,7 @@
              {% if bdd %}
                {% for db in bdd %}
                   <li class="nav-item">
-                    <a  data-target= "info" data-def="Base de donnée" data-id="{{ bd.id }}"href="#" class="nav-link">
+                    <a id="{{ bd.id }}" data-target= "info" data-def="Base de donnée" data-id="{{ bd.id }}"href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>{{ bd.name }}</p>
                     </a>
@@ -368,7 +368,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    
+    <noscript><span  style="margin-left: auto; margin-right: auto">Veuillez activez votre JavaScript pour acceder à l'application</span></noscript>
     <div id="root"></div>
     </div>
         <!-- /.row -->
@@ -415,4 +415,5 @@
 
         {% block javascripts %}{% endblock %}
     </body>
+    <noscript>Veuillez activez votre JavaScript pour acceder à l'application</noscript>
 </html>
