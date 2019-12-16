@@ -79,3 +79,25 @@ if($('#stockage').children('#repli').html() == 'replicationServ'){
 else{
     $('#replication').attr('class', 'fas fa-times-circle text-danger');
 }
+
+//display la div qui affiche les retentions de données 
+$('#imgRetention').on('click',function(event){
+    event.stopPropagation();
+    if($('#retentionData').css('display') =="none"){
+    $('#retentionData').css('display','block');
+    }
+    else{
+        $('#retentionData').css('display','none');
+    }
+
+});
+
+$(window).click(function()
+{
+    $('#retentionData').css('display','none');
+});
+
+$('#retentionData').click(function(event)
+{
+ event.stopPropagation();
+});

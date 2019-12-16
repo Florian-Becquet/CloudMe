@@ -84,7 +84,7 @@ $(document).ready(function(){
        })
        //on crée prixService la somme des prix sur le formulaire et on set les valeurs dans le tableau de la page3
        var prixService = Number(prixIp) + Number(prixJours) + Number(prixProtection) + Number(prixRange) + Number(prixReplictation) ;
-       $('#tabIp').html($('#subscription_IP').val());
+ 
        $('#tabName').html($('#subscription_name option:selected').html());
        $('#tabRam').html($('#subscription_ram').val());
        $('#tabCpu').html($('#subscription_cpu').val());
@@ -94,6 +94,7 @@ $(document).ready(function(){
         }
        $('#prixTotal').html(prixService);
        $('#prixService').val(prixService);
+       //ici on verifie si les input checkbox sont checked pour l'afficher ensuite dans le tableau
        if($('input[value=protectionHA]').prop('checked')){
         $('#tabProtection').attr('class', 'fas fa-check text-success');
        }
@@ -105,6 +106,12 @@ $(document).ready(function(){
        }
        else{
         $('#tabReplication').attr('class', 'fas fa-times-circle text-danger');
+       }
+       if($('#subscription_IP').prop('checked')){
+        $('#tabIp').html('LAN + ' + $('#subscription_IP').val());
+       }
+       else if($('#subscription_IP').prop('checked') == false){
+        $('#tabIp').html('LAN');
        }
     })
    
