@@ -8,13 +8,17 @@ use Dompdf\Options;
 use App\Entity\User;
 use App\Entity\Facture;
 use App\Entity\Services;
+use App\Form\AccountType;
 use App\Entity\Subscription;
 use App\Form\SubscriptionType;
+use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -142,10 +146,6 @@ class NavigationController extends Controller
      * @Route("/info", name="info")
      */
     public function info(Request $request, SubscriptionRepository $sub, ServicesRepository $serviceRepo){
-
-        //envoie fausses donées backup
-        $backup = array('Sauvegarde du 12/11/2019' ,'Sauvegarde du 13/12/2019' ,'Sauvegarde du 20/01/2020');
-
         //recupération de l'id du service vps
         $id = $request->request->get('id');
         $info = $sub->findOneBy(['id' => $id]);
@@ -171,7 +171,7 @@ class NavigationController extends Controller
 
         $result = array(['headline' => $serv->getHeadline(), 'name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
         
-        return $this->render('pages/info.html.twig',['info' => $result,'retention'=>$backup]);
+        return $this->render('pages/info.html.twig',['info' => $result]);
     }
          /**
      * @Route("/infometrics", name="infometrics")
@@ -242,4 +242,32 @@ class NavigationController extends Controller
             "Attachment" => true, 
         ]);
     }
+
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profil(Request $request, UserRepository $user,EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+        $roles= $user->getRoles();
+        $password= $user->getPassword();
+        $dateInscription= $user->getDateInscription();
+        $formeJuri= $user->getFormeJuridique();
+        $status= $user->getStatus();
+        $form = $this->createForm(AccountType::class, $user, ['action' => $this->generateUrl('profil')]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles($roles);
+            $user->setPassword($password);
+            $user->setDateInscription($dateInscription);
+            $user->setFormeJuridique($formeJuri);
+            $user->setStatus($status);
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('pages/monProfil.html.twig', [
+            'formProfil'=> $form->createView(),
+        ]);}
 }
