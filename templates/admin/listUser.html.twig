@@ -1,3 +1,26 @@
-{% for user in users %}
-    <h1>{{ user.name }}</h1>
-{% endfor %}
+<div class="col-10 ml-auto mr-auto">
+    <table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Status</th>
+        <th scope="col">Souscriptions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.status }}</td>
+                <td>{{ user.count }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
