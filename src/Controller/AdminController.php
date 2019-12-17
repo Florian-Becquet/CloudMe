@@ -24,7 +24,7 @@ class AdminController extends AbstractController
         foreach ($listUser as $users){
             $subscriptions[$i] = $users->getSubscriptions();
             $countSub[$i] = count($subscriptions[$i]);
-            $allUser[$i] = ['name' => $users->getName(), 'firstName' => $users->getFirstName(), 'status' => $users->GetStatus(), 'email' => $users->getEmail(), 'count' => $countSub[$i]];
+            $allUser[$i] = ['id' => $users->getId(), 'name' => $users->getName(), 'firstName' => $users->getFirstName(), 'status' => $users->GetStatus(), 'email' => $users->getEmail(), 'count' => $countSub[$i]];
             $i++;
         }
         
