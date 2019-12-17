@@ -151,6 +151,7 @@ class NavigationController extends Controller
         $info = $sub->findOneBy(['id' => $id]);
         $protection ="";
         $replication = "";
+        $retention = array('Sauvegarde du 17/11/2019');
         $serv = $serviceRepo->findOneBy(['id' => $info->getIdServices()]);
         if($info->getHighAvailability()){
         $arr = explode(',',$info->getHighAvailability());
@@ -171,7 +172,7 @@ class NavigationController extends Controller
 
         $result = array(['headline' => $serv->getHeadline(), 'name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
         
-        return $this->render('pages/info.html.twig',['info' => $result]);
+        return $this->render('pages/info.html.twig',['info' => $result,'retention'=>$retention]);
     }
          /**
      * @Route("/infometrics", name="infometrics")
