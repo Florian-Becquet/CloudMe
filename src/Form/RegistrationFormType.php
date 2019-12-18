@@ -101,8 +101,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 'choices' => [
                     'Choisissez une option' => null,
-                    'Particulier' => 'particulier',
-                    'Entreprise' => 'entreprise'
+                    'Particulier' => 'Particulier',
+                    'Entreprise' => 'Entreprise'
                 ]
             ])
                 

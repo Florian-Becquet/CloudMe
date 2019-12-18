@@ -178,7 +178,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-header" style="text-transform: uppercase; color:black"><b>{{app.user.name}} {{app.user.firstName}}</b></span>
           <div class="dropdown-divider"></div>
-          <a href="#" data-target="profil" data-def="Profil" class="dropdown-item navigation">
+          <a href="#" data-target="mon-compte/profil" data-def="Profil" class="dropdown-item navigation">
             <i class="fas fa-user-cog"></i> Paramètre de compte
           </a>
           <div class="dropdown-divider"></div>
@@ -363,6 +363,13 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark" id="def2">Dashboard</h1>
           </div><!-- /.col -->
+          {% for message in app.flashes('success') %}
+            <div class="toast position-absolute" data-delay="3000" style="right:0;top:0;z-index:100">
+              <div class="toast-body" style="background-color:green;color:white;">
+                {{message}}
+              </div>
+            </div>
+          {% endfor %}
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{path('home')}}">Accueil</a></li>

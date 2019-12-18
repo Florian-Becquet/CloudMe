@@ -244,26 +244,19 @@ class NavigationController extends Controller
     }
 
     /**
-     * @Route("/profil", name="profil")
+     * @Route("/mon-compte/profil", name="profil")
      */
     public function profil(Request $request, UserRepository $user,EntityManagerInterface $em)
     {
         $user = $this->getUser();
-        $roles= $user->getRoles();
-        $password= $user->getPassword();
-        $dateInscription= $user->getDateInscription();
-        $formeJuri= $user->getFormeJuridique();
-        $status= $user->getStatus();
-        $form = $this->createForm(AccountType::class, $user, ['action' => $this->generateUrl('profil')]);
+        $form = $this->createForm(AccountType::class, $user,['action' => $this->generateUrl('profil')]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoles($roles);
-            $user->setPassword($password);
-            $user->setDateInscription($dateInscription);
-            $user->setFormeJuridique($formeJuri);
-            $user->setStatus($status);
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            
+            $this->addFlash('success','Votre profil a bien été modifié');
             return $this->redirectToRoute('home');
         }
 

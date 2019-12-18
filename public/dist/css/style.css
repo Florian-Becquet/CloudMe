@@ -1,4 +1,4 @@
- .clearfix:after {
+ /* .clearfix:after {
   content: "";
   display: table;
   clear: both;
@@ -43,7 +43,7 @@ h1 {
   background: url(../img/dimension.png);
 } */
 
-/* #project {
+/*#project {
   float: left;
 }
 
@@ -54,25 +54,23 @@ h1 {
   margin-right: 10px;
   display: inline-block;
   font-size: 0.8em;
-}
+}*/
 
 #company {
-  float: right;
-  margin-right:42%;
-  text-align: right;
+  font-size:20px;
+  right:0;
 }
-
+/*
 #project div,
 #company div {
   white-space: nowrap;        
 } */
 
- table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-bottom: 20px;
-  margin-top: 40px;
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  margin-bottom: 20px !important;
 }
 
 /* table tr:nth-child(2n-1) td {
@@ -81,21 +79,20 @@ h1 {
 
 table th,
 table td {
-  text-align: center;
-}
+  text-align: center !important;
+} 
 
 table th {
-  padding: 5px 20px;
-  color: #5D6975;
-  border-bottom: 1px solid #C1CED9;
-  white-space: nowrap;        
-  font-weight: normal;
-}
+  padding: 5px 20px !important;
+  border-bottom: 1px solid black !important; 
+  white-space: nowrap !important;        
+  font-weight: normal !important;
+} 
 
 /* #notices .notice {
   color: #5D6975;
   font-size: 1.2em;
-}  */
+}  */ 
 
 footer {
   color: #5D6975;
@@ -106,4 +103,22 @@ footer {
   border-top: 1px solid #C1CED9;
   padding: 8px 0;
   text-align: center;
+}
+
+table 
+{
+    border-collapse: collapse !important;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black !important;
+}
+
+.flotte {
+  float:left;
+  }
+
+  hr {
+    border: 1px solid;
+    color: #333;
 }

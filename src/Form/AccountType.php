@@ -15,22 +15,50 @@ class AccountType extends AbstractType
         $builder
             ->add('email', TextType::class, [
                 'label' => false])
+
             ->add('name', TextType::class, [
                 'label' => false])
+
             ->add('first_name', TextType::class, [
                 'label' => false])
+                
             ->add('pays', TextType::class, [
                 'label' => false])
-            ->add('code_postal', TextType::class, [
+
+            ->add('codePostal', TextType::class, [
                 'label' => false])
+
             ->add('adresse', TextType::class, [
                 'label' => false])
+
             ->add('ville', TextType::class, [
                 'label' => false])
+                
             ->add('numero_tel', TextType::class, [
                 'label' => false])
-        ;
-    }
+
+            ->add('num_siret', TextType::class, [
+                'label' => false,
+                'disabled' => 'disabled',
+                'attr' =>[
+                    'title' => false
+                    ]])
+
+            ->add('forme_juridique', TextType::class, [
+                'label' => false,
+                'disabled' => 'disabled',
+                'attr' =>[
+                    'title' => false
+                    ]])
+                
+            ->add('society_name', TextType::class, [
+                'label' => false,
+                'disabled' => 'disabled',
+                'attr' =>[
+                    'title' => false
+                    ]])
+        
+                ;}
 
     public function configureOptions(OptionsResolver $resolver)
     {

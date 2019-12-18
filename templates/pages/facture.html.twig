@@ -1,22 +1,27 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="dist/css/style.css" media="all" />
 
-      <h6 class="text-center">FACTURE N°111121901</h6><hr>
-      <div class="text-right clearfix" style="font-size:20px" id="company">
-        <div>CloudMe</div>
-        <div>455 Foggy Heights,<br /> AZ 85004, US</div>
-        <div>03 20 20 20 20</div>
-        <div><a href="mailto:cloudme@example.com">cloudme@example.com</a></div>
+      <p class="flotte">
+        <img src="dist/img/logo1.png"/></p>
+      <p style="line-height:65px;font-size:26px;margin-left:300px">
+        Facture n°112423124</p>
+        <hr>
+      <div style="margin-top:100px;">
+        <div class="text-right position-absolute" id="company">
+          <div>CloudMe</div>
+          <div>455 Foggy Heights,<br /> AZ 85004, US</div>
+          <div>03 20 20 20 20</div>
+          <div><a href="mailto:cloudme@example.com">cloudme@example.com</a></div>
+        </div>
+        <div class="text-left" style="font-size:18px" id="project">
+          <div style="font-size:24px">Information client</div>
+          <div><span>CLIENT</span> {{app.user.name}} {{app.user.firstName}}</div>
+          <div><span>ADDRESS</span> {{app.user.adresse}},{{app.user.ville}}</div>
+          <div><span>EMAIL</span> <a href="mailto:{{app.user.email}}">{{app.user.email}}</a></div>
+          <div><span>DATE</span> 11 Décembre, 2019</div>
+        </div>
       </div>
-      <div class="text-left" style="font-size:18px" id="project">
-        <div style="font-size:24px">Information client</div>
-        <div><span>CLIENT</span> {{app.user.name}} {{app.user.firstName}}</div>
-        <div><span>ADDRESS</span> {{app.user.adresse}},{{app.user.ville}}</div>
-        <div><span>EMAIL</span> <a href="mailto:{{app.user.email}}">{{app.user.email}}</a></div>
-        <div><span>DATE</span> 11 Décembre, 2019</div>
-      </div>
-      <table class="table" style="margin-top:150px;font-size:20px; border:solid">
-        <thead class="thead-light">
+      <table class="table" style="margin-top:190px;font-size:20px;">
           <tr>
             <th>SERVICE</th>
             <th>HEADLIN</th>
@@ -24,7 +29,6 @@
             <th>DATE D'ECHEANCE</th>
             <th>PRIX</th>
           </tr>
-        </thead>
           {% for data in service %}
         <tbody>
           <tr>
@@ -38,15 +42,13 @@
         {% endfor %}
       </table>
       
-      <table class="table mt-2" style="width:45%;font-size:18px; border:solid; margin-left:303%">
-        <thead class="thead-light">
+      <table style="width:45%;font-size:18px; margin-left:300%;">
           <tr>
             <th scope="col">Total HT</th>
             <th scope="col">Taux TVA</th>
             <th scope="col">Total TVA</th>
             <th scope="col">Total TCC</th>
           </tr>
-        </thead>
         <tbody>
           <tr>
             <th>45€</th>
@@ -57,4 +59,5 @@
         </tbody>
       </table>
     <footer>
+    Invoice was created on a computer and is valid without the signature and seal.
     </footer>
