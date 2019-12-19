@@ -1,4 +1,32 @@
 <div class="col-10 ml-auto mr-auto">
+           <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <div class="input-group-btn">
+          <button id="actionButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret"></span></button>
+        <ul id="searchAction" class="dropdown-menu" role="menu">
+          <li><a href="#">headline</a></li>
+          <li><a href="#">description</a></li>
+          <li><a href="#">os</a></li>
+          <li><a href="#">package</a></li>
+          <li><a href="#">section</a></li>
+          <li><a href="#">template</a></li>
+          <li><a href="#">type</a></li>
+          <li><a href="#">version</a></li>
+          <li><a href="#">disponible</a></li>
+          <li><a href="#">type de service</a></li>
+         
+        </ul>
+      </div><!-- /btn-group -->
+       <input id="valueSearch" class="form-control mr-1" type="text" placeholder="Search"
+    aria-label="Search">
+  <i id="loupe" class="fas fa-search mt-2" aria-hidden="true"></i>
+      <input id="actionInput" type="hidden" value=""> 
+       <span class="input-group-addon"><a><span class="glyphicon glyphicon-search"></span></a> </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+
+</div><!-- /.row -->
     <table class="table table-responsive table-sm table-striped table-hover table-bordered">
     <thead>
         <tr>

@@ -41,6 +41,7 @@ class AdminController extends AbstractController
      */
     public function listServ(ServicesRepository $serviceRepo, PaginatorInterface $paginator, Request $request){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $listServ = $serviceRepo->findAll();
         $services = $paginator->paginate(
             $listServ, // Requête contenant les données à paginer (ici nos services)
