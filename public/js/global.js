@@ -4,6 +4,7 @@ $(document).ready(function(){
 
     // chargement ajax des autres pages sur le click de chaques sections differentes
     $('.navigation').on('click',function(){
+  
         var target = $(this).data('target');
         var id = $(this).data('id');
         console.log(id);
@@ -17,7 +18,8 @@ $(document).ready(function(){
             url: target,
             data: 'id=' + id,
             success: function(data){
-                
+                $('#recherche').css('display',"none");
+                $('#selectedAction').html('Rechercher par');
                 $('#root').html(data);
                 $('#def').html(def);
                 if(def == "facture") {
@@ -34,11 +36,14 @@ $(document).ready(function(){
     //au click sur la class soucription on charge formsub du service selectionné
     $('.subscription').on('click',function(){
         var target = $(this).data('target');
+        
         $.ajax({
           type: 'POST',
           url: 'formSub',
           data: 'serv=' + target ,
           success: function(data){
+            $('#recherche').css('display',"none");
+            $('#selectedAction').html('Rechercher par');
             $('#root').html(data);
           }
         })

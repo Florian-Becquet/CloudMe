@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('#loupe').off("click");
     //fonction d'afficchage de ma barre de recherche
      $('#loupeDisplay').on('click',function(){
         
@@ -13,8 +14,11 @@ $(document).ready(function(){
         $('#searchAction').empty();
     }
         $('#liste').children().each(function(){
-        var nomColonne = $(this).html();
-        $('#searchAction').append('<li><a href="#">'+nomColonne+'</a></li>');
+            if($(this).data('search')){
+                var nomColonne = $(this).html();
+                var dataSearch = $(this).data('search');
+                $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+            }
       })
     
 // chargement en ajax de la pagination 
@@ -68,11 +72,12 @@ actionList.on('click', 'a', function(e){
 function selectSearchAction(i){
     var actionItem = actionList.eq(i);
     action = actionItem.find('a').text();
+    name = actionItem.find('a').data('search');
     actionList.removeClass('active');
     actionItem.addClass('active');
     $('#selectedAction').html(action);
     if(action != "Recherche par"){
-    $('#valueSearch').attr('name',action)
+    $('#valueSearch').attr('name',name)
     }
     $('#actionInput').val(action);
 }
