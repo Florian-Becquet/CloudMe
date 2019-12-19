@@ -41,10 +41,14 @@ class AdminController extends AbstractController
      */
     public function listServ(ServicesRepository $serviceRepo, PaginatorInterface $paginator, Request $request){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $dataInput = $request->query->get('input');
         //recupération de la requete headline et traitement si la requete est vraie
-        if($request->query->get('headline')){
-            $headline = $request->query->get('headline');
-            $listServ = $serviceRepo->findByHeadline($headline);
+        if($request->query->get($dataInput)){
+            $value = $request->query->get($dataInput);
+            if($dataInput =="os"){
+                $dataInput = "OS";
+            }
+            $listServ = $serviceRepo->findByParameters($value,$dataInput);
         }
         else{
             $listServ = $serviceRepo->findAll();

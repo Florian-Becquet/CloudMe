@@ -23,10 +23,10 @@ class ServicesRepository extends ServiceEntityRepository
      * @return Services[] Returns an array of Services objects
       */
     
-    public function findByHeadline($value)
+    public function findByParameters($value,$col)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.headline like :val')
+            ->andWhere("s.".$col." like :val")
             ->setParameter('val', '%'.$value.'%')
             ->orderBy('s.id', 'ASC')
             

@@ -43,7 +43,7 @@ $('.page-link').on('click',function(e){
     $.ajax({
         type: 'GET',
         url: 'listServ',
-        data: 'page='+page+'&'+name+'='+valeur,
+        data: 'page='+page+'&'+name+'='+valeur+'&'+'input='+name,
         success: function(data){
             $('#root').html(data);
         }
@@ -69,14 +69,16 @@ function selectSearchAction(i){
     $('#actionInput').val(action);
 }
 //1
-$('#loupe').on('click',function(){
+$('#loupe').on('click',function(e){
+    $(this).off("click");
     var valeur = $('#valueSearch').val();
     var name = $('#valueSearch').attr('name');
+    
 
     $.ajax({
         type: 'GET',
         url: 'listServ',
-        data: name+'='+valeur,
+        data: name+'='+valeur+'&'+'input='+name,
         success: function(data){
             $('#root').html(data);
         }
