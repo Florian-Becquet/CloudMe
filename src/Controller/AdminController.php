@@ -81,6 +81,7 @@ class AdminController extends AbstractController
         $dateFin = "";
         //boucle qui permet d'alimenter le tableau paginateSub 
         for($i = 0 ; $i< count($subscriptions);$i++){
+            //recupération de l'objet user qui appartient a la souscription[$i]
             $user = $subscriptions[$i]->getIdUser();
             //traitement de la date de sub en format jours mois année en string
             $dateSub = $subscriptions[$i]->getDateSub()->format('d-m-Y');
