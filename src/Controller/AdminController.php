@@ -74,14 +74,18 @@ class AdminController extends AbstractController
      */
     public function listSub(SubscriptionRepository $subRepo,Request $request,PaginatorInterface $paginator){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        //prise de toutes les souscriptions dans la base de donnée dans la variable subscriptions
         $subscriptions = $subRepo->findAll();
         $paginateSub = array();
         $dateSub = "";
         $dateFin = "";
+        //boucle qui permet d'alimenter le tableau paginateSub 
         for($i = 0 ; $i< count($subscriptions);$i++){
             $user = $subscriptions[$i]->getIdUser();
+            //traitement de la date de sub en format jours mois année en string
             $dateSub = $subscriptions[$i]->getDateSub()->format('d-m-Y');
             if($subscriptions[$i]->getDateFin() != null){
+                //traitement de la date de fin en format jours mois année en string
             $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
             }
             $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'cpu' => $subscriptions[$i]->getCpu()
@@ -90,8 +94,9 @@ class AdminController extends AbstractController
             ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
             'id' =>  $subscriptions[$i]->getId()];
         }
+        //mise en place de la pagination par le tableau paginateSub alimenter dans la boucle au dessus
         $subs = $paginator->paginate(
-            $paginateSub, // Requête contenant les données à paginer (ici nos services)
+            $paginateSub, // Requête contenant les données à paginer 
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             10 // Nombre de résultats par page
         );

@@ -1,6 +1,7 @@
 $(document).ready(function(){
+    //effacement d'un event click sur la loupe (car bug au niveau des chargement de page qui duplique l'evenement)
     $('#loupe').off("click");
-    //fonction d'afficchage de ma barre de recherche
+    //fonction d'afficchage de la barre de recherche
      $('#loupeDisplay').on('click',function(){
         
          $('#recherche').css('display','block');
@@ -62,6 +63,8 @@ $('.page-link').on('click',function(e){
 
     })
 })
+
+//dropdown dynamique pour la recherche
 var actionList = $('#searchAction').find('li');
 
 actionList.on('click', 'a', function(e){
@@ -81,7 +84,7 @@ function selectSearchAction(i){
     }
     $('#actionInput').val(action);
 }
-//1
+// fonction qui permet d'envoyer les donnée au back sur le click de la loupe
 $('#loupe').on('click',function(e){
     $(this).off("click");
     var valeur = $('#valueSearch').val();
