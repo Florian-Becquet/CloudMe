@@ -8,11 +8,19 @@ $(document).ready(function(){
     if($('#recherche').css('display') == 'block'){
         $('#loupeDisplay').css('display','none');
     }
+    //apparition des li et a pour le dropdown
+    if($('#searchAction').children().length > 0){
+        $('#searchAction').empty();
+    }
+        $('#liste').children().each(function(){
+        var nomColonne = $(this).html();
+        $('#searchAction').append('<li><a href="#">'+nomColonne+'</a></li>');
+      })
     
-   
 // chargement en ajax de la pagination 
 $('.page-link').on('click',function(e){
     e.preventDefault();
+    var def2 = $('#def2').html();
     var page = $(this).html();
     var name = $('#valueSearch').attr('name');
     var valeur = $('#valueSearch').val();
@@ -22,7 +30,6 @@ $('.page-link').on('click',function(e){
         $('.page-item').each(function(){
             if($(this).attr('class') == "page-item active"){
                 var currentPage = $(this).children().html();
-                
                 page = Number(currentPage) - 1 ; 
             }
         })
@@ -30,6 +37,7 @@ $('.page-link').on('click',function(e){
     }
     // recupération de la valeur suivant pour ajouter 1 a la page actuelle
     if($(this).html() == "Suivant&nbsp;»"){
+        
         $('.page-item').each(function(){
             if($(this).attr('class') == "page-item active"){
                 var currentPage = $(this).children().html();
@@ -42,7 +50,7 @@ $('.page-link').on('click',function(e){
     //envoi des données de la barre de recherche vers le controller
     $.ajax({
         type: 'GET',
-        url: 'listServ',
+        url: def2,
         data: 'page='+page+'&'+name+'='+valeur+'&'+'input='+name,
         success: function(data){
             $('#root').html(data);
@@ -73,11 +81,12 @@ $('#loupe').on('click',function(e){
     $(this).off("click");
     var valeur = $('#valueSearch').val();
     var name = $('#valueSearch').attr('name');
-    
+    var def2 = $('#def2').html();
+
 
     $.ajax({
         type: 'GET',
-        url: 'listServ',
+        url: def2,
         data: name+'='+valeur+'&'+'input='+name,
         success: function(data){
             $('#root').html(data);

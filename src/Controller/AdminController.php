@@ -17,7 +17,7 @@ class AdminController extends AbstractController
      * 
      * controller pour l'affichage de la liste des utilisateures uniquement accesible pour l'admin
      */
-    public function listUser(UserRepository $userRepo)
+    public function listUser(UserRepository $userRepo, PaginatorInterface $paginator, Request $request)
     {
         $subscriptions = array();
         $countSub = array();
@@ -31,8 +31,13 @@ class AdminController extends AbstractController
             $allUser[$i] = ['id' => $users->getId(), 'name' => $users->getName(), 'firstName' => $users->getFirstName(), 'status' => $users->GetStatus(), 'email' => $users->getEmail(), 'count' => $countSub[$i]];
             $i++;
         }
+        $users = $paginator->paginate(
+            $allUser, // Requête contenant les données à paginer (ici nos services)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5 // Nombre de résultats par page
+        );
         
-        return $this->render('admin/listUser.html.twig', ['users' => $allUser]);
+        return $this->render('admin/listUser.html.twig', ['users' => $users]);
     }
     /**
      * @Route("/listServ", name="listServ")

@@ -347,7 +347,7 @@
           </li>
           {% if is_granted('ROLE_ADMIN') %}
           <li class="nav-item " >
-            <a data-target="listUser" data-def="Users" href="#" class="nav-link navigation">
+            <a data-target="listUser" data-def="listUser" href="#" class="nav-link navigation">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Liste des utilisateurs
@@ -355,7 +355,7 @@
             </a>
           </li>
           <li class="nav-item " >
-            <a data-target="listServ" data-def="listeServ" href="#" class="nav-link navigation">
+            <a data-target="listServ" data-def="listServ" href="#" class="nav-link navigation">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Liste des Serveurs
@@ -363,7 +363,7 @@
             </a>
           </li>
           <li class="nav-item " >
-            <a data-target="listSub" data-def="listeSub" href="#" class="nav-link navigation">
+            <a data-target="listSub" data-def="listSub" href="#" class="nav-link navigation">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Liste des souscriptions
@@ -414,14 +414,6 @@
                   <div class="input-group-btn">
                       <button id="actionButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret"></span></button>
                     <ul id="searchAction" class="dropdown-menu" role="menu">
-                      <li><a href="#">headline</a></li>
-                      <li><a href="#">os</a></li>
-                      <li><a href="#">package</a></li>
-                      <li><a href="#">section</a></li>
-                      <li><a href="#">type</a></li>
-                      <li><a href="#">version</a></li>
-                      <li><a href="#">type de service</a></li>
-                    
                     </ul>
                   </div><!-- /btn-group -->
                   <input id="valueSearch" class="form-control mr-1" type="text" placeholder="Search"
