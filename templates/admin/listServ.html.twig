@@ -3,11 +3,9 @@
     <thead>
         <tr>
         <th scope="col">Headline</th>
-        <th scope="col">Description</th>
         <th scope="col">OS</th>
         <th scope="col">Package</th>
         <th scope="col">Section</th>
-        <th scope="col">Template</th>
         <th scope="col">Type</th>
         <th scope="col">Version</th>
         <th scope="col">DIsponible</th>
@@ -18,11 +16,9 @@
         {% for service in services %}
             <tr id="{{ service.Id }}">
                 <td>{{ service.headline }}</td>
-                <td>{{ service.description }}</td>
                 <td>{{ service.os }}</td>
                 <td>{{ service.package }}</td>
                 <td>{{ service.section }}</td>
-                <td>{{ service.template }}</td>
                 <td>{{ service.type }}</td>
                 <td>{{ service.version }}</td>
                 <td>{{ service.available }}</td>
