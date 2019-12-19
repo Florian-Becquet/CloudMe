@@ -4,7 +4,9 @@
       <p class="flotte">
         <img src="dist/img/logo1.png"/></p>
       <p style="line-height:65px;font-size:26px;margin-left:300px">
-        Facture n°112423124</p>
+      {% for facture in factures %}
+        Facture n°{{facture.numeroFacture}}</p>
+        {% endfor %}
         <hr>
       <div style="margin-top:100px;">
         <div class="text-right position-absolute" id="company">
@@ -18,25 +20,26 @@
           <div><span>CLIENT</span> {{app.user.name}} {{app.user.firstName}}</div>
           <div><span>ADDRESS</span> {{app.user.adresse}},{{app.user.ville}}</div>
           <div><span>EMAIL</span> <a href="mailto:{{app.user.email}}">{{app.user.email}}</a></div>
-          <div><span>DATE</span> 11 Décembre, 2019</div>
+          {% for facture in factures %}
+          <div><span>DATE DE FACTURATION</span> {{facture.dateEdition | date('d/m/Y')}}</div>
+          <div><span>DATE ECHEANCE</span> {{facture.dateEcheance | date('d/m/Y')}}</div>
+          {% endfor %}
         </div>
       </div>
-      <table class="table" style="margin-top:190px;font-size:20px;">
+      <table style="margin-top:190px;font-size:20px;">
           <tr>
             <th>SERVICE</th>
             <th>HEADLIN</th>
             <th>DATE SOUSCRIPTION</th>
-            <th>DATE D'ECHEANCE</th>
             <th>PRIX</th>
           </tr>
-          {% for data in service %}
+          {% for data in userSub %}
         <tbody>
           <tr>
-            <td>{{data.service}}</td>
-            <td>{{data.headline}}</td>
-            <td>{{data.dateSous}}</td>
-            <td>{{data.dateEche}}</td>
-            <td>{{data.prix}}</td>
+            <td>{{data.IdServices.serviceType | upper}}</td>
+            <td>{{data.IdServices.headline}}</td>
+            <td>{{data.datesub | date('d/m/Y')}}</td>
+            <td>{{data.price}}€</td>
           </tr>
         </tbody>
         {% endfor %}
@@ -50,12 +53,12 @@
             <th scope="col">Total TCC</th>
           </tr>
         <tbody>
-          <tr>
-            <th>45€</th>
+           <tr>
+            <th>{{totalPrice }}€</th>
             <td>20,00%</td>
-            <td>7,50€</td>
-            <td>52,50€</td>
-          </tr>
+            <td>{{totalPrice / 100 * 20}}€</td>
+            <td>{{totalPrice * 1.2}}€</td>
+          </tr> 
         </tbody>
       </table>
     <footer>
