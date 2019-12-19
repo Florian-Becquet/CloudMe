@@ -42,6 +42,11 @@ class Facture
      */
     private $id_user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Etat;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Facture
     public function setIdUser(?User $id_user): self
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->Etat;
+    }
+
+    public function setEtat(string $Etat): self
+    {
+        $this->Etat = $Etat;
 
         return $this;
     }

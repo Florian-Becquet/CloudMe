@@ -13,6 +13,7 @@ use App\Entity\Subscription;
 use App\Form\SubscriptionType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Repository\FactureRepository;
 use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,7 @@ use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class NavigationController extends Controller
@@ -194,51 +196,71 @@ class NavigationController extends Controller
     /**
      * @Route("/infofacture", name="infofacture")
      */
-    public function infofacture(Request $request){
-        $id = $request->request->get('id');
+    public function infofacture(FactureRepository $factrepo,SubscriptionRepository $subrepo){
+        $user = New user();
+        $totalPrice = 0;
+        $user = $this->getUser();
+        $userFacture= $factrepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
+       
+        $listPrice = $subrepo->findBy(['id_user'=>$user->getId()],['price'=>"ASC"]);
+        foreach ($listPrice as $price){
+                    $totalPrice = $totalPrice + $price->getPrice(); 
+                }
 
-        //fausses données 
-        $metrics = array(['commande' => '12345', 'date' => '21/07/2019','type' => 'CB', 'etat' => 'Payé', 'total'=>'15€', 'id'=> 1],
-                        ['commande' => '23456', 'date' => '21/08/2019','type' => 'CB', 'etat' => 'En attente', 'total'=>'15€', 'id'=> 2],);
-        
         return $this->render('pages/infoFacture.html.twig',
-        ['service'=>$metrics]);
+        ['userFacture'=>$userFacture,'totalPrice'=>$totalPrice]);
     }
 
     /**
      * @Route("/facture", name="facture")
      */
-    public function facture(Request $request){
-
+    public function facture(SubscriptionRepository $subrepo,FactureRepository $factrepo,Request $request){
+        // On instancie tout ce qu'on a besoin
         $user = new User();
-        $date = new Datetime();
-        $id = $request->request->get('id');
+        $date = new DateTime();
+        $facture = new Facture();
+        $totalPrice = 0;
+        //On défini nos variables
         $user=$this->getUser();
-        //fausses données 
-        $metrics = array(['service' => 'VPS', 'headline' => 'TurnKey phpBB','dateSous' => '21/11/2019', 'dateEche' => '04/12/2019', 'prix'=>'15€', 'id'=> 1]);
-        
+        $subscriptions = $user->getSubscriptions();
+        $dateEdition = $date;
+        $dateEcheance= $date;    
+        // On récupere les données grace à doctrine
+        $userSub= $subrepo->findBy(['id_user'=>$user->getId()],['date_sub'=>"ASC"]);
+        $userFacture= $factrepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
+        // On défini chaque setter 
+        $facture->setDateEcheance($dateEcheance);
+        $facture->setDateEdition($dateEdition);
+        $facture->setIdUser($user);
+        $facture->setNumeroFacture($user->getId().$dateEdition->format('d-m-Y').$facture->getId());
 
-        // Configure Dompdf according to your needs
+        //Calcule pour le total des prix
+        $listPrice = $subrepo->findBy(['id_user'=>$user->getId()],['price'=>"ASC"]);
+        foreach ($listPrice as $price){
+                    $totalPrice = $totalPrice + $price->getPrice();
+                    
+                }
+
+        // Configure Dompdf avec ce qu'on à besoin
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         $pdfOptions->setDpi(150);
-        // Instantiate Dompdf with our options
+        // On instancie la librairie 
         $dompdf = new Dompdf($pdfOptions);
-        // repo->findall()
         
-        // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('pages/facture.html.twig',['service'=>$metrics]);
+        // La page ou la facturation ce trouve 
+        $html = $this->renderView('pages/facture.html.twig',['userSub'=>$userSub,'factures'=>$userFacture,'totalPrice'=>$totalPrice]);
         
-        // Load HTML to Dompdf
+        // Charge l'HTML avec la library
         $dompdf->loadHtml($html);
         
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        // (Optional) Choisir la taille de la feuille + mode portrait ou paysage
         $dompdf->setPaper('A4', 'portrait');
 
-        // Render the HTML as PDF
+        // Rendre le HMTL en PDF
         $dompdf->render();
 
-        // Output the generated PDF to Browser (force download)
+        // Genere le PDF et le télécharge avec la date du jours
         $dompdf->stream($user->getId().$date->format('d-m-Y'), [
             "Attachment" => true, 
         ]);
@@ -249,10 +271,10 @@ class NavigationController extends Controller
      */
     public function profil(Request $request, UserRepository $user,EntityManagerInterface $em)
     {
-        $user = $this->getUser();
-        $form = $this->createForm(AccountType::class, $user,['action' => $this->generateUrl('profil')]);
+        $user = $this->getUser(); // Utilisateur courant
+        $form = $this->createForm(AccountType::class, $user,['action' => $this->generateUrl('profil')]); // Créer un formulaire
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) { // Si le formulaire est valide et qu'il est envoyé
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
