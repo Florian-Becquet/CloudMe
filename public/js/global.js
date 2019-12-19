@@ -20,6 +20,8 @@ $(document).ready(function(){
             success: function(data){
                 $('#recherche').css('display',"none");
                 $('#selectedAction').html('Rechercher par');
+                $('#valueSearch').removeAttr('name');
+                $('#valueSearch').val('');
                 $('#root').html(data);
                 $('#def').html(def);
                 if(def == "facture") {
@@ -44,6 +46,8 @@ $(document).ready(function(){
           success: function(data){
             $('#recherche').css('display',"none");
             $('#selectedAction').html('Rechercher par');
+            $('#valueSearch').removeAttr('name');
+            $('#valueSearch').val('');
             $('#root').html(data);
           }
         })
