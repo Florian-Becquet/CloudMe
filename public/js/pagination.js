@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    //fonction d'afficchage de ma barre de recherche
+     $('#loupeDisplay').on('click',function(){
+        
+         $('#recherche').css('display','block');
+        $(this).css('display','none');
+    })
+    if($('#recherche').css('display') == 'block'){
+        $('#loupeDisplay').css('display','none');
+    }
+    
+   
 // chargement en ajax de la pagination 
 $('.page-link').on('click',function(e){
     e.preventDefault();
@@ -28,7 +39,7 @@ $('.page-link').on('click',function(e){
         })
        
     }
-
+    //envoi des données de la barre de recherche vers le controller
     $.ajax({
         type: 'GET',
         url: 'listServ',
@@ -57,6 +68,7 @@ function selectSearchAction(i){
     }
     $('#actionInput').val(action);
 }
+//1
 $('#loupe').on('click',function(){
     var valeur = $('#valueSearch').val();
     var name = $('#valueSearch').attr('name');

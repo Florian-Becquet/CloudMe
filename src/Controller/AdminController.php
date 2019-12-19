@@ -41,14 +41,20 @@ class AdminController extends AbstractController
      */
     public function listServ(ServicesRepository $serviceRepo, PaginatorInterface $paginator, Request $request){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        
-        $listServ = $serviceRepo->findAll();
+        //recupération de la requete headline et traitement si la requete est vraie
+        if($request->query->get('headline')){
+            $headline = $request->query->get('headline');
+            $listServ = $serviceRepo->findByHeadline($headline);
+        }
+        else{
+            $listServ = $serviceRepo->findAll();
+        }
         $services = $paginator->paginate(
             $listServ, // Requête contenant les données à paginer (ici nos services)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            5 // Nombre de résultats par page
+            10 // Nombre de résultats par page
         );
-        return $this->render('admin/listServ.html.twig', ['services' => $services]);
+        return $this->render('admin/listServ.html.twig', ['services' => $services ]);
     }
     /**
      * @Route("/listSub", name="listSub")
@@ -59,4 +65,14 @@ class AdminController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('admin/listSub.html.twig');
     }
+/**
+     * @Route("/recherche", name="recherche")
+     * 
+     * controller pour l'affichage de la liste des souscriptions uniquement accesible pour l'admin
+     */
+    public function recherche(){
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        return $this->render('admin/recherche.html.twig');
+    }
+
 }
