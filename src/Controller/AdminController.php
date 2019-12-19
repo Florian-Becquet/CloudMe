@@ -72,9 +72,30 @@ class AdminController extends AbstractController
      * 
      * controller pour l'affichage de la liste des souscriptions uniquement accesible pour l'admin
      */
-    public function listSub(SubscriptionRepository $subRepo){
+    public function listSub(SubscriptionRepository $subRepo,Request $request,PaginatorInterface $paginator){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        return $this->render('admin/listSub.html.twig');
+        $subscriptions = $subRepo->findAll();
+        $paginateSub = array();
+        $dateSub = "";
+        $dateFin = "";
+        for($i = 0 ; $i< count($subscriptions);$i++){
+            $user = $subscriptions[$i]->getIdUser();
+            $dateSub = $subscriptions[$i]->getDateSub()->format('d-m-Y');
+            if($subscriptions[$i]->getDateFin() != null){
+            $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
+            }
+            $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'cpu' => $subscriptions[$i]->getCpu()
+            ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
+            ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
+            ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
+            'id' =>  $subscriptions[$i]->getId()];
+        }
+        $subs = $paginator->paginate(
+            $paginateSub, // Requête contenant les données à paginer (ici nos services)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            10 // Nombre de résultats par page
+        );
+        return $this->render('admin/listSub.html.twig',['subscriptions' => $subs]);
     }
 /**
      * @Route("/recherche", name="recherche")

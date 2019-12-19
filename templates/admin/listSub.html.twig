@@ -1,1 +1,35 @@
-<h1>yo</h1>
+<div class="col-10 ml-auto mr-auto">
+<i id="loupeDisplay" class="fas fa-search mt-2 mb-2" aria-hidden="true"></i>
+    <table class="table table-responsive table-sm table-striped table-hover ">
+    <thead>
+        <tr id="liste">
+            <th scope="col" >Utilisateur</th>
+            <th scope="col" data-search="cpu">CPU</th>
+            <th scope="col" data-search="ram">RAM</th>
+            <th scope="col" data-search="disk_space">Espace disque</th>
+            <th scope="col" data-search="date_sub">Date de souscription</th>
+            <th scope="col" data-search="date_fin">Date de fin de souscription</th>
+            <th scope="col" data-search="sub_name">Nom</th>
+            <th scope="col" data-search="price">Prix</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sub in subscriptions %}
+            <tr id="{{ sub.id }}">
+                <td>{{ sub.name }} {{ sub.firstName}}</td>
+                <td>{{ sub.cpu }}</td>
+                <td>{{ sub.ram }}</td>
+                <td>{{ sub.space }}</td>
+                <td>{{ sub.dateSub }}</td>
+                <td>{{ sub.dateFin }}</td>
+                <td>{{ sub.subName }}</td>
+                <td>{{ sub.price }}/mois</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    {{ knp_pagination_render(subscriptions) }}
+</div>
+
+<script src="js/pagination.js"></script>
+

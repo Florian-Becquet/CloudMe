@@ -179,7 +179,7 @@ class Subscription
     {
         return $this->date_fin;
     }
-
+ 
     public function setDateFin(?\DateTimeInterface $date_fin): self
     {
         $this->date_fin = $date_fin;
