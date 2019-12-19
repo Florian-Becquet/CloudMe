@@ -406,6 +406,36 @@
       </div><!-- /.container-fluid -->
     </div>
     <noscript><span  style="margin-left: auto; margin-right: auto">Veuillez activez votre JavaScript pour acceder à l'application</span></noscript>
+    {# Chargement de la barre recherche pour les paginations #}
+    <div id="recherche" style="display: none;">   
+                <div class="row">
+              <div class="col-md-4 offset-md-1">
+                <div class="input-group">
+                  <div class="input-group-btn">
+                      <button id="actionButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret"></span></button>
+                    <ul id="searchAction" class="dropdown-menu" role="menu">
+                      <li><a href="#">headline</a></li>
+                      <li><a href="#">os</a></li>
+                      <li><a href="#">package</a></li>
+                      <li><a href="#">section</a></li>
+                      <li><a href="#">type</a></li>
+                      <li><a href="#">version</a></li>
+                      <li><a href="#">type de service</a></li>
+                    
+                    </ul>
+                  </div><!-- /btn-group -->
+                  <input id="valueSearch" class="form-control mr-1" type="text" placeholder="Search"
+                aria-label="Search">
+                <i id="loupe" class="fas fa-search mt-2"></i>
+                  <input id="actionInput" type="hidden" value=""> 
+                  <span class="input-group-addon"><a><span class="glyphicon glyphicon-search"></span></a> </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+          
+            </div><!-- /.row -->
+            
+</div>
+    {# Chargement du contenu general en Ajax dans la div root #}
     <div id="root"></div>
     </div>
         <!-- /.row -->

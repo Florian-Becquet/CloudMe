@@ -17,6 +17,7 @@ $(document).ready(function(){
             url: target,
             data: 'id=' + id,
             success: function(data){
+                
                 $('#root').html(data);
                 $('#def').html(def);
                 if(def == "facture") {
@@ -26,7 +27,7 @@ $(document).ready(function(){
                 else {
                     $('#def2').html(def);
                 }
-                
+               
             }
             })
     })
