@@ -16,9 +16,15 @@ $(document).ready(function(){
     }
         $('#liste').children().each(function(){
             if($(this).data('search')){
-                var nomColonne = $(this).html();
-                var dataSearch = $(this).data('search');
-                $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+                if($(this).data('search') == 'price'){
+                    $('#searchAction').append('<li><a href="#" data-search="price_minimal">Prix minimal</a></li>');
+                    $('#searchAction').append('<li><a href="#" data-search="price_maximal">Prix maximal</a></li>');
+                }
+                else{
+                    var nomColonne = $(this).html();
+                    var dataSearch = $(this).data('search');
+                    $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+                }
             }
       })
     
