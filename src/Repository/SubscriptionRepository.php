@@ -25,13 +25,42 @@ class SubscriptionRepository extends ServiceEntityRepository
     
     public function findByParameters($value,$col)
     {
+        if($col == "min_price"){
         return $this->createQueryBuilder('s')
-            ->andWhere("s.".$col." like :val")
-            ->setParameter('val', '%'.$value.'%')
-            ->orderBy('s.id', 'ASC')
+            ->andWhere("s.price >= :val")
+            ->setParameter('val', $value)
+            ->orderBy('s.price', 'ASC')
             ->getQuery()
             ->getResult()
         ;
+        }
+        elseif($col == "max_price"){
+            return $this->createQueryBuilder('s')
+                ->andWhere("s.price <= :val")
+                ->setParameter('val', $value)
+                ->orderBy('s.price', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+            }
+            elseif(stripos($col,"date") !== false ){
+                return $this->createQueryBuilder('s')
+                ->andWhere("s.".$col." like :val")
+                ->setParameter('val', "%".$value."%")
+                ->orderBy('s.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+            }
+            else{
+                return $this->createQueryBuilder('s')
+                    ->andWhere("s.".$col." = :val")
+                    ->setParameter('val', $value)
+                    ->orderBy('s.id', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+                ;
+        }
     }
     
 
