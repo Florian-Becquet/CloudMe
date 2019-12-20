@@ -60,7 +60,6 @@ $('.page-link').on('click',function(e){
         success: function(data){
             $('#root').html(data);
         }
-
     })
 })
 
@@ -91,15 +90,16 @@ $('#loupe').on('click',function(e){
     var name = $('#valueSearch').attr('name');
     var def2 = $('#def2').html();
 
-
     $.ajax({
         type: 'GET',
         url: def2,
         data: name+'='+valeur+'&'+'input='+name,
         success: function(data){
             $('#root').html(data);
+        },
+        error: function(){
+            alert('erreur lors de la recherche');
         }
-
     })
 })
 });
