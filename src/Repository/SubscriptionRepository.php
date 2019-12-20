@@ -19,22 +19,50 @@ class SubscriptionRepository extends ServiceEntityRepository
         parent::__construct($registry, Subscription::class);
     }
 
-    // /**
-    //  * @return Subscription[] Returns an array of Subscription objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Subscription[] Returns an array of Subscription objects
+      */
+    
+    public function findByParameters($value,$col)
     {
+        if($col == "min_price"){
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
+            ->andWhere("s.price >= :val")
             ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('s.price', 'ASC')
             ->getQuery()
             ->getResult()
         ;
+        }
+        elseif($col == "max_price"){
+            return $this->createQueryBuilder('s')
+                ->andWhere("s.price <= :val")
+                ->setParameter('val', $value)
+                ->orderBy('s.price', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+            }
+            elseif(stripos($col,"date") !== false ){
+                return $this->createQueryBuilder('s')
+                ->andWhere("s.".$col." like :val")
+                ->setParameter('val', "%".$value."%")
+                ->orderBy('s.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+            }
+            else{
+                return $this->createQueryBuilder('s')
+                    ->andWhere("s.".$col." = :val")
+                    ->setParameter('val', $value)
+                    ->orderBy('s.id', 'ASC')
+                    ->getQuery()
+                    ->getResult()
+                ;
+        }
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Subscription
