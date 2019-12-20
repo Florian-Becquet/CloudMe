@@ -217,29 +217,32 @@ class NavigationController extends Controller
     public function facture(SubscriptionRepository $subrepo,FactureRepository $factrepo,Request $request){
         // On instancie tout ce qu'on a besoin
         $user = new User();
+        $dateMois = date('m');
+        $dateAnnee = date('Y');
         $date = new DateTime();
         $facture = new Facture();
         $totalPrice = 0;
         //On défini nos variables
         $user=$this->getUser();
         $subscriptions = $user->getSubscriptions();
-        $dateEdition = $date;
-        $dateEcheance= $date;    
+        $dateEdition = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
+        $dateEcheance= new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);    
         // On récupere les données grace à doctrine
         $userSub= $subrepo->findBy(['id_user'=>$user->getId()],['date_sub'=>"ASC"]);
         $userFacture= $factrepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
-        // On défini chaque setter 
-        $facture->setDateEcheance($dateEcheance);
-        $facture->setDateEdition($dateEdition);
-        $facture->setIdUser($user);
-        $facture->setNumeroFacture($user->getId().$dateEdition->format('d-m-Y').$facture->getId());
-
         //Calcule pour le total des prix
         $listPrice = $subrepo->findBy(['id_user'=>$user->getId()],['price'=>"ASC"]);
         foreach ($listPrice as $price){
                     $totalPrice = $totalPrice + $price->getPrice();
-                    
                 }
+        // On défini chaque setter 
+        $facture->setDateEcheance($dateEcheance);
+        $facture->setDateEdition($dateEdition);
+        $facture->setIdUser($user);
+        $facture->setEtat("Payé");
+        $facture->setPrice($totalPrice);
+        $facture->setNumeroFacture($user->getId().$dateEdition->format('d-m-Y').$facture->getId());
+
 
         // Configure Dompdf avec ce qu'on à besoin
         $pdfOptions = new Options();

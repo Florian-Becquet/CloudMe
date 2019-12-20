@@ -36,7 +36,7 @@
           {% for data in userSub %}
         <tbody>
           <tr>
-            <td>{{data.IdServices.serviceType | upper}}</td>
+            <td>{{data.subname | upper}}</td>
             <td>{{data.IdServices.headline}}</td>
             <td>{{data.datesub | date('d/m/Y')}}</td>
             <td>{{data.price}}€</td>
@@ -50,7 +50,7 @@
             <th scope="col">Total HT</th>
             <th scope="col">Taux TVA</th>
             <th scope="col">Total TVA</th>
-            <th scope="col">Total TCC</th>
+            <th scope="col">Total TTC</th>
           </tr>
         <tbody>
            <tr>
