@@ -16,9 +16,15 @@ $(document).ready(function(){
     }
         $('#liste').children().each(function(){
             if($(this).data('search')){
-                var nomColonne = $(this).html();
-                var dataSearch = $(this).data('search');
-                $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+                if($(this).data('search') == 'price'){
+                    $('#searchAction').append('<li><a href="#" data-search="price_minimal">Prix minimal</a></li>');
+                    $('#searchAction').append('<li><a href="#" data-search="price_maximal">Prix maximal</a></li>');
+                }
+                else{
+                    var nomColonne = $(this).html();
+                    var dataSearch = $(this).data('search');
+                    $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+                }
             }
       })
     
@@ -60,7 +66,6 @@ $('.page-link').on('click',function(e){
         success: function(data){
             $('#root').html(data);
         }
-
     })
 })
 
@@ -91,15 +96,16 @@ $('#loupe').on('click',function(e){
     var name = $('#valueSearch').attr('name');
     var def2 = $('#def2').html();
 
-
     $.ajax({
         type: 'GET',
         url: def2,
         data: name+'='+valeur+'&'+'input='+name,
         success: function(data){
             $('#root').html(data);
+        },
+        error: function(){
+            alert('erreur lors de la recherche');
         }
-
     })
 })
 });
