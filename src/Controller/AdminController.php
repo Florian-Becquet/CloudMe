@@ -142,7 +142,7 @@ class AdminController extends AbstractController
                     //traitement de la date de fin en format jours mois année en string
                 $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
                 }
-                $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'cpu' => $subscriptions[$i]->getCpu()
+                $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'email'=>$user->getEmail(),'cpu' => $subscriptions[$i]->getCpu()
                 ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
                 ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
                 ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),

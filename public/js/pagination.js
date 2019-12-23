@@ -17,13 +17,13 @@ $(document).ready(function(){
         $('#liste').children().each(function(){
             if($(this).data('search')){
                 if($(this).data('search') == 'price'){
-                    $('#searchAction').append('<li><a href="#" data-search="min_price">Prix minimal</a></li>');
-                    $('#searchAction').append('<li><a href="#" data-search="max_price">Prix maximal</a></li>');
+                    $('#searchAction').append('<li ><a class="dropdown-item"  href="#" data-search="min_price" style="color:black;">Prix minimal</a></li>');
+                    $('#searchAction').append('<li ><a class="dropdown-item"  href="#" data-search="max_price" style="color:black;">Prix maximal</a></li>');
                 }
                 else{
                     var nomColonne = $(this).html();
                     var dataSearch = $(this).data('search');
-                    $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+                    $('#searchAction').append('<li ><a class="dropdown-item"  href="#" data-search="'+dataSearch+'" style="color:black;">'+nomColonne+'</a></li>');
                 }
             }
       })
