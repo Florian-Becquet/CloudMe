@@ -1,12 +1,10 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="dist/css/bootstrap.css" >
 <link rel="stylesheet" href="dist/css/style.css" media="all" />
 
       <p class="flotte">
         <img src="dist/img/logo1.png"/></p>
       <p style="line-height:65px;font-size:26px;margin-left:300px">
-      {% for facture in factures %}
-        Facture n°{{facture.numeroFacture}}</p>
-        {% endfor %}
+        Facture n°{{factureId.numeroFacture}}</p>
         <hr>
       <div style="margin-top:100px;">
         <div class="text-right position-absolute" id="company">
@@ -20,25 +18,21 @@
           <div><span>CLIENT</span> {{app.user.name}} {{app.user.firstName}}</div>
           <div><span>ADDRESS</span> {{app.user.adresse}},{{app.user.ville}}</div>
           <div><span>EMAIL</span> <a href="mailto:{{app.user.email}}">{{app.user.email}}</a></div>
-          {% for facture in factures %}
-          <div><span>DATE DE FACTURATION</span> {{facture.dateEdition | date('d/m/Y')}}</div>
-          <div><span>DATE ECHEANCE</span> {{facture.dateEcheance | date('d/m/Y')}}</div>
-          {% endfor %}
+          <div><span>Date de facturation:</span> {{factureId.dateEdition | date('d/m/Y')}}</div>
+          <div><span>Somme prélevée à partir</span> {{factureId.dateEcheance | date('d/m/Y')}}</div>
         </div>
       </div>
       <table style="margin-top:190px;font-size:20px;">
           <tr>
-            <th>SERVICE</th>
-            <th>HEADLIN</th>
-            <th>DATE SOUSCRIPTION</th>
+            <th>REFERENCE</th>
+            <th>DESIGNATION</th>
             <th>TOTAL HT</th>
           </tr>
           {% for data in userSub %}
         <tbody>
           <tr>
             <td>{{data.subname | upper}}</td>
-            <td>{{data.IdServices.headline}}</td>
-            <td>{{data.datesub | date('d/m/Y')}}</td>
+            <td>{{data.headline}} du {{data.dateSub | date('d/m/Y')}} au {{data.lastDays | date('d/m/Y')}}</td>
             <td>{{data.price}}€</td>
           </tr>
         </tbody>
