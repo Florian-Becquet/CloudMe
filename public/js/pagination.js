@@ -108,4 +108,33 @@ $('#loupe').on('click',function(e){
         }
     })
 })
+    //au click sur la colonne disponible on rend un service disponible ou non apres confirmation
+    $('.fa-square').on('click', function(){
+        var servId = $(this).data('target');
+        var color = $(this);
+        if(color.attr('class') == 'fas fa-square text-danger'){
+            var msgConfirm = 'Activer le service';
+        }
+        else {
+            var msgConfirm = 'Désactiver le service';
+        }
+        if (confirm(msgConfirm)){
+            $.ajax({
+                type: 'GET',
+                url: 'changeDisponibility',
+                data: 'id=' +servId,
+                success: function(data){
+                    if(data == 'ok'){
+                        if(color.attr('class') == 'fas fa-square text-success'){
+                            color.attr('class', 'fas fa-square text-danger');
+                        }
+                        else{
+                            color.attr('class', 'fas fa-square text-success');
+                        }
+                    }
+                }
+            })
+        }
+    })
+
 });

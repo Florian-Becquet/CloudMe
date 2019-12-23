@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use App\Repository\ServicesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
@@ -160,4 +162,22 @@ class AdminController extends AbstractController
         return $this->render('admin/recherche.html.twig');
     }
 
+    /**
+     * @Route("/changeDisponibility", name="changeDisponibility")
+     * 
+     * 
+     */
+    public function changeDisponibility(Request $request, ServicesRepository $servRepo, EntityManagerInterface $em){
+        $id = $request->query->get('id');
+        $currentServ = $servRepo->find($id);
+        if ($currentServ->getAvailable() == 1){
+            $currentServ->setAvailable(0);
+        }
+        elseif ($currentServ->getAvailable() == 0){
+            $currentServ->setAvailable(1);
+        }
+        $em->persist($currentServ);
+        $em->flush();
+        return new Response('ok');
+    }
 }
