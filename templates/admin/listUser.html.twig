@@ -17,30 +17,30 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     {% if user.status == 0 %}
-                    <td><div class="btn-group dropup">
-                        <a class='btn btn-primary btn-xs pl-2 pr-2 ml-1' data-toggle="dropdown"  title="Options"href="#">Inactif</a>
+                    <td class="text-center"><div class="btn-group dropup">
+                        <a id="{{ user.id }}" class='btn btn-primary btn-xs pl-2 pr-2 ml-1' data-toggle="dropdown"  title="Options"href="#">Inactif</a>
                         <ul class="dropdown-menu" style="min-width: 5rem;">
-                             <li class="text-center"><a class='btn btn-info btn-xs pr-2 pl-2'href="#">Actif</a></li>
-                             <li class="text-center"><a class='btn btn-primary btn-xs'href="#">Inactif</a></li>
-                             <li class="text-center"><a class='btn btn-dark btn-xs'href="#">Expert</a></li>
+                             <li class="text-center" ><a class='btn btn-info btn-xs pr-2 pl-2 status' data-id="{{ user.id }}" data-status="1" href="#">Actif</a></li>
+                             <li class="text-center" ><a class='btn btn-primary btn-xs status' data-id="{{ user.id }}" data-status="0"href="#">Inactif</a></li>
+                             <li class="text-center" ><a class='btn btn-dark btn-xs status' data-id="{{ user.id }}" data-status="2"href="#">Expert</a></li>
                         </ul>
                     </div></td>
                     {% elseif user.status == 1 %}
-                        <td><div class="btn-group dropup">
-                        <a class='btn btn-info btn-xs pl-2 pr-2 ml-1' data-toggle="dropdown"  title="Options"href="#">Actif</a>
+                        <td class="text-center"><div class="btn-group dropup">
+                        <a id="{{ user.id }}" class='btn btn-info btn-xs pl-3 pr-3 ml-1' data-toggle="dropdown"  title="Options"href="#">Actif</a>
                         <ul class="dropdown-menu" style="min-width: 5rem;">
-                             <li class="text-center"><a class='btn btn-info btn-xs pr-2 pl-2'href="#">Actif</a></li>
-                             <li class="text-center"><a class='btn btn-primary btn-xs'href="#">Inactif</a></li>
-                             <li class="text-center"><a class='btn btn-dark btn-xs'href="#">Expert</a></li>
+                             <li class="text-center" ><a class='btn btn-info btn-xs pr-2 pl-2 status' data-id="{{ user.id }}" data-status="1" href="#">Actif</a></li>
+                             <li class="text-center" ><a class='btn btn-primary btn-xs status'data-id="{{ user.id }}" data-status="0" href="#">Inactif</a></li>
+                             <li class="text-center" ><a class='btn btn-dark btn-xs status'data-id="{{ user.id }}" data-status="2" href="#">Expert</a></li>
                         </ul>
                     </div></td>
                     {% else %}
-                    <td><div class="btn-group dropup">
-                        <a class='btn btn-dark btn-xs pl-2 pr-2 ml-1' data-toggle="dropdown"  title="Options"href="#">Expert</a>
+                    <td class="text-center"><div class="btn-group dropup">
+                        <a id="{{ user.id }}"class='btn btn-dark btn-xs pl-2 pr-2 ml-1' data-toggle="dropdown"  title="Options"href="#">Expert</a>
                         <ul class="dropdown-menu" style="min-width: 5rem;">
-                             <li class="text-center"><a class='btn btn-info btn-xs pr-2 pl-2'href="#">Actif</a></li>
-                             <li class="text-center"><a class='btn btn-primary btn-xs'href="#">Inactif</a></li>
-                             <li class="text-center"><a class='btn btn-dark btn-xs'href="#">Expert</a></li>
+                             <li class="text-center" ><a class='btn btn-info btn-xs pr-2 pl-2 status' data-id="{{ user.id }}" data-status="1" href="#">Actif</a></li>
+                             <li class="text-center" ><a class='btn btn-primary btn-xs status'data-id="{{ user.id }}" data-status="0" href="#">Inactif</a></li>
+                             <li class="text-center" ><a class='btn btn-dark btn-xs status' data-id="{{ user.id }}" data-status="2" href="#">Expert</a></li>
                              
                         </ul>
                     </div></td>

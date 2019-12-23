@@ -136,5 +136,32 @@ $('#loupe').on('click',function(e){
             })
         }
     })
-
+    //envoie du status Utilisateur 
+    $('.status').on('click',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        var status = $(this).data('status');
+        var a = $(this);
+        $.ajax({
+            type: 'GET',
+            url: 'changeStatus',
+            data: 'id=' +id+'&status='+status,
+            success:function(data){
+                if(data == 0){
+                    $("#"+id).attr('class','btn btn-primary btn-xs pl-2 pr-2 ml-1');
+                    $("#"+id).html('Inactif');
+                
+                }
+                else if(data == 1){
+                    $("#"+id).attr('class','btn btn-info btn-xs pl-2 pr-2 ml-1');
+                    $("#"+id).html('Actif');
+                }
+                else {
+                    $("#"+id).attr('class','btn btn-dark btn-xs pl-2 pr-2 ml-1');
+                    $("#"+id).html('Expert');
+                }
+               
+            }
+        })
+    })
 });

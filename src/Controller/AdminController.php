@@ -206,4 +206,21 @@ class AdminController extends AbstractController
         $em->flush();
         return new Response('ok');
     }
+     /**
+     * @Route("/changeStatus", name="changeStatus")
+     * 
+     * change le status de l'utilisateur en bdd.
+     */
+    public function changeStatus(Request $request , UserRepository $userRepo, EntityManagerInterface $em){
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $id = $request->query->get('id');
+        $status = $request->query->get('status');
+        $user = $userRepo->find($id);
+        $user->setStatus($status);
+        $em->persist($user);
+        $em->flush();
+       return new Response($status);
+    }
+
+
 }
