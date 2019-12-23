@@ -5,11 +5,12 @@
     <thead>
         <tr id="liste">
             <th scope="col" >Utilisateur</th>
+            <th scope="col" data-search="email">email</th>
             <th scope="col" data-search="cpu">CPU</th>
             <th scope="col" data-search="ram">RAM</th>
             <th scope="col" data-search="disk_space">Espace disque</th>
-            <th scope="col" data-search="date_sub">Date de souscription</th>
-            <th scope="col" data-search="date_fin">Date de fin de souscription</th>
+            <th scope="col" data-search="date_sub">Date debut</th>
+            <th scope="col" data-search="date_fin">Date de fin</th>
             <th scope="col" data-search="sub_name">Nom</th>
             <th scope="col" data-search="price">Prix</th>
         </tr>
@@ -18,6 +19,7 @@
         {% for sub in subscriptions %}
             <tr id="{{ sub.id }}">
                 <td>{{ sub.name }} {{ sub.firstName}}</td>
+                 <td>{{ sub.email }}</td>
                 <td>{{ sub.cpu }}</td>
                 <td>{{ sub.ram }}</td>
                 <td>{{ sub.space }}</td>
