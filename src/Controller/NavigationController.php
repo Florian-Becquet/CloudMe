@@ -196,53 +196,64 @@ class NavigationController extends Controller
     /**
      * @Route("/infofacture", name="infofacture")
      */
-    public function infofacture(FactureRepository $factrepo,SubscriptionRepository $subrepo){
+    public function infofacture(FactureRepository $factRepo, EntityManagerInterface $em, SubscriptionRepository $subrepo){
         $user = New user();
-        $totalPrice = 0;
-        $user = $this->getUser();
-        $userFacture= $factrepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
-       
-        $listPrice = $subrepo->findBy(['id_user'=>$user->getId()],['price'=>"ASC"]);
-        foreach ($listPrice as $price){
-                    $totalPrice = $totalPrice + $price->getPrice(); 
-                }
+        $date = New Date();
+        $facture = new Facture();
+        $dateMois = date('m');
+        $dateAnnee = date('Y');
+        $dateEdition = new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);
+        $dateEcheance= new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);
+        $premierDuMois = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
 
+        $user=$this->getUser();
+        $totalPrice = 0;
+        $factureAll= $factRepo->findAll();
+
+        $subscriptions = $user->getSubscriptions(); 
+        foreach($subscriptions as $sub){
+            if($sub->getDateSub() >= $premierDuMois && isset($factureAll) ){
+                $totalPrice = $totalPrice + $sub->getPrice();
+                $facture->setDateEcheance($dateEcheance);
+                $facture->setDateEdition($dateEdition);
+                $facture->setIdUser($user);
+                $facture->setEtat("Payé");
+                $facture->setPrice($totalPrice * 1.2);
+                $facture->setNumeroFacture('000'.$user->getId().$dateEdition->format('my').'-'.'000'.$facture->getId());
+                $em->persist($facture);
+                $em->flush();
+            }
+        }
+        $userFacture= $factRepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
         return $this->render('pages/infoFacture.html.twig',
         ['userFacture'=>$userFacture,'totalPrice'=>$totalPrice]);
     }
 
     /**
-     * @Route("/facture", name="facture")
+     * @Route("/facture/{id}", name="facture")
      */
-    public function facture(SubscriptionRepository $subrepo,FactureRepository $factrepo,Request $request){
+    public function facture(Facture $facture,SubscriptionRepository $subrepo,FactureRepository $factrepo,Request $request){
         // On instancie tout ce qu'on a besoin
         $user = new User();
+        $date = new DateTime();
+        $totalPrice = 0;
+        $i= 0;
+        $subMois = array();
         $dateMois = date('m');
         $dateAnnee = date('Y');
-        $date = new DateTime();
-        $facture = new Facture();
-        $totalPrice = 0;
+        $premierDuMois = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
+        $DernierJoursDuMois= new DateTime('last day of this year');
         //On défini nos variables
         $user=$this->getUser();
-        $subscriptions = $user->getSubscriptions();
-        $dateEdition = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
-        $dateEcheance= new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);    
-        // On récupere les données grace à doctrine
-        $userSub= $subrepo->findBy(['id_user'=>$user->getId()],['date_sub'=>"ASC"]);
-        $userFacture= $factrepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
-        //Calcule pour le total des prix
-        $listPrice = $subrepo->findBy(['id_user'=>$user->getId()],['price'=>"ASC"]);
-        foreach ($listPrice as $price){
-                    $totalPrice = $totalPrice + $price->getPrice();
-                }
-        // On défini chaque setter 
-        $facture->setDateEcheance($dateEcheance);
-        $facture->setDateEdition($dateEdition);
-        $facture->setIdUser($user);
-        $facture->setEtat("Payé");
-        $facture->setPrice($totalPrice);
-        $facture->setNumeroFacture($user->getId().$dateEdition->format('d-m-Y').$facture->getId());
-
+        $subscriptions = $user->getSubscriptions(); 
+        foreach($subscriptions as $sub){
+            if($sub->getDateSub() >= $premierDuMois){
+                $totalPrice = $totalPrice + $sub->getPrice();
+                $service = $sub->getIdServices();
+                $subMois[$i] = ['totalPrice'=>$totalPrice,'lastDays'=>$DernierJoursDuMois,'dateSub' => $sub->getDateSub(), 'subname' => $sub->getSubName(),'price'=>$sub->getPrice(),'headline' => $service->getHeadline() ];
+            }
+            $i ++;
+        } 
 
         // Configure Dompdf avec ce qu'on à besoin
         $pdfOptions = new Options();
@@ -252,7 +263,7 @@ class NavigationController extends Controller
         $dompdf = new Dompdf($pdfOptions);
         
         // La page ou la facturation ce trouve 
-        $html = $this->renderView('pages/facture.html.twig',['userSub'=>$userSub,'factures'=>$userFacture,'totalPrice'=>$totalPrice]);
+        $html = $this->renderView('pages/facture.html.twig',['userSub'=>$subMois,'totalPrice'=>$totalPrice,'factureId' => $facture]);
         
         // Charge l'HTML avec la library
         $dompdf->loadHtml($html);

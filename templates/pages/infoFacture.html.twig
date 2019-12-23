@@ -23,11 +23,12 @@
       <span class="badge badge-danger">
       {% endif %}
       {{facture.etat}}</span></td>
-      {% endfor %}
-      <td>{{totalPrice}}€</td>
-      <td><a href="{{path('facture')}}">
+      
+      <td>{{facture.price}}€</td>
+      <td><a href="{{path('facture', {'id':facture.id}) }}">
         <i class="fas fa-file-pdf"></i> PDF
         </a></td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
