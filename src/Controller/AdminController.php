@@ -90,9 +90,7 @@ class AdminController extends AbstractController
         $paginateSub = array();
         $dateSub = "";
         $dateFin = "";
-        $fakeDate = "11-12-2019";
-        $date = new \DateTime($fakeDate);
-        $fakeDate = $date->format('Y-m-d');
+        
         //traitement de la recherche
         $dataInput = $request->query->get('input');
         if($request->query->get($dataInput)){
@@ -150,7 +148,7 @@ class AdminController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             10 // Nombre de résultats par page
         );
-        return $this->render('admin/listSub.html.twig',['subscriptions' => $subs,'fakeDate' => $fakeDate]);
+        return $this->render('admin/listSub.html.twig',['subscriptions' => $subs]);
     }
 /**
      * @Route("/recherche", name="recherche")
