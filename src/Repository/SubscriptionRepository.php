@@ -44,6 +44,8 @@ class SubscriptionRepository extends ServiceEntityRepository
             ;
             }
             elseif(stripos($col,"date") !== false ){
+              
+                
                 return $this->createQueryBuilder('s')
                 ->andWhere("s.".$col." like :val")
                 ->setParameter('val', "%".$value."%")

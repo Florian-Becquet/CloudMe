@@ -8,6 +8,7 @@ use App\Repository\SubscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
@@ -89,11 +90,23 @@ class AdminController extends AbstractController
         $paginateSub = array();
         $dateSub = "";
         $dateFin = "";
+        $fakeDate = "11-12-2019";
+        $date = new \DateTime($fakeDate);
+        $fakeDate = $date->format('Y-m-d');
         //traitement de la recherche
         $dataInput = $request->query->get('input');
         if($request->query->get($dataInput)){
-            
+       
+
             $value = $request->query->get($dataInput);
+            //condition si on reçoit une date complete pour la reformater en format Américain
+            if(stripos($dataInput,'date') !== false){
+                if(mb_substr_count($value,'-') == 2){
+                    $date = new \DateTime($value);
+                    $value = $date->format('Y-m-d');
+                       
+            }
+        }
             $subscriptions= $subRepo->findByParameters($value,$dataInput);
             for($i = 0 ; $i< count($subscriptions);$i++){
                 //recupération de l'objet user qui appartient a la souscription[$i]
@@ -137,7 +150,7 @@ class AdminController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             10 // Nombre de résultats par page
         );
-        return $this->render('admin/listSub.html.twig',['subscriptions' => $subs]);
+        return $this->render('admin/listSub.html.twig',['subscriptions' => $subs,'fakeDate' => $fakeDate]);
     }
 /**
      * @Route("/recherche", name="recherche")
