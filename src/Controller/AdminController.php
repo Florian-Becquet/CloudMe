@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Repository\UserRepository;
 use App\Repository\ServicesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -82,18 +85,53 @@ class AdminController extends AbstractController
      * 
      * controller pour l'affichage de la liste des souscriptions uniquement accesible pour l'admin
      */
-    public function listSub(SubscriptionRepository $subRepo,Request $request,PaginatorInterface $paginator){
+    public function listSub(SubscriptionRepository $subRepo,Request $request,PaginatorInterface $paginator,UserRepository $userRepo){
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-       
+        $k = 0;
         
         $paginateSub = array();
         $dateSub = "";
         $dateFin = "";
+       
         //traitement de la recherche
         $dataInput = $request->query->get('input');
         if($request->query->get($dataInput)){
-            
+       
+
             $value = $request->query->get($dataInput);
+            //condition si on reçoit une date complete pour la reformater en format Américain
+            if(stripos($dataInput,'date') !== false){
+                if(mb_substr_count($value,'-') == 2){
+                    $date = new \DateTime($value);
+                    $value = $date->format('Y-m-d');
+                       
+            }
+        }
+        //condition si on recoit l'email de l'utilisateur on va chercher dans le User repo toutes les souscriptions pour les lister
+            if($dataInput == "email"){
+                $user = $userRepo->findByParameters($value,$dataInput);
+                for($j = 0; $j < count($user); $j++){
+                    $subscriptions[$j] = $user[$j]->getSubscriptions();
+                    
+                        for($i=0; $i < count($subscriptions[$j]); $i++){
+                            
+                            $dateSub = $subscriptions[$j][$i]->getDateSub()->format('d-m-Y');
+                            if($subscriptions[$j][$i]->getDateFin() != null){
+                                //traitement de la date de fin en format jours mois année en string
+                            $dateFin = $subscriptions[$j][$i]->getDateFin()->format('d-m-Y');
+                            }
+                            $paginateSub[$k] = ['name' => $user[$j]->getName(),'firstName' => $user[$j]->getFirstName(),'email'=>$user[$j]->getEmail(),'cpu' => $subscriptions[$j][$i]->getCpu()
+                            ,'ram' =>  $subscriptions[$j][$i]->getRam(),'space' =>  $subscriptions[$j][$i]->getDiskSpace()
+                            ,'price' =>  $subscriptions[$j][$i]->getPrice(),'dateSub' =>  $dateSub
+                            ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$j][$i]->getSubName(),
+                            'id' =>  $subscriptions[$j][$i]->getId()];
+                            $k++;
+                        }
+                 
+                }
+              
+            }
+            else{
             $subscriptions= $subRepo->findByParameters($value,$dataInput);
             for($i = 0 ; $i< count($subscriptions);$i++){
                 //recupération de l'objet user qui appartient a la souscription[$i]
@@ -109,6 +147,7 @@ class AdminController extends AbstractController
                 ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
                 ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
                 'id' =>  $subscriptions[$i]->getId()];
+                }
             }
         }
         else{
@@ -124,7 +163,7 @@ class AdminController extends AbstractController
                 //traitement de la date de fin en format jours mois année en string
             $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
             }
-            $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'cpu' => $subscriptions[$i]->getCpu()
+            $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'email' => $user->getEmail(),'cpu' => $subscriptions[$i]->getCpu()
             ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
             ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
             ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
@@ -149,4 +188,22 @@ class AdminController extends AbstractController
         return $this->render('admin/recherche.html.twig');
     }
 
+    /**
+     * @Route("/changeDisponibility", name="changeDisponibility")
+     * 
+     * 
+     */
+    public function changeDisponibility(Request $request, ServicesRepository $servRepo, EntityManagerInterface $em){
+        $id = $request->query->get('id');
+        $currentServ = $servRepo->find($id);
+        if ($currentServ->getAvailable() == 1){
+            $currentServ->setAvailable(0);
+        }
+        elseif ($currentServ->getAvailable() == 0){
+            $currentServ->setAvailable(1);
+        }
+        $em->persist($currentServ);
+        $em->flush();
+        return new Response('ok');
+    }
 }
