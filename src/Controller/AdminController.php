@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -178,20 +179,11 @@ class AdminController extends AbstractController
         );
         return $this->render('admin/listSub.html.twig',['subscriptions' => $subs]);
     }
-/**
-     * @Route("/recherche", name="recherche")
-     * 
-     * controller pour l'affichage de la liste des souscriptions uniquement accesible pour l'admin
-     */
-    public function recherche(){
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        return $this->render('admin/recherche.html.twig');
-    }
 
     /**
      * @Route("/changeDisponibility", name="changeDisponibility")
      * 
-     * 
+     * fonction pour changer la disponibilité d'un service
      */
     public function changeDisponibility(Request $request, ServicesRepository $servRepo, EntityManagerInterface $em){
         $id = $request->query->get('id');
@@ -222,5 +214,14 @@ class AdminController extends AbstractController
        return new Response($status);
     }
 
-
+    /**
+     * @Route("/changePrice", name="changePrice")
+     * 
+     * change les prix de la config
+     */
+    public function changePrice(PricingRepository $pricingRepo){
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $tabPrice = $pricingRepo->findAll();
+        return $this->render('admin/changePrice.html.twig', ['prices' => $tabPrice]);
+    }
 }
