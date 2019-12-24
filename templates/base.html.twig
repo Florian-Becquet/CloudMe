@@ -72,6 +72,40 @@
       {# <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>  #}
+      {% if is_granted('ROLE_ADMIN') %}
+      <li>
+        <div class="dropdown">
+          <a data-toggle="dropdown" class="nav-link" href="#" title="back-office">
+            <i class="fas fa-users-cog"></i>
+          </a>
+          <div class="dropdown-menu" style="height: 180px; width: 202px;" aria-labelledby="dropdownMenuButton">
+          <h6 class="dropdown-header">Admin</h6>
+          <div class="dropdown-divider"></div>
+            <div class="nav-item " >
+            <a data-target="listUser" data-def="listUser" href="#" class="nav-link navigation">
+              <p style="color: black">
+                Liste des utilisateurs
+              </p>
+            </a>
+          </div>
+          <div class="nav-item " >
+            <a data-target="listServ" data-def="listServ" href="#" class="nav-link navigation">
+              <p style="color: black">
+                Liste des Serveurs
+              </p>
+            </a>
+          </div>
+          <div class="nav-item " >
+            <a data-target="listSub" data-def="listSub" href="#" class="nav-link navigation">
+              <p style="color: black">
+                Liste des souscriptions
+              </p>
+            </a>
+          </div>
+          </div>
+        </div>
+      </li>
+      {% endif %}
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -345,32 +379,6 @@
               </p>
             </a>
           </li>
-          {% if is_granted('ROLE_ADMIN') %}
-          <li class="nav-item " >
-            <a data-target="listUser" data-def="listUser" href="#" class="nav-link navigation">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des utilisateurs
-              </p>
-            </a>
-          </li>
-          <li class="nav-item " >
-            <a data-target="listServ" data-def="listServ" href="#" class="nav-link navigation">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des Serveurs
-              </p>
-            </a>
-          </li>
-          <li class="nav-item " >
-            <a data-target="listSub" data-def="listSub" href="#" class="nav-link navigation">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des souscriptions
-              </p>
-            </a>
-          </li>
-          {% endif %}
       </nav>
       <!-- /.sidebar-menu -->
     </div>
