@@ -1,4 +1,13 @@
 $(document).ready(function(){
+
+    //disable le bouton loupe quand l'element de recherche est Rechercher par ..
+
+   if($('#selectedAction').html() == "Rechercher par") {
+       $('#loupe').prop('disabled',true);
+  }
+
+  
+   
     //effacement d'un event click sur la loupe (car bug au niveau des chargement de page qui duplique l'evenement)
     $('#loupe').off("click");
     //fonction d'afficchage de la barre de recherche
@@ -85,8 +94,10 @@ function selectSearchAction(i){
     actionItem.addClass('active');
     $('#selectedAction').html(action);
     if(action != "Recherche par"){
-    $('#valueSearch').attr('name',name)
+    $('#loupe').prop('disabled',false);
+    $('#valueSearch').attr('name',name);
     }
+    
     $('#actionInput').val(action);
 }
 // fonction qui permet d'envoyer les donnée au back sur le click de la loupe
