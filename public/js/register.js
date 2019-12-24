@@ -1,5 +1,5 @@
 
-
+//fonction qui desactive le bouton de soumission et rend des champs required si un input est choisi 
 $('select').on('change',function(){
     if($(this).val() == 2) {
         $('#infoEntreprise').css('display','block');
@@ -12,7 +12,7 @@ $('select').on('change',function(){
         $('#registration_form_num_siret').prop('required',false);
     }
 })
-
+//vérification du mot de passe au keyup
 $('#verifPwd').on('keyup',function(){
     var pwd = $('#registration_form_plainPassword').val();
     if($(this).val() == pwd){

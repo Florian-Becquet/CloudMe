@@ -72,6 +72,40 @@
       {# <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>  #}
+      {% if is_granted('ROLE_ADMIN') %}
+      <li>
+        <div class="dropdown">
+          <a data-toggle="dropdown" class="nav-link" href="#" title="back-office">
+            <i class="fas fa-users-cog"></i>
+          </a>
+          <div class="dropdown-menu" style="height: 180px; width: 202px;" aria-labelledby="dropdownMenuButton">
+          <h6 class="dropdown-header">Admin</h6>
+          <div class="dropdown-divider"></div>
+            <div class="nav-item " >
+            <a data-target="listUser" data-def="listUser" href="#" class="nav-link navigation">
+              <p style="color: black">
+                Liste des utilisateurs
+              </p>
+            </a>
+          </div>
+          <div class="nav-item " >
+            <a data-target="listServ" data-def="listServ" href="#" class="nav-link navigation">
+              <p style="color: black">
+                Liste des Serveurs
+              </p>
+            </a>
+          </div>
+          <div class="nav-item " >
+            <a data-target="listSub" data-def="listSub" href="#" class="nav-link navigation">
+              <p style="color: black">
+                Liste des souscriptions
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </li>
+      {% endif %}
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -345,32 +379,6 @@
               </p>
             </a>
           </li>
-          {% if is_granted('ROLE_ADMIN') %}
-          <li class="nav-item " >
-            <a data-target="listUser" data-def="listUser" href="#" class="nav-link navigation">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des utilisateurs
-              </p>
-            </a>
-          </li>
-          <li class="nav-item " >
-            <a data-target="listServ" data-def="listServ" href="#" class="nav-link navigation">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des Serveurs
-              </p>
-            </a>
-          </li>
-          <li class="nav-item " >
-            <a data-target="listSub" data-def="listSub" href="#" class="nav-link navigation">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Liste des souscriptions
-              </p>
-            </a>
-          </li>
-          {% endif %}
       </nav>
       <!-- /.sidebar-menu -->
     </div>
@@ -409,21 +417,22 @@
     {# Chargement de la barre recherche pour les paginations #}
     <div id="recherche" style="display: none;">   
                 <div class="row">
-              <div class="col-md-4 offset-md-1">
-                <div class="input-group"> 
-                  <div class="input-group-btn">
-                      <button id="actionButton" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret"></span></button>
-                    <ul id="searchAction" class="dropdown-menu" role="menu">
-                    </ul>
-                  </div><!-- /btn-group -->
-                  <input id="valueSearch" class="form-control mr-1" type="text" placeholder="Recherche"
-                aria-label="Search">
-                <i id="loupe" class="fas fa-search mt-2"></i>
-                  <input id="actionInput" type="hidden" value=""> 
-                  <span class="input-group-addon"><a><span class="glyphicon glyphicon-search"></span></a> </span>
-                </div><!-- /input-group -->
-              </div><!-- /.col-lg-6 -->
-          
+                <form class="offset-md-1">
+                    <div class="col-md-12">
+                      <div class="input-group"> 
+                        <div class="input-group-btn">
+                            <button id="actionButton" style="background:#515559;color: #fff;  font-size: 0.93em"type="button" class="btn btn-search dropdown-toggle ml-2" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret ml-1"></span></button>
+                          <div id="searchAction" class="dropdown-menu" role="menu">
+                          </div>
+                        </div><!-- /btn-group -->
+                        <input id="valueSearch" class="form-control" type="text" placeholder="Recherche"
+                      aria-label="Search">
+                      <button id="loupe" type="submit" style="background:#515559;color: #fff;  font-size: 0.9em" class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i></button>
+                        <input id="actionInput" type="hidden" value=""> 
+                        <span class="input-group-addon"><a><span class="glyphicon glyphicon-search"></span></a> </span>
+                      </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form>
             </div><!-- /.row -->
             
 </div>

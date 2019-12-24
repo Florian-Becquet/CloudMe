@@ -1,4 +1,13 @@
 $(document).ready(function(){
+
+    //disable le bouton loupe quand l'element de recherche est Rechercher par ..
+
+   if($('#selectedAction').html() == "Rechercher par") {
+       $('#loupe').prop('disabled',true);
+  }
+
+  
+   
     //effacement d'un event click sur la loupe (car bug au niveau des chargement de page qui duplique l'evenement)
     $('#loupe').off("click");
     //fonction d'afficchage de la barre de recherche
@@ -17,13 +26,13 @@ $(document).ready(function(){
         $('#liste').children().each(function(){
             if($(this).data('search')){
                 if($(this).data('search') == 'price'){
-                    $('#searchAction').append('<li><a href="#" data-search="min_price">Prix minimal</a></li>');
-                    $('#searchAction').append('<li><a href="#" data-search="max_price">Prix maximal</a></li>');
+                    $('#searchAction').append('<li ><a class="dropdown-item"  href="#" data-search="min_price" style="color:black;">Prix minimal</a></li>');
+                    $('#searchAction').append('<li ><a class="dropdown-item"  href="#" data-search="max_price" style="color:black;">Prix maximal</a></li>');
                 }
                 else{
                     var nomColonne = $(this).html();
                     var dataSearch = $(this).data('search');
-                    $('#searchAction').append('<li><a href="#" data-search="'+dataSearch+'">'+nomColonne+'</a></li>');
+                    $('#searchAction').append('<li ><a class="dropdown-item"  href="#" data-search="'+dataSearch+'" style="color:black;">'+nomColonne+'</a></li>');
                 }
             }
       })
@@ -85,8 +94,10 @@ function selectSearchAction(i){
     actionItem.addClass('active');
     $('#selectedAction').html(action);
     if(action != "Recherche par"){
-    $('#valueSearch').attr('name',name)
+    $('#loupe').prop('disabled',false);
+    $('#valueSearch').attr('name',name);
     }
+    
     $('#actionInput').val(action);
 }
 // fonction qui permet d'envoyer les donnée au back sur le click de la loupe
@@ -136,5 +147,32 @@ $('#loupe').on('click',function(e){
             })
         }
     })
-
+    //envoie du status Utilisateur 
+    $('.status').on('click',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        var status = $(this).data('status');
+        var a = $(this);
+        $.ajax({
+            type: 'GET',
+            url: 'changeStatus',
+            data: 'id=' +id+'&status='+status,
+            success:function(data){
+                if(data == 0){
+                    $("#"+id).attr('class','btn btn-primary btn-xs pl-2 pr-2 ml-1');
+                    $("#"+id).html('Inactif');
+                
+                }
+                else if(data == 1){
+                    $("#"+id).attr('class','btn btn-info btn-xs pl-2 pr-2 ml-1');
+                    $("#"+id).html('Actif');
+                }
+                else {
+                    $("#"+id).attr('class','btn btn-dark btn-xs pl-2 pr-2 ml-1');
+                    $("#"+id).html('Expert');
+                }
+               
+            }
+        })
+    })
 });

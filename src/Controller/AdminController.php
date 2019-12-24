@@ -142,7 +142,7 @@ class AdminController extends AbstractController
                     //traitement de la date de fin en format jours mois année en string
                 $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
                 }
-                $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'cpu' => $subscriptions[$i]->getCpu()
+                $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'email'=>$user->getEmail(),'cpu' => $subscriptions[$i]->getCpu()
                 ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
                 ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
                 ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
@@ -206,4 +206,21 @@ class AdminController extends AbstractController
         $em->flush();
         return new Response('ok');
     }
+     /**
+     * @Route("/changeStatus", name="changeStatus")
+     * 
+     * change le status de l'utilisateur en bdd.
+     */
+    public function changeStatus(Request $request , UserRepository $userRepo, EntityManagerInterface $em){
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $id = $request->query->get('id');
+        $status = $request->query->get('status');
+        $user = $userRepo->find($id);
+        $user->setStatus($status);
+        $em->persist($user);
+        $em->flush();
+       return new Response($status);
+    }
+
+
 }
