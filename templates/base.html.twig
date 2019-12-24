@@ -409,21 +409,22 @@
     {# Chargement de la barre recherche pour les paginations #}
     <div id="recherche" style="display: none;">   
                 <div class="row">
-              <div class="col-md-4 offset-md-1">
-                <div class="input-group"> 
-                  <div class="input-group-btn">
-                      <button id="actionButton" style="background:#0069d9;color: #fff;  border-radius: 0; font-size: 0.93em"type="button" class="btn btn-search dropdown-toggle ml-2" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret ml-1"></span></button>
-                    <div id="searchAction" class="dropdown-menu" role="menu">
-                    </div>
-                  </div><!-- /btn-group -->
-                  <input id="valueSearch" class="form-control" type="text" placeholder="Recherche"
-                aria-label="Search">
-                 <button id="loupe" style="background:#0069d9;color: #fff; border-radius: 0; font-size: 0.9em" class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i></button>
-                  <input id="actionInput" type="hidden" value=""> 
-                  <span class="input-group-addon"><a><span class="glyphicon glyphicon-search"></span></a> </span>
-                </div><!-- /input-group -->
-              </div><!-- /.col-lg-6 -->
-          
+                <form class="offset-md-1">
+                    <div class="col-md-12">
+                      <div class="input-group"> 
+                        <div class="input-group-btn">
+                            <button id="actionButton" style="background:#515559;color: #fff;  font-size: 0.93em"type="button" class="btn btn-search dropdown-toggle ml-2" data-toggle="dropdown" aria-expanded="false"><span id="selectedAction">Recherche par </span><span class="caret ml-1"></span></button>
+                          <div id="searchAction" class="dropdown-menu" role="menu">
+                          </div>
+                        </div><!-- /btn-group -->
+                        <input id="valueSearch" class="form-control" type="text" placeholder="Recherche"
+                      aria-label="Search">
+                      <button id="loupe" type="submit" style="background:#515559;color: #fff;  font-size: 0.9em" class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i></button>
+                        <input id="actionInput" type="hidden" value=""> 
+                        <span class="input-group-addon"><a><span class="glyphicon glyphicon-search"></span></a> </span>
+                      </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form>
             </div><!-- /.row -->
             
 </div>
