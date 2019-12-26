@@ -202,22 +202,27 @@ class NavigationController extends Controller
         $facture = new Facture();
         $dateMois = date('m');
         $dateAnnee = date('Y');
+        $joursMois = date('t');
+        $DernierJoursDuMois= new DateTime('last day of this month');
         $dateEdition = new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);
         $dateEcheance= new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);
         $premierDuMois = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
 
         $user=$this->getUser();
         $totalPrice = 0;
-        $factureAll= $factRepo->findAll();
 
         $subscriptions = $user->getSubscriptions(); 
         foreach($subscriptions as $sub){
-            if($sub->getDateSub() >= $premierDuMois && isset($factureAll) ){
+            if($sub->getDateSub() >= $premierDuMois){
                 $totalPrice = $totalPrice + $sub->getPrice();
+                // $prixJours = $totalPrice / $joursMois;
+                // $joursRestant = $DernierJoursDuMois->fo - $sub->getDateSub();
+                // $prixTotal = $priceDays * $joursRestant;
+
                 $facture->setDateEcheance($dateEcheance);
                 $facture->setDateEdition($dateEdition);
                 $facture->setIdUser($user);
-                $facture->setEtat("Payé");
+                $facture->setEtat("En attente");
                 $facture->setPrice($totalPrice * 1.2);
                 $facture->setNumeroFacture('000'.$user->getId().$dateEdition->format('my').'-'.'000'.$facture->getId());
                 $em->persist($facture);
@@ -242,7 +247,7 @@ class NavigationController extends Controller
         $dateMois = date('m');
         $dateAnnee = date('Y');
         $premierDuMois = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
-        $DernierJoursDuMois= new DateTime('last day of this year');
+        $DernierJoursDuMois= new DateTime('last day of this month');
         //On défini nos variables
         $user=$this->getUser();
         $subscriptions = $user->getSubscriptions(); 
