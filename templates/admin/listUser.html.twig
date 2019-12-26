@@ -8,6 +8,7 @@
                 <th scope="col" data-search="email">Email</th>
                 <th scope="col" >Status</th>
                 <th scope="col" >Souscriptions</th>
+                <th class="text-center" scope="col">Option</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
                     </div></td>
                     {% endif %}
                     <td>{{ user.count }}</td>
+                    <td class="text-center "><a class='btn btn-success btn-xs pr-2 pl-2 tabAccueil' data-target="modifUser" data-id="{{ user.id }}" style="color: #FFF" href="#">Modifier</a></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -53,3 +55,4 @@
      {{ knp_pagination_render(users) }}
 </div>
 <script src="js/pagination.js"></script>
+<script src="js/Nav.js"></script>

@@ -75,7 +75,7 @@
                   </thead>
                   <tbody>
                   {% for allSub in souscription %}
-                    <tr class="tabAccueil" data-id="{{ allSub.id }}" data-class="{{ allSub.type }}" style="cursor: pointer">
+                    <tr class="tabAccueil" data-id="{{ allSub.id }}" data-target ="info" data-class="{{ allSub.type }}" style="cursor: pointer">
                       <td>{{ allSub.name }}</td>
                       <td>{{ allSub.headline }}</td>
                       <td>{{ allSub.type }}</td>

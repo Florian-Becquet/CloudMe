@@ -1,0 +1,97 @@
+
+<style>
+body{
+    margin-top:20px;
+    background:#f8f8f8
+}
+</style>
+<div class="container">
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+                <div class="text-right">
+                    <div><small>Membre depuis le {{user.dateInscription|date('d/m/Y')}}</small></div>
+                </div>
+                {{ form_start(formProfil) }}
+                {{ form_widget(formProfil._token) }}
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col">
+                            <label>Nom de l'entreprise</label>
+                            {{ form_row(formProfil.society_name) }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <label>Nom</label>
+                              {{ form_row(formProfil.name) }}
+                          </div>
+                          <div class="col">
+                              <label>Prenom</label>
+                              {{ form_row(formProfil.first_name) }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <label>Email</label>
+                              {{ form_row(formProfil.email) }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <label>Adresse</label>
+                              {{ form_row(formProfil.adresse) }}
+                          </div>
+                        </div>
+                    </div>
+                      <div class="col-12 col-sm-6 mb-3">
+                          <div class="row">
+                            <div class="col">
+                              <label>Forme Juridique</label>
+                                {{ form_row(formProfil.forme_juridique) }}
+                            </div>
+                            <div class="col">
+                              <label>Numéro de SIRET</label>
+                              {{ form_row(formProfil.num_siret) }}
+                            </div>
+                          </div>
+                          <div class="col">
+                              <label>Numero de téléphone</label>
+                              {{ form_row(formProfil.numero_tel) }}
+                        </div>
+                        <div class="col">
+                              <label>Pays</label>
+                              {{ form_row(formProfil.pays) }}
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <label>Code Postal</label>
+                              {{ form_row(formProfil.codePostal) }}
+                          </div>
+                          <div class="col">
+                              <label>Ville</label>
+                              {{ form_row(formProfil.ville) }}
+                          </div>
+                          <input type="hidden" name="id" value ="{{ user.id }}">
+                        </div>
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Sauvegarder</button>
+                    </div>
+                    {{ form_start(formProfil) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+</div>

@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Form\AccountType;
 use App\Repository\UserRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -221,6 +222,29 @@ class AdminController extends AbstractController
         $em->flush();
        return new Response($status);
     }
+    /**
+     * @Route("/modifUser", name="modifUser")
+     * 
+     * Modifie les données d'un user par l'Admin.
+     */
+    public function modifUser(Request $request,UserRepository $userRepo){
+        
+        $id = $request->request->get('id');
+        $user = $userRepo->find($id);
+        $form = $this->createForm(AccountType::class, $user,['action' => $this->generateUrl('modifUser')]); // Créer un formulaire
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) { // Si le formulaire est valide et qu'il est envoyé
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            
+            $this->addFlash('success','Le profil a bien été modifié');
+            return $this->redirectToRoute('home');
+        }
 
-
+        return $this->render('admin/modifyUser.html.twig', [
+            'formProfil'=> $form->createView(),'user' => $user
+        ]);
+       
+    }
 }

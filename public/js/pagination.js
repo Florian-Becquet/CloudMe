@@ -102,6 +102,7 @@ function selectSearchAction(i){
 }
 // fonction qui permet d'envoyer les donnée au back sur le click de la loupe
 $('#loupe').on('click',function(e){
+    e.preventDefault();
     $(this).off("click");
     var valeur = $('#valueSearch').val();
     var name = $('#valueSearch').attr('name');
