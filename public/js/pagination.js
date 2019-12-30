@@ -176,4 +176,20 @@ $('#loupe').on('click',function(e){
             }
         })
     })
+    $('.unsub').on('click',function(e){
+        var id = $(this).data('id');
+        var target = $(this).data('target');
+        var msgConfirm = "Voulez vous vraiment désactivé cette souscrption";
+        if (confirm(msgConfirm)){
+        $.ajax({
+            type:"POST",
+            url: target,
+            data :"id=" + id,
+            success:function(data){
+                console.log(data);
+                $('#'+id).children('.dateUnSub').html(data);
+            }
+        })
+        }
+    })
 });

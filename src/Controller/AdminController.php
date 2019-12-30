@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Form\AccountType;
 use App\Repository\UserRepository;
 use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
-use Knp\Component\Pager\PaginatorInterface;
 
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,7 @@ class AdminController extends AbstractController
     {
         $subscriptions = array();
         $countSub = array();
+        
         $i=0;
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $dataInput = $request->query->get('input');
@@ -122,6 +124,9 @@ class AdminController extends AbstractController
                                 //traitement de la date de fin en format jours mois année en string
                             $dateFin = $subscriptions[$j][$i]->getDateFin()->format('d-m-Y');
                             }
+                            else{
+                                $dateFin = null;
+                            }
                             $paginateSub[$k] = ['name' => $user[$j]->getName(),'firstName' => $user[$j]->getFirstName(),'email'=>$user[$j]->getEmail(),'cpu' => $subscriptions[$j][$i]->getCpu()
                             ,'ram' =>  $subscriptions[$j][$i]->getRam(),'space' =>  $subscriptions[$j][$i]->getDiskSpace()
                             ,'price' =>  $subscriptions[$j][$i]->getPrice(),'dateSub' =>  $dateSub
@@ -144,6 +149,9 @@ class AdminController extends AbstractController
                     //traitement de la date de fin en format jours mois année en string
                 $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
                 }
+                else{
+                    $dateFin = null;
+                }
                 $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'email'=>$user->getEmail(),'cpu' => $subscriptions[$i]->getCpu()
                 ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
                 ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
@@ -164,6 +172,9 @@ class AdminController extends AbstractController
             if($subscriptions[$i]->getDateFin() != null){
                 //traitement de la date de fin en format jours mois année en string
             $dateFin = $subscriptions[$i]->getDateFin()->format('d-m-Y');
+            }
+            else{
+                $dateFin = null;
             }
             $paginateSub[$i] = ['name' => $user->getName(),'firstName' => $user->getFirstName(),'email' => $user->getEmail(),'cpu' => $subscriptions[$i]->getCpu()
             ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
@@ -271,4 +282,22 @@ class AdminController extends AbstractController
             return $this->render('admin/changePrice.html.twig', ['prices' => $tabPrice]);
         }
     }
+     /**
+     * @Route("/unsub", name="unsub")
+     * 
+     * Désabonner un utilisateur par l'Admin
+     */
+    public function unSub(Request $request, SubscriptionRepository $subRepo,EntityManagerInterface $em){
+        $id = $request->request->get('id');
+        $sub = $subRepo->find($id);
+        $dateUnSub = new DateTime();
+        $sub->setDateFin($dateUnSub);
+        $em->persist($sub);
+        $em->flush();
+        $date = $dateUnSub->format('d-m-Y');
+        return new Response($date);
+
+    }
+
 }
+
