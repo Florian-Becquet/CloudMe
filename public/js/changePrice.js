@@ -1,6 +1,7 @@
 $(document).ready(function(){
     //au click sur le bouton changePrice
     $('#changePrice').on('click', function(e){
+        $("br").remove();
         e.preventDefault();
         var tabPrice = [];
         var i = 0;
