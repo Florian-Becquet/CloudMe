@@ -47,7 +47,10 @@
                     </div></td>
                     {% endif %}
                     <td>{{ user.count }}</td>
-                    <td class="text-center "><a class='btn btn-success btn-xs pr-2 pl-2 tabAccueil' data-target="modifUser" data-id="{{ user.id }}" style="color: #FFF" href="#">Modifier</a></td>
+                    <td class="text-center ">
+                    <a class='btn btn-success btn-xs pr-2 pl-2 tabAccueil' data-target="modifUser" title="Modifier les données de l'utilisateur"data-id="{{ user.id }}" style="color: #FFF" href="#">Modifier</a>
+                   
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

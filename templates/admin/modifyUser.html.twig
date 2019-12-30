@@ -79,6 +79,10 @@ body{
                               <label>Ville</label>
                               {{ form_row(formProfil.ville) }}
                           </div>
+                            <div class="col">
+                              <label>Remise</label>
+                              {{ form_row(formProfil.remise) }}
+                          </div>
                           <input type="hidden" name="id" value ="{{ user.id }}">
                         </div>
                       <div class="col d-flex justify-content-end">

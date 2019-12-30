@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 
 class AccountType extends AbstractType
 {
@@ -14,6 +15,9 @@ class AccountType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
+                'label' => false])
+
+            ->add('remise', PercentType::class, [
                 'label' => false])
 
             ->add('name', TextType::class, [
