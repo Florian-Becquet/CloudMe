@@ -24,22 +24,26 @@
       </div>
       <table style="margin-top:190px;font-size:20px;">
           <tr>
-            <th>REFERENCE</th>
-            <th>DESIGNATION</th>
-            <th>TOTAL HT</th>
+            <th style="width: 10%">Référence</th>
+            <th >Désgnation</th>
+            <th style="width: 5%">Qte</th>
+            <th style="width: 10%">PU HT</th>
+            <th style="width: 10%">Total HT</th>
           </tr>
           {% for data in userSub %}
         <tbody>
           <tr>
             <td>{{data.subname | upper}}</td>
             <td>{{data.headline}} du {{data.dateSub | date('d/m/Y')}} au {{data.lastDays | date('d/m/Y')}}</td>
+            <td>1</td>
+            <td>{{data.price * 1}}€</td>
             <td>{{data.price}}€</td>
           </tr>
         </tbody>
         {% endfor %}
       </table>
       
-      <table style="width:45%;font-size:18px; margin-left:300%;">
+      <table style="width:45%;font-size:18px; margin-left:294%;">
           <tr>
             <th scope="col">Total HT</th>
             <th scope="col">Taux TVA</th>
@@ -48,7 +52,7 @@
           </tr>
         <tbody>
            <tr>
-            <th>{{totalPrice }}€</th>
+            <td>{{totalPrice }}€</td>
             <td>20,00%</td>
             <td>{{totalPrice / 100 * 20}}€</td>
             <td>{{totalPrice * 1.2}}€</td>
