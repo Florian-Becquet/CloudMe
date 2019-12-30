@@ -176,6 +176,7 @@ $('#loupe').on('click',function(e){
             }
         })
     })
+    //Sur le click de l'icone poubelle call ajax pour envoyer la désactivation de la souscription
     $('.unsub').on('click',function(e){
         var id = $(this).data('id');
         var target = $(this).data('target');
