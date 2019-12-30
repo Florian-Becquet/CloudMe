@@ -242,11 +242,33 @@ class AdminController extends AbstractController
     /**
      * @Route("/changePrice", name="changePrice")
      * 
-     * change les prix de la config
+     * change les prix des services
      */
-    public function changePrice(PricingRepository $pricingRepo){
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $tabPrice = $pricingRepo->findAll();
-        return $this->render('admin/changePrice.html.twig', ['prices' => $tabPrice]);
+    public function changePrice(PricingRepository $pricingRepo, Request $request, EntityManagerInterface $em){
+        //Si il y a une requete avec newPrice on decode NewPrice et on va chercher les valeurs existantes des prix dans la bdd
+        if($request->request->get('newPrice')){
+            $newPrices = $request->request->get('newPrice');
+            $newPrices = json_decode($newPrices);
+            $currentPrice = $pricingRepo->findAll();
+            //on parcours le tableau currentPrice et le tableau newPrice
+            for($i=0; $i<count($currentPrice); $i++){
+                for($j=0; $j<count($newPrices);$j++){
+                    //si la categorie du prix courant  et egales a la categories envoyé dans newPrice on set le nouveau prix
+                    if($currentPrice[$i]->getCategories() == $newPrices[$j]->categories){
+                        $currentPrice[$i]->setPrice($newPrices[$j]->prix);
+                        $em->persist($currentPrice[$i]);
+                    }
+                }
+            }
+            //on envoie en bdd
+            $em->flush();
+            return new Response('success');
+            
+        }
+        else{
+            $this->denyAccessUnlessGranted('ROLE_ADMIN');
+            $tabPrice = $pricingRepo->findAll();
+            return $this->render('admin/changePrice.html.twig', ['prices' => $tabPrice]);
+        }
     }
 }
