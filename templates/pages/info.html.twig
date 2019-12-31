@@ -1,7 +1,15 @@
 
 {% for data in info %}
-    <h3 class="lead text-center mb-5"> Données du service : {{ data.headline }}</h3>
- 
+    <h3 class="lead text-center mb-1"> Données du service : {{ data.headline }}</h3>
+    <h4 class="lead text-center mb-4"> Coût de la configuration : <strong>{{ data.price }}€/mois</strong></h4>
+    {% if data.status != 0 %}
+      <div  class="alert alert-danger col-md-4 offset-md-4 mb-2" >
+        Votre abonnement a ce service s'arrete le {{ data.dateFin | date('d/m/Y')}}
+      </div>
+      {% endif %}
+        <div id="finSub" class="alert alert-danger col-md-4 offset-md-4 mb-2" style="display: none;">
+        
+      </div>
     <div class="container ">
     <div class="row custyle">
     <div class="col-md-12 table-responsive mb-5">
@@ -47,13 +55,15 @@
                 <a class='btn btn-success btn-xs pl-2 pr-2' title="Lancer le serveur"href="#"><span class="fas fa-play"></span></a> 
                 <a href="#" title="Arreter le serveur"class="btn btn-danger btn-xs pl-2 pr-2"><span class="fas fa-stop"></span></a>
                 <div class="btn-group dropup">
-                        <a class='btn btn-warning btn-xs pl-2 pr-2 ml-1' data-toggle="dropdown"  title="Options"href="#"><i class="fa fa-caret-up"  style="color:white;"></i></a>
+                        <a class='btn btn-warning btn-xs pl-2 pr-2 ' data-toggle="dropdown"  title="Options"href="#"><i class="fa fa-caret-up"  style="color:white;"></i></a>
                         <div class="dropdown-menu ">
                              <a class='btn btn-info btn-xs pl-2 pr-2 ml-4'   title="Options"href="#"><i class="fas fa-cog "  style="color:white;"></i></a>
                              <a class='btn btn-primary btn-xs pl-2 pr-2 ml-2'   title="Options"href="#"><i class="fas fa-cog "  style="color:white;"></i></a>
                              <a class='btn btn-dark btn-xs pl-2 pr-2 ml-2'   title="Options"href="#"><i class="fas fa-cog "  style="color:white;"></i></a>
                         </div>
+                          
                 </div>
+                <a class='btn btn-danger btn-xs pr-2 pl-2 ' data-target="unsubUser" data-id="{{ data.id }}" id="unSub" title="Se désabonner"  style="color: #FFF" href="#"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
           

@@ -288,11 +288,11 @@ class AdminController extends AbstractController
      * Désabonner un utilisateur par l'Admin
      */
     public function unSub(Request $request, SubscriptionRepository $subRepo,EntityManagerInterface $em){
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $id = $request->request->get('id');
+        $id = $request->request->get('id'); $id = $request->request->get('id');
         $sub = $subRepo->find($id);
         $dateUnSub = new DateTime();
         $sub->setDateFin($dateUnSub);
+        $sub->setStatus(1);
         $em->persist($sub);
         $em->flush();
         $date = $dateUnSub->format('d-m-Y');
