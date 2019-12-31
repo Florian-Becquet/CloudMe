@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -23,11 +24,15 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas une adresse mail valide."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * 
      */
     private $roles = [];
 
@@ -49,6 +54,12 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      min = 14,
+     *      max = 14,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $num_siret;
 
@@ -74,6 +85,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[0-9]{5}$/")
      */
     private $code_postal;
 
