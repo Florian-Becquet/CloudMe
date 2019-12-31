@@ -10,7 +10,6 @@
         <h1 class="text-center"> Bonjour {{app.user.name}} {{app.user.firstName}}</h1>
         <hr>
         {% if souscription %}
-        {% for data in service %}
       <div class="row mt-4 justify-content-center text-right">
           <div class="col-12 col-sm-4 col-md-3">
             <div class="info-box">
@@ -19,7 +18,7 @@
                 <span class="info-box-text text-center">CPU(Global)</span>
                 <span class="info-box-text">Capacité</span>
                 <span class="info-box-number">
-                  {{data.CPU}}
+                  {{ CPU }} / {{ maxCpu }}
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -34,7 +33,7 @@
               <div class="info-box-content">
                 <span class="info-box-text text-center">RAM (Global) </span>
                 <span class="info-box-text">Capacité</span>
-                <span class="info-box-number">12/{{data.RAM}}GB</span>
+                <span class="info-box-number">{{ RAM }}/{{ maxRam }} GB</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -53,7 +52,7 @@
                 <span class="info-box-text text-center">Disque(Global)</span>
                 <span class="info-box-text">Capacité</span>
                 <span class="info-box-number">
-                  {{data.Disque}}/15TO
+                {{ Disque }} / {{ maxDisk }} GB
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -62,7 +61,6 @@
           </div>
           <!-- /.col -->
       </div>
-      {% endfor %}
       <div class="col-md-9 mr-auto ml-auto">
         <table class="table table-head-fixed table-striped table-hover table-bordered table-sm">
                   <thead>

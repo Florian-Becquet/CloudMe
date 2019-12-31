@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Subscription;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Subscription|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,6 +22,7 @@ class SubscriptionRepository extends ServiceEntityRepository
 
      /**
       * @return Subscription[] Returns an array of Subscription objects
+      * @parameters: the value we are looking for and the column to look for it in the table
       */
     
     public function findByParameters($value,$col)
@@ -65,6 +67,20 @@ class SubscriptionRepository extends ServiceEntityRepository
         }
     }
     
+    /**
+     * fonction qui va calculer la somme d'une colonne pour un user 
+     *
+     * @param [string] $col
+     * @param [int] $userId
+     */
+    public function getSumSubByUser($col, $userId){
+        return $this->createQueryBuilder('s')
+        ->andWhere('s.id_user = :user')
+        ->setParameter('user', $userId)
+        ->select("SUM(s.".$col.") as result")
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Subscription

@@ -66,9 +66,10 @@ class NavigationController extends Controller
      /**
      * @Route("/intro", name="intro")
      */
-    public function intro(Request $request, ServicesRepository $serviceRepo){
+    public function intro(Request $request, ServicesRepository $serviceRepo, SubscriptionRepository $subRepo){
         $user = $this->getUser();
         $allSub = array();
+        $idUser = $user->getId();
         $subscriptions = $user->getSubscriptions();
         for($i=0; $i<count($subscriptions);$i++){
             $id_serv = $subscriptions[$i]->getIdServices();
@@ -77,10 +78,16 @@ class NavigationController extends Controller
         }
         $id = $request->request->get('id');
 
-        //fausses données 
-        $metrics = array (['CPU' => '24', 'RAM' => '32','Disque'=>'15','id' => 1]);
+        //methode pour rechercher la somme de cpu/ram/disk_space pour les souscriptions d'un user
+        $sumCpu = $subRepo->getSumSubByUser('cpu', $idUser);
+        $sumRam = $subRepo->getSumSubByUser('ram', $idUser);
+        $sumDisk = $subRepo->getSumSubByUser('disk_space', $idUser);
+        $countSub = count($subscriptions);
+        $maxDisk = $countSub * 500;
+        $maxRam = $countSub * 16;
+        $maxCpu = $countSub * 8;
         
-        return $this->render('pages/home.html.twig', ['service'=>$metrics, 'souscription' => $allSub]);
+        return $this->render('pages/home.html.twig', ['maxCpu' => $maxCpu,'maxRam' => $maxRam,'maxDisk' => $maxDisk, 'CPU' => $sumCpu, 'RAM' => $sumRam,'Disque'=>$sumDisk, 'souscription' => $allSub]);
     }     
     /**
      * @Route("/formSub", name="formSub")
