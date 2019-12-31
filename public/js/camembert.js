@@ -91,7 +91,7 @@ $('#imgRetention').on('click',function(event){
     }
 
 });
-
+//cacher la div retention data on click de la fenetre 
 $(window).click(function()
 {
     $('#retentionData').css('display','none');
@@ -101,3 +101,34 @@ $('#retentionData').click(function(event)
 {
  event.stopPropagation();
 });
+var date = new Date();
+// désabonner une souscription 
+$('#unSub').on('click',function(){
+    var date = new Date();
+    var month = date.getMonth() + 1
+    var id = $(this).data('id');
+    var target = $(this).data('target');
+    //fonction qui retourne le nombre de jours dans un mois
+    function nombreJour( mois, annee){
+        return new Date( annee, mois+1, 0).getDate();
+      }
+      const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                            "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+                            ];
+      var msgConfirm = "Votre abonnement prendra fin le"+ " " + nombreJour(date.getMonth(),date.getFullYear()) + " " + monthNames[date.getMonth()] +" "+ date.getFullYear() + "\n" +"êtes vous sur de vouloir supprimer cette abonnement?";
+      if (confirm(msgConfirm)){
+        $.ajax({
+            type:"POST",
+            url: target,
+            data :"id=" + id,
+            success:function(data){
+                if(data == "success"){
+                    $('#finSub').css('display','block');
+                    $('#finSub').html('Votre abonnement a ce service s\'arrêtera le' + " " +nombreJour(date.getMonth(),date.getFullYear())+"/"+ month +"/"+ date.getFullYear())
+                     
+                }
+              
+            }
+        })
+      }
+})

@@ -20,6 +20,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -31,6 +32,7 @@ class NavigationController extends Controller
      */
     public function home(ServicesRepository $serviceRepo){
         $user = $this->getUser();
+        $date = new DateTime;
         $vps = array();
         $serveur = array();
         $bureauVirtuel = array();
@@ -38,6 +40,7 @@ class NavigationController extends Controller
         $allSub = array();
         $subscriptions = $user->getSubscriptions();
         for($i=0; $i<count($subscriptions);$i++){
+            if($subscriptions[$i]->getDateFin() > $date || $subscriptions[$i]->getDateFin() == null ){
             $id_serv = $subscriptions[$i]->getIdServices();
             $serv = $serviceRepo->findOneBy(['id' => $id_serv]);
             if($serv->getServiceType() == "vps"){
@@ -58,7 +61,7 @@ class NavigationController extends Controller
                 $bdd[$countBdd] = ['name' => $subscriptions[$i]->getSubName(),'id' => $subscriptions[$i]->getId()];
             }
         }
-           
+    }   
         return $this->render('base.html.twig' , ['vps' => $vps , 'serveur' => $serveur, 'bureauVirtuel' => $bureauVirtuel,'bdd' => $bdd]);
     }
   
@@ -179,7 +182,9 @@ class NavigationController extends Controller
             
         }
 
-        $result = array(['headline' => $serv->getHeadline(), 'name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam(),'space'=> $info->getDiskSpace() ]);
+        $result = array(['headline' => $serv->getHeadline(), 'name' => $info->getSubName(),'ip' => $info->getIP(),'protection' => $protection
+        ,'replication' => $replication,'status' => $info->getStatus(),'backup' => $info->getBackup(),'cpu'=> $info->getCpu(),'ram' => $info->getRam()
+        ,'space'=> $info->getDiskSpace(),'price' =>$info->getPrice(),'id' => $info->getId(),'dateFin' => $info->getDateFin() ]);
         
         return $this->render('pages/info.html.twig',['info' => $result,'retention'=>$retention]);
     }
@@ -311,5 +316,23 @@ class NavigationController extends Controller
 
         return $this->render('pages/monProfil.html.twig', [
             'formProfil'=> $form->createView(),
-        ]);}
+        ]);
+    }
+     /**
+     * @Route("/unsubUser", name="unsubUser")
+     * 
+     * L'utilisateur se désabonne
+     */
+    public function unSubUser(Request $request, SubscriptionRepository $subRepo,EntityManagerInterface $em){
+        $id = $request->request->get('id');
+        $sub = $subRepo->find($id);
+        $dateUnSub = new DateTime();
+        $sub->setDateFin($dateUnSub);
+        $sub->setStatus(1);
+        $em->persist($sub);
+        $em->flush();
+        $date = $dateUnSub->format('d-m-Y');
+        return new Response("success");
+
+    }
 }
