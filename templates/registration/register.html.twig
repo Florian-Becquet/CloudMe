@@ -28,7 +28,16 @@
   <div class="card col-12 text-center">
     <div class="card-body register-card-body ml-4 " >
       <p class="login-box-msg">Créer un compte</p>
-  
+    {% if not registrationForm.vars.valid %}
+    <ul class="alert alert-danger">
+        {# ainsi que les erreurs concernant chaque champs #}
+        {% for child in registrationForm.children %}
+            {% for error in child.vars.errors %}
+                <li>{{error.message}} </li> {# on ajoute le label du champ devant l'erreur pour plus de précisions. #}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
       {{ form_start(registrationForm) }}
         <div class="input-group mb-3 d-flex justify-content-around">
         <div class="d-flex" >
