@@ -291,12 +291,15 @@ class AdminController extends AbstractController
         $id = $request->request->get('id'); $id = $request->request->get('id');
         $sub = $subRepo->find($id);
         $dateUnSub = new DateTime();
-        $sub->setDateFin($dateUnSub);
+        $date = new DateTime('now');
+        $date->modify('last day of this month');
+        $date->format('Y-m-d');
+        $sub->setDateFin($date);
         $sub->setStatus(1);
         $em->persist($sub);
         $em->flush();
-        $date = $dateUnSub->format('d-m-Y');
-        return new Response($date);
+        $dateU = $dateUnSub->format('d-m-Y');
+        return new Response($dateU);
 
     }
 

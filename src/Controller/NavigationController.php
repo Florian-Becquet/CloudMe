@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use DateInterval;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\User;
@@ -32,7 +33,7 @@ class NavigationController extends Controller
      */
     public function home(ServicesRepository $serviceRepo){
         $user = $this->getUser();
-        $date = new DateTime;
+        $date = new DateTime('-1 day');
         $vps = array();
         $serveur = array();
         $bureauVirtuel = array();
@@ -40,7 +41,7 @@ class NavigationController extends Controller
         $allSub = array();
         $subscriptions = $user->getSubscriptions();
         for($i=0; $i<count($subscriptions);$i++){
-            if($subscriptions[$i]->getDateFin() > $date || $subscriptions[$i]->getDateFin() == null ){
+            if($subscriptions[$i]->getDateFin() >= $date || $subscriptions[$i]->getDateFin() == null ){
             $id_serv = $subscriptions[$i]->getIdServices();
             $serv = $serviceRepo->findOneBy(['id' => $id_serv]);
             if($serv->getServiceType() == "vps"){
@@ -326,13 +327,30 @@ class NavigationController extends Controller
     public function unSubUser(Request $request, SubscriptionRepository $subRepo,EntityManagerInterface $em){
         $id = $request->request->get('id');
         $sub = $subRepo->find($id);
-        $dateUnSub = new DateTime();
-        $sub->setDateFin($dateUnSub);
+        
+        $date = new DateTime('now');
+        $date->modify('last day of this month');
+        $date->format('Y-m-d');
+        $sub->setDateFin($date);
         $sub->setStatus(1);
         $em->persist($sub);
         $em->flush();
-        $date = $dateUnSub->format('d-m-Y');
+        
         return new Response("success");
 
+    }
+    /**
+     * @Route("/reSubUser", name="reSubUser")
+     * 
+     * L'utilisateur se réabonne
+     */
+    public function reSubUser(Request $request,SubscriptionRepository $subRepo,EntityManagerInterface $em) {
+        $id = $request->request->get('id');
+        $sub = $subRepo->find($id);
+        $sub->setDateFin(null);
+        $sub->setStatus(0);
+        $em->persist($sub);
+        $em->flush();
+        return new Response('success');
     }
 }

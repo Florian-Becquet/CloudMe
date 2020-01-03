@@ -1,4 +1,19 @@
-
+$('#reSub').on('click',function(){
+    var id = $(this).data('id');
+    var target = $(this).data('target');
+    var msgConfirm = "Êtes vous sur de vouloir vous réabonner a ce service ?"
+    if(confirm(msgConfirm)){
+                $.ajax({
+                type:"POST",
+                url: target,
+                data :"id=" + id,
+                success:function(data){
+                    
+                    $('#subFin').css('display','none');
+                }
+            })
+            }
+})
 //recupération des données cpu dans la div stockage.
 var cpu = $('#stockage').children('#cpu').html();
 
@@ -105,7 +120,14 @@ var date = new Date();
 // désabonner une souscription 
 $('#unSub').on('click',function(){
     var date = new Date();
+    var messageMonth = "";
     var month = date.getMonth() + 1
+    if(month < 10){
+        messageMonth = "0"+month;
+    }
+    else {
+        messageMonth = month;
+    }
     var id = $(this).data('id');
     var target = $(this).data('target');
     //fonction qui retourne le nombre de jours dans un mois
@@ -124,11 +146,13 @@ $('#unSub').on('click',function(){
             success:function(data){
                 if(data == "success"){
                     $('#finSub').css('display','block');
-                    $('#finSub').html('Votre abonnement a ce service s\'arrêtera le' + " " +nombreJour(date.getMonth(),date.getFullYear())+"/"+ month +"/"+ date.getFullYear())
+                    $('#finSub').html('Votre abonnement a ce service s\'arrêtera le' + " " +nombreJour(date.getMonth(),date.getFullYear())+"/"+ messageMonth +"/"+ date.getFullYear())
                      
                 }
               
             }
         })
       }
+
+     
 })
