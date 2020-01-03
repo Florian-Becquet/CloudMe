@@ -1,7 +1,7 @@
 <div class="col-10 ml-auto mr-auto">
 
 <i id="loupeDisplay" class="fas fa-search mt-2 mb-2" aria-hidden="true"></i>
-    <table class="table table-striped table-hover table-bordered">
+    <table class="table table-striped table-hover table-bordered table-responsive">
     <thead>
         <tr id="liste" >
             <th scope="col" >Utilisateur</th>
@@ -29,9 +29,12 @@
                 <td>{{ sub.subName }}</td>
                 <td>{{ sub.price }}</td>
                  <td class="text-center ">
+                 {% if sub.status == 0 %}
                     <a class='btn btn-danger btn-xs pr-2 pl-2 unsub' data-target="unsub" data-id="{{ sub.id }}"title="Désactiver la souscription"  style="color: #FFF" href="#"><i class="fas fa-trash"></i></a>
-                   
-                    </td>
+                {% else %}
+                    <a class='btn btn-primary btn-xs pr-2 pl-2 resub' data-target="reSub" data-id="{{ sub.id }}"title="Réactiver la souscription"  style="color: #FFF" href="#"><i class="fas fa-redo"></i></a>
+                {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </tbody>

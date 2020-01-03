@@ -178,9 +178,10 @@ $('#loupe').on('click',function(e){
     })
     //Sur le click de l'icone poubelle call ajax pour envoyer la désactivation de la souscription
     $('.unsub').on('click',function(e){
+        var elem = $(this);
         var id = $(this).data('id');
         var target = $(this).data('target');
-        var msgConfirm = "Voulez vous vraiment désactivé cette souscrption";
+        var msgConfirm = "Voulez vous vraiment désactiver cette souscrption";
         if (confirm(msgConfirm)){
         $.ajax({
             type:"POST",
@@ -189,6 +190,26 @@ $('#loupe').on('click',function(e){
             success:function(data){
                 console.log(data);
                 $('#'+id).children('.dateUnSub').html(data);
+                elem.replaceWith('<a class="btn btn-success btn-xs pr-2 pl-2 " title="Souscription desactivé"  style="color: #FFF" href="#"><i class="fas fa-check"></i></a>');
+            }
+        })
+        }
+    })
+    //l'admin réactive une souscription
+    $('.resub').on('click',function(e){
+        var elem = $(this);
+        var id = $(this).data('id');
+        var target = $(this).data('target');
+        var msgConfirm = "Voulez vous vraiment réactiver cette souscrption";
+        if (confirm(msgConfirm)){
+        $.ajax({
+            type:"POST",
+            url: target,
+            data :"id=" + id,
+            success:function(data){
+                console.log(data);
+                $('#'+id).children('.dateUnSub').html("");
+                elem.replaceWith('<a class="btn btn-success btn-xs pr-2 pl-2 " title="Souscription active"  style="color: #FFF" href="#"><i class="fas fa-check"></i></a>');
             }
         })
         }

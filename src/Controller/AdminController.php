@@ -131,7 +131,7 @@ class AdminController extends AbstractController
                             ,'ram' =>  $subscriptions[$j][$i]->getRam(),'space' =>  $subscriptions[$j][$i]->getDiskSpace()
                             ,'price' =>  $subscriptions[$j][$i]->getPrice(),'dateSub' =>  $dateSub
                             ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$j][$i]->getSubName(),
-                            'id' =>  $subscriptions[$j][$i]->getId()];
+                            'id' =>  $subscriptions[$j][$i]->getId(), 'status' =>  $subscriptions[$j][$i]->getStatus()];
                             $k++;
                         }
                  
@@ -156,7 +156,7 @@ class AdminController extends AbstractController
                 ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
                 ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
                 ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
-                'id' =>  $subscriptions[$i]->getId()];
+                'id' =>  $subscriptions[$i]->getId(),  'status' =>  $subscriptions[$i]->getStatus()];
                 }
             }
         }
@@ -180,7 +180,7 @@ class AdminController extends AbstractController
             ,'ram' =>  $subscriptions[$i]->getRam(),'space' =>  $subscriptions[$i]->getDiskSpace()
             ,'price' =>  $subscriptions[$i]->getPrice(),'dateSub' =>  $dateSub
             ,'dateFin' =>  $dateFin,'subName' =>  $subscriptions[$i]->getSubName(),
-            'id' =>  $subscriptions[$i]->getId()];
+            'id' =>  $subscriptions[$i]->getId(),  'status' =>  $subscriptions[$i]->getStatus()];
         }
     }
         //mise en place de la pagination par le tableau paginateSub alimenter dans la boucle au dessus
@@ -302,6 +302,19 @@ class AdminController extends AbstractController
         return new Response($dateU);
 
     }
-
+    /**
+     * @Route("/reSub", name="reSub")
+     * 
+     * L'admin réactive une souscription set date fin null et status a 0
+     */
+    public function reSubUser(Request $request,SubscriptionRepository $subRepo,EntityManagerInterface $em) {
+        $id = $request->request->get('id');
+        $sub = $subRepo->find($id);
+        $sub->setDateFin(null);
+        $sub->setStatus(0);
+        $em->persist($sub);
+        $em->flush();
+        return new Response('success');
+    }
 }
 
