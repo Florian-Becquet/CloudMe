@@ -19,6 +19,8 @@ BEGIN
     	FETCH cur_sub INTO user_price, id_user_facture;
         SELECT max(id) into countFacture from facture;
         set countFacture = countFacture + 1;
+        IF ISNULL(countFacture) THEN set idFacture = "0001";
+        END IF;
          IF countFacture <= 10 THEN set idFacture = CONCAT("000",countFacture);
         END IF;
         IF countFacture >= 10 AND  countFacture < 100 THEN set idFacture = CONCAT("00",countFacture);
