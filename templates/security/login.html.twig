@@ -27,7 +27,11 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Se connecter pour accéder à la plateforme</p>
-
+      {% if error %}
+      <div class="alert alert-danger text-center">
+        {{ error.messageKey | trans(error.messageData, 'security')}}
+      </div>
+      {% endif %}
       <form method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" name="email">
