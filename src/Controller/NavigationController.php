@@ -209,41 +209,11 @@ class NavigationController extends Controller
      * @Route("/infofacture", name="infofacture")
      */
     public function infofacture(FactureRepository $factRepo, EntityManagerInterface $em, SubscriptionRepository $subrepo){
-        $user = New user();
-        $date = New Date();
-        $facture = new Facture();
-        $dateMois = date('m');
-        $dateAnnee = date('Y');
-        $joursMois = date('t');
-        $DernierJoursDuMois= new DateTime('last day of this month');
-        $dateEdition = new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);
-        $dateEcheance= new DateTime('5'.'-'.$dateMois.'-'.$dateAnnee);
-        $premierDuMois = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
-
-        $user=$this->getUser();
-        $totalPrice = 0;
-
-        $subscriptions = $user->getSubscriptions(); 
-        foreach($subscriptions as $sub){
-            if($sub->getDateSub() >= $premierDuMois){
-                $totalPrice = $totalPrice + $sub->getPrice();
-                // $prixJours = $totalPrice / $joursMois;
-                // $joursRestant = $DernierJoursDuMois->fo - $sub->getDateSub();
-                // $prixTotal = $priceDays * $joursRestant;
-
-                $facture->setDateEcheance($dateEcheance);
-                $facture->setDateEdition($dateEdition);
-                $facture->setIdUser($user);
-                $facture->setEtat("En attente");
-                $facture->setPrice($totalPrice * 1.2);
-                $facture->setNumeroFacture('000'.$user->getId().$dateEdition->format('my').'-'.'000'.$facture->getId());
-                $em->persist($facture);
-                $em->flush();
-            }
-        }
+        $user = new User();
+        $user = $this->getUser();
         $userFacture= $factRepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
         return $this->render('pages/infoFacture.html.twig',
-        ['userFacture'=>$userFacture,'totalPrice'=>$totalPrice]);
+        ['userFacture'=>$userFacture]);
     }
 
     /**
