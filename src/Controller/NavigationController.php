@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use DateTime;
 use Dompdf\Dompdf;
+use App\Entity\TVA;
 use Dompdf\Options;
 use App\Entity\User;
 use App\Entity\Facture;
@@ -11,6 +12,7 @@ use App\Entity\Services;
 use App\Form\AccountType;
 use App\Entity\Subscription;
 use App\Form\SubscriptionType;
+use App\Repository\TVARepository;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Repository\FactureRepository;
@@ -195,7 +197,8 @@ class NavigationController extends Controller
 
         return $this->render('pages/infoMetrics.html.twig');
     }
-        /**
+    
+    /**
      * @Route("/forfait", name="forfait")
      */
     public function forfait(Request $request){
@@ -203,68 +206,6 @@ class NavigationController extends Controller
         $serveur = $this->getDoctrine()->getRepository(Services::class);
         $description = $serveur->findBy(['id' => $info]);
         return $this->render('pages/forfait.html.twig',['info' => $description]);
-    }
-
-    /**
-     * @Route("/infofacture", name="infofacture")
-     */
-    public function infofacture(FactureRepository $factRepo, EntityManagerInterface $em, SubscriptionRepository $subrepo){
-        $user = new User();
-        $user = $this->getUser();
-        $userFacture= $factRepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
-        return $this->render('pages/infoFacture.html.twig',
-        ['userFacture'=>$userFacture]);
-    }
-
-    /**
-     * @Route("/facture/{id}", name="facture")
-     */
-    public function facture(Facture $facture,SubscriptionRepository $subrepo,FactureRepository $factrepo,Request $request){
-        // On instancie tout ce qu'on a besoin
-        $user = new User();
-        $date = new DateTime();
-        $totalPrice = 0;
-        $i= 0;
-        $subMois = array();
-        $dateMois = date('m');
-        $dateAnnee = date('Y');
-        $premierDuMois = new DateTime('1'.'-'.$dateMois.'-'.$dateAnnee);
-        $DernierJoursDuMois= new DateTime('last day of this month');
-        //On défini nos variables
-        $user=$this->getUser();
-        $subscriptions = $user->getSubscriptions(); 
-        foreach($subscriptions as $sub){
-            if($sub->getDateSub() >= $premierDuMois){
-                $totalPrice = $totalPrice + $sub->getPrice();
-                $service = $sub->getIdServices();
-                $subMois[$i] = ['totalPrice'=>$totalPrice,'lastDays'=>$DernierJoursDuMois,'dateSub' => $sub->getDateSub(), 'subname' => $sub->getSubName(),'price'=>$sub->getPrice(),'headline' => $service->getHeadline() ];
-            }
-            $i ++;
-        } 
-
-        // Configure Dompdf avec ce qu'on à besoin
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-        $pdfOptions->setDpi(150);
-        // On instancie la librairie 
-        $dompdf = new Dompdf($pdfOptions);
-        
-        // La page ou la facturation ce trouve 
-        $html = $this->renderView('pages/facture.html.twig',['userSub'=>$subMois,'totalPrice'=>$totalPrice,'factureId' => $facture]);
-        
-        // Charge l'HTML avec la library
-        $dompdf->loadHtml($html);
-        
-        // (Optional) Choisir la taille de la feuille + mode portrait ou paysage
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Rendre le HMTL en PDF
-        $dompdf->render();
-
-        // Genere le PDF et le télécharge avec la date du jours
-        $dompdf->stream($user->getId().$date->format('d-m-Y'), [
-            "Attachment" => true, 
-        ]);
     }
 
     /**

@@ -52,10 +52,10 @@
           </tr>
         <tbody>
            <tr>
-            <td>{{totalPrice }}€</td>
+            <td>{{totalPrice}}€</td>
             <td>20,00%</td>
-            <td>{{totalPrice / 100 * 20}}€</td>
-            <td>{{totalPrice * 1.2}}€</td>
+            <td>{{totalPrice * tva.taux}}€</td>
+            <td>{{totalPrice * (tva.taux + 1)}}€</td>
           </tr> 
         </tbody>
       </table>

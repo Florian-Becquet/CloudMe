@@ -17,9 +17,9 @@
     <thead> 
     
         <tr>
-        {% if retention %}
-            <th></th>
-        {% endif %}
+            {% if retention %}
+              <th></th>
+            {% endif %}
             <th>Nom</th>
             <th>CPU</th>
             <th>RAM</th>
@@ -34,13 +34,11 @@
         </tr>
     </thead>
             <tr>
-            {% if retention %}
-                <td id="imgRetention">
-                <img  title="voir les sauvegardes de données"src="https://img.icons8.com/flat_round/24/000000/plus.png">
-                </td>
-            {% endif %}
-            
-            
+                {% if retention %}
+                    <td id="imgRetention">
+                    <img  title="voir les sauvegardes de données"src="https://img.icons8.com/flat_round/24/000000/plus.png">
+                    </td>
+                {% endif %}
                 <td>{{ data.name }}</td>
                 <td>{{data.cpu}}</td>
                 <td>{{ data.ram }}</td>
@@ -57,7 +55,7 @@
                 <div class="btn-group dropup">
                         <a class='btn btn-warning btn-xs pl-2 pr-2 ' data-toggle="dropdown"  title="Options"href="#"><i class="fa fa-caret-up"  style="color:white;"></i></a>
                         <div class="dropdown-menu ">
-                             <a class='btn btn-info btn-xs pl-2 pr-2 ml-4'   title="Options"href="#"><i class="fas fa-cog "  style="color:white;"></i></a>
+                             <a class='btn btn-info btn-xs pl-2 pr-2 ml-4'   title="Options"><i class="fas fa-cog"  style="color:white;"></i></a>
                              <a class='btn btn-primary btn-xs pl-2 pr-2 ml-2'   title="Options"href="#"><i class="fas fa-cog "  style="color:white;"></i></a>
                              <a class='btn btn-dark btn-xs pl-2 pr-2 ml-2'   title="Options"href="#"><i class="fas fa-cog "  style="color:white;"></i></a>
                         </div>
@@ -66,13 +64,41 @@
                 <a class='btn btn-danger btn-xs pr-2 pl-2 ' data-target="unsubUser" data-id="{{ data.id }}" id="unSub" title="Se désabonner"  style="color: #FFF" href="#"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
-          
-    </table>
-   
+          </table>
+                      <table class="table table-striped custab mx-auto saveTab" style="width:90%;display: none">
+              <thead>
+                <tr>
+                  <th>Sauvegarde</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Server</td>
+                  <td>17/11/2019</td>
+                  <td><a class='btn btn-success btn-xs pl-2 pr-2' title="Récuperer cette sauvegarde"href="#"><span class="fas fa-undo-alt"></span></a></td>
+                </tr>
+                <tr>
+                  <td>Server</td>
+                  <td>17/11/2019</td>
+                  <td><a class='btn btn-success btn-xs pl-2 pr-2' title="Récuperer cette sauvegarde"href="#"><span class="fas fa-undo-alt"></span></a></td>
+                </tr>
+                <tr>
+                  <td>Server</td>
+                  <td>17/11/2019</td>
+                  <td><a class='btn btn-success btn-xs pl-2 pr-2' title="Récuperer cette sauvegarde"href="#"><span class="fas fa-undo-alt"></span></a></td>
+                </tr>
+                <tr>
+                  <td>Server</td>
+                  <td>17/11/2019</td>
+                  <td><a class='btn btn-success btn-xs pl-2 pr-2' title="Récuperer cette sauvegarde"href="#"><span class="fas fa-undo-alt"></span></a></td>
+                </tr>
+              </tbody>
+            </table> 
+        </div>
+      </div>
     </div>
-      
-    </div>
-</div>
      <div id="stockage" style="display:none;">
         <span id="cpu">{{ data.cpu }}</span>
         <span id="ram">{{ data.ram }}</span>
@@ -80,33 +106,7 @@
         <span id="prot">{{ data.protection }}</span>
         <span id="repli">{{ data.replication }}</span>
     </div>
-
-     
- <div class="card" id="retentionData"style="width: 18rem; z-index:2; position:absolute; top:37%; left:16%; display:none;">
-  <div class="card-header text-center">
-    <h3 class="lead">Rétentions des données</h3>
-  </div>
-  <table class="card-table table">
-    <thead>
-      <tr>
-        <th class="text-center" scope="col-6">Listes des sauvegardes</th>
-       
-      </tr>
-    </thead>
-    <tbody>
-    {% for data in retention %}
-      <tr>
-        <td>{{ data }}</td>
-       
-      </tr>
-   {% endfor %}
-      
-    </tbody>
-  </table>
-</div>
-<div class="row">
-      
-
+    <div class="row">
         <div class="col-md-4 col-sm-12 text-center">
         <h4>CPU</h4>
         
@@ -125,4 +125,11 @@
      
 </div>
 {% endfor %}
+<script>
+$(document).ready(function(){
+  $("#imgRetention").click(function(){
+    $(".saveTab").show(1000);
+  });
+});
+</script>
 <script src="js/camembert.js"></script>
