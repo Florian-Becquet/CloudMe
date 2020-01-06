@@ -145,6 +145,10 @@ class ComposerStaticInit74169bf1714fe4e1d66770f3430d4475
             'Doctrine\\Bundle\\MigrationsBundle\\' => 33,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
+        'C' => 
+        array (
+            'Corsinvest\\ProxmoxVE\\Api\\' => 25,
+        ),
         'A' => 
         array (
             'App\\Tests\\' => 10,
@@ -533,6 +537,10 @@ class ComposerStaticInit74169bf1714fe4e1d66770f3430d4475
         'Doctrine\\Bundle\\DoctrineBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
+        ),
+        'Corsinvest\\ProxmoxVE\\Api\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/corsinvest/cv4pve-api-php/src',
         ),
         'App\\Tests\\' => 
         array (
