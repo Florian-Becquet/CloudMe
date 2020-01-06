@@ -43,15 +43,18 @@ class FactureController extends AbstractController
         $premierDuMois = new DateTime('first day of this month');
         $premierDuMoisPrecedent = new DateTime('first day of previous month');
         $DernierJoursDuMoisPrecendent= new DateTime('last day of previous month');
+        //date de la facture en cours, et on recupere le dernier jour du mois precedent
+        $dateFacture = $facture->getDateEdition();
+        $dateFacture = $dateFacture->modify('last day of previous month');
         
-
         //On défini nos variables
         $user=$this->getUser();
         $subscriptions = $user->getSubscriptions();
         $tva = $user->getIdTva();
 
         foreach($subscriptions as $sub){
-            if($sub->getDateSub() < $premierDuMois && $sub->getDateFin() < $DernierJoursDuMoisPrecendent){
+            //Si la date de fin de la souscription est in
+            if(($sub->getDateFin() >= $dateFacture || is_null($sub->getDateFin()))&& $sub->getDateSub() <= $dateFacture){
                 $totalPrice = $totalPrice + $sub->getPrice();
                 $service = $sub->getIdServices();
                 $subMois[$i] = ['totalPrice'=>$totalPrice,'firstDay'=>$premierDuMoisPrecedent,'lastDays'=>$DernierJoursDuMoisPrecendent,'dateSub' => $sub->getDateSub(), 'subname' => $sub->getSubName(),'price'=>$sub->getPrice(),'headline' => $service->getHeadline()];
