@@ -5,6 +5,7 @@
         "php": "^7.1.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "corsinvest/cv4pve-api-php": "2.0.1",
         "dompdf/dompdf": "^0.8.3",
         "knplabs/knp-paginator-bundle": "4.X",
         "sensio/framework-extra-bundle": "^5.1",
