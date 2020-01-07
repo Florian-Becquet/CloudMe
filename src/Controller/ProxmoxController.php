@@ -176,14 +176,14 @@ $client->delete('/nodes/sd-158254/lxc/115')->getResponse();
      *
      */
     public function startCT(){
-        
+        $url = "https://sd-158254.dedibox.fr:8006/?console=lxc&novnc=1&vmid=105&vmname=testapi.maf.com&node=sd-158257&resize=off&cmd=";
         $client = new PveClient("sd-158254.dedibox.fr");
         $client->setResponseType('json');
-//login check bool
+        //login check bool
         if ($client->login('root', 'Supinf0752', 'pam')) {
             $lxc = new PVEVmidLxcNodeNodesVncproxy($client, "sd-158257", 105);
-            if($lxc->createRest($height = 250, $websocket = null, $width = "250px")){
-                 return new Response($lxc->createRest($height = 250, $websocket = null, $width = 250)->properties->cert); 
+            if($lxc->createRest($height = 250, $websocket = null, $width = 250)){
+                 return new Response($url); 
             }
             else{
                 echo 'elifnhje';

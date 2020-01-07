@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\AccountType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
