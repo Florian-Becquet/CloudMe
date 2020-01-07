@@ -9,6 +9,8 @@ use App\Form\SubscriptionType;
 use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Corsinvest\ProxmoxVE\Api\PveClient;
+use Corsinvest\ProxmoxVE\Api\PVEStatusVmidLxcNodeNodesStart;
+use Corsinvest\ProxmoxVE\Api\PVEVmidLxcNodeNodesVncproxy;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -169,4 +171,26 @@ $client->delete('/nodes/sd-158254/lxc/115')->getResponse();
             echo "KOOO";
         }
     }
+    /**
+     * @Route("/startCT", name="startCT")
+     *
+     */
+    public function startCT(){
+        
+        $client = new PveClient("sd-158254.dedibox.fr");
+        $client->setResponseType('json');
+//login check bool
+        if ($client->login('root', 'Supinf0752', 'pam')) {
+            $lxc = new PVEVmidLxcNodeNodesVncproxy($client, "sd-158257", 105);
+            if($lxc->createRest($height = 250, $websocket = null, $width = "250px")){
+                 return new Response($lxc->createRest($height = 250, $websocket = null, $width = 250)->properties->cert); 
+            }
+            else{
+                echo 'elifnhje';
+            }
+        }else{
+            echo "KOOO";
+        }
+    }
+    
 }
