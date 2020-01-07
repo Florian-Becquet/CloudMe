@@ -39,7 +39,9 @@
         {% endfor %}
     </tbody>
     </table>
-    {{ knp_pagination_render(subscriptions) }}
+    <div class="pagination justify-content-center">
+        {{ knp_pagination_render(subscriptions) }}
+    </div>
 </div>
 
 <script src="js/pagination.js"></script>

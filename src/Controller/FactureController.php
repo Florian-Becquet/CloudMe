@@ -10,6 +10,7 @@ use App\Entity\Facture;
 use App\Repository\FactureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SubscriptionRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,13 +20,25 @@ class FactureController extends AbstractController
     /**
      * @Route("/infofacture", name="infofacture")
      */
-    public function infofacture(FactureRepository $factRepo, EntityManagerInterface $em, SubscriptionRepository $subrepo){
+    public function infofacture(Request $request,PaginatorInterface $paginator,FactureRepository $factRepo, EntityManagerInterface $em, SubscriptionRepository $subrepo){
         $user = new User();
         $user = $this->getUser();
         $tva = $user->getIdTva();
-        $userFacture= $factRepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
+        $dataInput = $request->query->get('input');
+        if($request->query->get($dataInput)){
+            $value = $request->query->get($dataInput);
+            $userFacture = $factRepo->findByParameters($value,$dataInput);
+        }
+        else{
+            $userFacture = $factRepo->findBy(['id_user'=>$user->getId()],['date_edition'=>"ASC"]);
+        }
+        $factures = $paginator->paginate(
+            $userFacture, // Requête contenant les données à paginer (ici nos factures)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            10 // Nombre de résultats par page
+        );
         return $this->render('pages/infoFacture.html.twig',
-        ['userFacture'=>$userFacture, 'tva' => $tva]);
+        [ 'tva' => $tva, 'factures' => $factures]);
     }
 
     /**

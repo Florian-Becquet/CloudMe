@@ -24,13 +24,7 @@ $(document).ready(function(){
                 $('#valueSearch').val('');
                 $('#root').html(data);
                 $('#def').html(def);
-                if(def == "facture") {
-                    var mes = "Mes";
-                    $('#def2').html(mes + " " + def);
-                }
-                else {
-                    $('#def2').html(def);
-                }
+                $('#def2').html(def);
                
             }
             })
