@@ -9,6 +9,7 @@ use App\Form\SubscriptionType;
 use App\Repository\PricingRepository;
 use App\Repository\ServicesRepository;
 use Corsinvest\ProxmoxVE\Api\PveClient;
+use Corsinvest\ProxmoxVE\Api\ApiFunction;
 use Corsinvest\ProxmoxVE\Api\PVEStatusVmidLxcNodeNodesStart;
 use Corsinvest\ProxmoxVE\Api\PVEVmidLxcNodeNodesVncproxy;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,6 +54,7 @@ class ProxmoxController extends AbstractController
         $form->handleRequest($request);
         //si le form est valide est soumis
         if ($form->isSubmitted() && $form->isValid()) {
+            
             //le status est set a 0 par défaut, l'admin pourra le set a 1 pour activer, set la date de debut, l'adresse ip, l'id user et le nom de la souscription
             $sub->setStatus('0');
             $sub->setDateSub($date);
@@ -69,10 +71,13 @@ class ProxmoxController extends AbstractController
             $allSub = $repoSub->findAll();
             $subId = $allSub[count($allSub) - 1]->getId() + 1;
             $sub_name = 'CL12' . $user->getId() . $vpsChosen->getServiceType() . $subId;
-            $sub->setSubName($sub_name);
+            $function = new ApiFunction("sd-158254.dedibox.fr");
+            $vmId = $function->createCt();
+            $sub->setSubName($vmId);
             //envoie en bdd et redirection vers home
             $em->persist($sub);
             $em->flush();
+            
             return $this->redirectToRoute('home');
         }
         return $this->render('pages/formSub.html.twig', [
@@ -115,82 +120,16 @@ class ProxmoxController extends AbstractController
         $em->flush();
         return new Response('success');
     }
+   
+  
     /**
-     * fonction de creation d'un CT
-     *  @Route("/createCT", name="createCT")
-     *
-     * @return void
-     */
-    public function createCtController()
-    {
-        $client = new PveClient("sd-158254.dedibox.fr");
-        $client->setResponseType('json');
-//login check bool
-        if ($client->login('root', 'Supinf0752', 'pam')) {
-
-//recupere l'id de vm/ct suivant qui est disponible
-            $nextVmId = $client->get('/cluster/nextid')->getResponse()->data;
-
-            //on creer un tableau Key=>value ex : "sd-158254"=>2GO avec la liste des noeud du cluster
-            $ListNodesRam = array();
-            foreach ($client->getNodes()->Index()->getResponse()->data as $node) {
-                $ListNodesRam[$node->node] = $node->mem;
-            }
-
-//on selectionne le noeud ou il y a le plus de memoire RAM disponible
-            $nodeMaxFreeMem = min($ListNodesRam);
-            $nodeName = array_search($nodeMaxFreeMem, $ListNodesRam);
-            var_dump($nodeName);
-            //preparation des parametres pour la creation d'un CT
-            $tabParam = [
-                "ostemplate" => "local:vztmpl/debian-9-turnkey-wordpress_15.3-1_amd64.tar.gz",
-                "vmid" => $nextVmId,
-                "cores" => 2,
-                "hostname" => "testapi.maf.com",
-                "password" => "azerty",
-                "net0" => "bridge=vmbr0,name=eth0,ip=1.2.3.4/24",
-                "rootfs" => "volume=local:12",
-                "memory" => "4096",
-            ];
-
-            $client->setResponseType('json');
-            $task = $client->create('/nodes/' . $nodeName . '/lxc', $tabParam)->getResponse();
-
-/*$client->delete('/nodes/sd-158254/lxc/107')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/108')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/109')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/110')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/111')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/112')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/113')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/114')->getResponse();
-$client->delete('/nodes/sd-158254/lxc/115')->getResponse();
- */
-            //var_dump($client->getNodes()->get("sd-158254")->getLxc());
-        } else {
-            echo "KOOO";
-        }
-    }
-    /**
-     * @Route("/startCT", name="startCT")
+     * @Route("/openPanel", name="openPanel")
      *
      */
-    public function startCT(){
-        $url = "https://sd-158254.dedibox.fr:8006/?console=lxc&novnc=1&vmid=105&vmname=testapi.maf.com&node=sd-158257&resize=off&cmd=";
-        $client = new PveClient("sd-158254.dedibox.fr");
-        $client->setResponseType('json');
-        //login check bool
-        if ($client->login('root', 'Supinf0752', 'pam')) {
-            $lxc = new PVEVmidLxcNodeNodesVncproxy($client, "sd-158257", 105);
-            if($lxc->createRest($height = 250, $websocket = null, $width = 250)){
-                 return new Response($url); 
-            }
-            else{
-                echo 'elifnhje';
-            }
-        }else{
-            echo "KOOO";
-        }
-    }
     
+    public function openPanel(){
+        $function = new ApiFunction("sd-158254.dedibox.fr");
+        $url = $function->openPanel();
+        return new Response($url);
+    }
 }

@@ -20,7 +20,7 @@ $('#desktop').on('click',function(){
     var element = $(this);
     $.ajax({
         type:"POST",
-        url: "startCT",
+        url: "openPanel",
         success:function(data){
             
             window.open(data,"console","width=744,height=400");
