@@ -68,10 +68,9 @@ class ProxmoxController extends AbstractController
             $sub->setIdServices($vpsChosen);
             //on crée le nom de la souscription
             $allSub = $repoSub->findAll();
-            $subId = $allSub[count($allSub) - 1]->getId() + 1;
             //on crée le CT dans l'API 
             $vmId = $this->createCt();
-            $subName = 'CL12' . $user->getId() . $vpsChosen->getServiceType() . $subId . '-' . $vmId;
+            $subName = 'CL12' . $user->getId() . $vpsChosen->getServiceType() . $vmId;
             $sub->setSubName($subName);
             //envoie en bdd et redirection vers home
             $em->persist($sub);
