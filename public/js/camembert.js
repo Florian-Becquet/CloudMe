@@ -1,3 +1,4 @@
+// réabonner un user
 $('#reSub').on('click',function(){
     var id = $(this).data('id');
     var target = $(this).data('target');
@@ -14,6 +15,19 @@ $('#reSub').on('click',function(){
             })
             }
 })
+//ouvrir le panel console
+$('#desktop').on('click',function(){
+    var element = $(this);
+    $.ajax({
+        type:"POST",
+        url: "openPanel",
+        success:function(data){
+            
+            window.open(data,"console","width=744,height=400");
+        }
+    })
+})
+
 //recupération des données cpu dans la div stockage.
 var cpu = $('#stockage').children('#cpu').html();
 
