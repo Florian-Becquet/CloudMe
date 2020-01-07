@@ -1,15 +1,18 @@
+<div class="col-10 ml-auto mr-auto">
+  <i id="loupeDisplay" class="fas fa-search mt-2 mb-2" aria-hidden="true"></i>
+</div>
 <table class="table table-striped mx-auto" style="width:90%">
   <thead>
-    <tr>
-      <th scope="col-sm-3">N°facture</th>
-      <th scope="col-sm-3">Date édition</th>
+    <tr id="liste">
+      <th scope="col-sm-3" data-search="numero_facture">N°facture</th>
+      <th scope="col-sm-3" data-search="date_edition">Date édition</th>
       <th scope="col-sm-3">Type de paiement</th>
       <th scope="col-sm-3">Etat</th>
       <th scope="col-sm-3">Total TTC</th>
       <th scope="col-sm-3">Export</th>
     </tr>
   </thead>
-  {% for facture in userFacture %}
+  {% for facture in factures %}
   <tbody>
     <tr>
       <th>{{facture.numeroFacture}}</th>
@@ -32,4 +35,7 @@
     {% endfor %}
   </tbody>
 </table>
-
+<div class="pagination justify-content-center">
+  {{ knp_pagination_render(factures) }}
+  </div>
+<script src="js/pagination.js"></script>
