@@ -1,0 +1,173 @@
+<?php
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Facture',
+            ],
+            'namespace' => [
+                'App\\Entity',
+            ],
+            'rootEntityName' => [
+                'App\\Entity\\Facture',
+            ],
+            'customRepositoryClassName' => [
+                'App\\Repository\\FactureRepository',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'id' => [
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'id' => true,
+                        'columnName' => 'id',
+                    ],
+                    'price' => [
+                        'fieldName' => 'price',
+                        'type' => 'float',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'price',
+                    ],
+                    'date_edition' => [
+                        'fieldName' => 'date_edition',
+                        'type' => 'date',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'date_edition',
+                    ],
+                    'date_echeance' => [
+                        'fieldName' => 'date_echeance',
+                        'type' => 'date',
+                        'scale' => 0,
+                        'length' => null,
+                        'unique' => false,
+                        'nullable' => true,
+                        'precision' => 0,
+                        'columnName' => 'date_echeance',
+                    ],
+                    'numero_facture' => [
+                        'fieldName' => 'numero_facture',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'columnName' => 'numero_facture',
+                    ],
+                    'Etat' => [
+                        'fieldName' => 'Etat',
+                        'type' => 'string',
+                        'scale' => 0,
+                        'length' => 255,
+                        'unique' => false,
+                        'nullable' => false,
+                        'precision' => 0,
+                        'options' => [
+                            'default' => 'En attente',
+                        ],
+                        'columnName' => 'etat',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'id' => 'id',
+                    'price' => 'price',
+                    'date_edition' => 'date_edition',
+                    'date_echeance' => 'date_echeance',
+                    'numero_facture' => 'numero_facture',
+                    'etat' => 'Etat',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'id' => 'id',
+                    'price' => 'price',
+                    'date_edition' => 'date_edition',
+                    'date_echeance' => 'date_echeance',
+                    'numero_facture' => 'numero_facture',
+                    'Etat' => 'etat',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'facture',
+                ],
+            ],
+            'associationMappings' => [
+                [
+                    'id_user' => [
+                        'fieldName' => 'id_user',
+                        'joinColumns' => [
+                            [
+                                'name' => 'id_user_id',
+                                'unique' => false,
+                                'nullable' => false,
+                                'onDelete' => null,
+                                'columnDefinition' => null,
+                                'referencedColumnName' => 'id',
+                            ],
+                        ],
+                        'cascade' => [],
+                        'inversedBy' => 'factures',
+                        'targetEntity' => 'App\\Entity\\User',
+                        'fetch' => 2,
+                        'type' => 2,
+                        'mappedBy' => null,
+                        'isOwningSide' => true,
+                        'sourceEntity' => 'App\\Entity\\Facture',
+                        'isCascadeRemove' => false,
+                        'isCascadePersist' => false,
+                        'isCascadeRefresh' => false,
+                        'isCascadeMerge' => false,
+                        'isCascadeDetach' => false,
+                        'sourceToTargetKeyColumns' => [
+                            'id_user_id' => 'id',
+                        ],
+                        'joinColumnFieldNames' => [
+                            'id_user_id' => 'id_user_id',
+                        ],
+                        'targetToSourceKeyColumns' => [
+                            'id' => 'id_user_id',
+                        ],
+                        'orphanRemoval' => false,
+                    ],
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+);
